@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoImage from "@/assets/img/logo.svg";
 
 function Header() {
+  const Navigate = useNavigate();
+
   return (
     <header className="font-roboto flex items-center justify-between p-4 border-b border-charcoal sticky top-0 bg-white z-10">
       <div>
@@ -33,6 +35,7 @@ function Header() {
         <button
           type="button"
           className="text-sm font-medium bg-[#D9D9D9] px-2 py-1 rounded-sm"
+          onClick={() => Navigate("/login")}
         >
           Login
         </button>
