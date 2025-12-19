@@ -8,9 +8,32 @@
   --font-pretendard: "Pretendard", system-ui, -apple-system, sans-serif;
   --font-chakra: "Chakra Petch", system-ui, -apple-system, sans-serif;
   --font-roboto: "Roboto", system-ui, -apple-system, sans-serif;
+
+  --color-charcoal: #2c2c2c;
+  --color-darkgrey: #838383;
+  --color-lightgrey: #d9d9d9;
+  --color-yellow: #f5ff76;
+  --color-green: #a5ae18;
+  --color-lightgreen: #00f318;
+  --color-red: #ff0000;
+
+  --text-title-lg: 2.25rem; /* 36px */
+  --text-title-md: 1.5rem; /* 24px */
+  --text-title-sm: 1.125rem; /* 18px */
+
+  --text-headline-lg: 2.25rem; /* 36px */
+
+  --text-body-lg: 1rem; /* 16px */
+  --text-body-md: 0.875rem; /* 14px */
 }
 
 @layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   body {
     @apply font-pretendard;
   }

@@ -3,7 +3,7 @@ import logoImage from "@/assets/img/logo.svg";
 
 function Header() {
   return (
-    <div className="font-roboto flex items-center justify-between p-4 border-b border-gray-200">
+    <header className="font-roboto flex items-center justify-between p-4 border-b border-charcoal sticky top-0 bg-white z-10">
       <div>
         <Link to="/">
           <img src={logoImage} alt="NTC 로고" className="h-[1.5rem] w-auto" />
@@ -37,7 +37,7 @@ function Header() {
           Login
         </button>
       </div>
-    </div>
+    </header>
   );
 }
 
