@@ -1,23 +1,52 @@
 import messageDelete from "@/assets/img/delete_sm.svg";
-import loading from "@/assets/img/loading.svg";
-
+// import loading from "@/assets/img/loading.svg";
 import { cheerUpMessages } from "@/api/dummyData";
 
+import { useState, useEffect } from "react";
+
 function CherrUpMessage() {
-  const getRandomBg = () =>
-    Math.random() > 0.5 ? "bg-yellow" : "bg-lightgrey";
+  const [visibleMessage, setVisibleMessage] = useState([]); // 원본메세지
+  const [currentIndex, setCurrentIndex] = useState(0); // 실제 렌더링되는 메세지
+
+  // 3초마다 한개씩 메세지 추가
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const nextIndex = currentIndex % cheerUpMessages.length;
+
+      setVisibleMessage((prev) => {
+        const next = [...prev, cheerUpMessages[nextIndex]];
+        return next.slice(-6);
+      });
+
+      setCurrentIndex((prev) => prev + 1);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [currentIndex]);
+
+  // 메세지 박스 배경 랜덤
+  const getBgById = (id) => (id % 2 === 0 ? "bg-yellow" : "bg-lightgrey");
 
   return (
-    <div className="absolute top-full mt-[4.875rem]">
-      {/* message */}
-      <div className="h-[12.313rem] overflow-hidden">
-        <div className="flex flex-col items-start gap-3">
-          {cheerUpMessages.map((message) => (
+    <div className="relative top-full mt-[4rem] flex flex-col gap-4">
+      {/* message box */}
+      <div className="relative h-[12.5rem] overflow-hidden">
+        {/* fade mask */}
+        <div
+          className="pointer-events-none absolute top-0 left-0 right-0 h-42
+          bg-gradient-to-b from-white to-transparent z-10"
+        />
+
+        {/* message stack */}
+        <div className="flex flex-col items-start gap-3 justify-end h-full">
+          {visibleMessage.map((message, index) => (
             <div
               key={message.id}
-              className={`inline-flex max-w-[16.25rem] min-h-[3.125rem] px-[0.625rem] py-2 text-xs font-roboto ${getRandomBg()}`}
+              className={`message inline-flex max-w-[16.25rem]
+              min-h-[3.125rem] px-[0.625rem] py-2
+              text-xs font-roboto  ${getBgById(message.id)}`}
             >
-              <p className="inline-block max-w-[11rem] leading-4 break-all">
+              <p className="inline-block max-w-[11rem] leading-4 break-all box-border">
                 {message.text}
               </p>
 
@@ -30,15 +59,13 @@ function CherrUpMessage() {
             </div>
           ))}
         </div>
-        {/* <img src={loading} alt="loading" /> */}
       </div>
 
       {/* input */}
-      <div className="flex flex-col items-start gap-[1.313rem] ">
+      <div className="flex flex-col items-start gap-[1.313rem]">
         <div className="flex flex-row gap-2">
           <button className="w-[2.313rem] h-[2rem] bg-lightgrey" />
-          <div className="h-[2rem] px-[0.5rem] py-[0.313rem] bg-lightgrey flex ">
-            <label htmlFor="cheerUp"></label>
+          <div className="h-[2rem] px-[0.5rem] py-[0.313rem] bg-lightgrey flex">
             <input
               id="cheerUp"
               type="text"

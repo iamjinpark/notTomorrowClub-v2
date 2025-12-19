@@ -28,7 +28,9 @@ function Home() {
         <div className="w-full pt-[3.75rem] relative">
           <img src={flipCountDownImage} alt="" className="w-full" />
           {/* cheer message*/}
-          <CherrUpMessage />
+          <div className="absolute">
+            <CherrUpMessage />
+          </div>
         </div>
         {/* start btn */}
         <div className="pt-[7.75rem] font-regular font-roboto text-title-sm">
