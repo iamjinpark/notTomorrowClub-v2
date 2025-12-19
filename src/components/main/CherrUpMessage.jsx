@@ -1,27 +1,41 @@
 import messageDelete from "@/assets/img/delete_sm.svg";
 // import loading from "@/assets/img/loading.svg";
 import { cheerUpMessages } from "@/api/dummyData";
+import TypingIndicator from "./TypingIndicator";
 
 import { useState, useEffect } from "react";
 
 function CherrUpMessage() {
   const [visibleMessage, setVisibleMessage] = useState([]); // 원본메세지
   const [currentIndex, setCurrentIndex] = useState(0); // 실제 렌더링되는 메세지
+  const [isTyping, setIsTyping] = useState(false); // 타이핑 애니메이션
 
   // 3초마다 한개씩 메세지 추가
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const nextIndex = currentIndex % cheerUpMessages.length;
+    let typingTimer;
+    let messageTimer;
 
-      setVisibleMessage((prev) => {
-        const next = [...prev, cheerUpMessages[nextIndex]];
-        return next.slice(-6);
-      });
+    setIsTyping(true);
 
-      setCurrentIndex((prev) => prev + 1);
-    }, 3000);
+    typingTimer = setTimeout(() => {
+      setIsTyping(false);
 
-    return () => clearTimeout(timer);
+      messageTimer = setTimeout(() => {
+        const nextIndex = currentIndex % cheerUpMessages.length;
+
+        setVisibleMessage((prev) => {
+          const next = [...prev, cheerUpMessages[nextIndex]];
+          return next.slice(-6);
+        });
+
+        setCurrentIndex((prev) => prev + 1);
+      }, 150); // typing → message
+    }, 2000); // typing
+
+    return () => {
+      clearTimeout(typingTimer);
+      clearTimeout(messageTimer);
+    };
   }, [currentIndex]);
 
   // 메세지 박스 배경 랜덤
@@ -33,7 +47,7 @@ function CherrUpMessage() {
       <div className="relative h-[12.5rem] overflow-hidden">
         {/* fade mask */}
         <div
-          className="pointer-events-none absolute top-0 left-0 right-0 h-42
+          className="pointer-events-none absolute top-0 left-0 right-0 h-28
           bg-gradient-to-b from-white to-transparent z-10"
         />
 
@@ -58,6 +72,11 @@ function CherrUpMessage() {
               </div>
             </div>
           ))}
+          {isTyping && (
+            <div>
+              <TypingIndicator />
+            </div>
+          )}
         </div>
       </div>
 
