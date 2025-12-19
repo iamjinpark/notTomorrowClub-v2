@@ -38,6 +38,10 @@
   body {
     @apply font-pretendard;
   }
+
+  button {
+    cursor: pointer;
+  }
 }
 
 .message {

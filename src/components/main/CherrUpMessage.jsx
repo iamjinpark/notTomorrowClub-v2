@@ -6,6 +6,9 @@ import pointer from "@/assets/img/pointer.png";
 import { useState, useEffect } from "react";
 
 function CherrUpMessage() {
+  // TODO: 추후 전역 상태나 context에서 가져올 현재 로그인한 사용자 ID
+  const currentUserId = "user123";
+
   const [visibleMessage, setVisibleMessage] = useState([]); // 원본메세지
   const [currentIndex, setCurrentIndex] = useState(0); // 실제 렌더링되는 메세지
   const [isTyping, setIsTyping] = useState(false); // 타이핑 애니메이션
@@ -32,7 +35,7 @@ function CherrUpMessage() {
         });
 
         setCurrentIndex((prev) => prev + 1);
-      }, 1000); // typing → message
+      }, 150); // typing → message
     }, 3500); // typing
 
     return () => {
@@ -52,7 +55,7 @@ function CherrUpMessage() {
   };
 
   return (
-    <div className="relative top-full mt-[4rem] flex flex-col gap-4">
+    <div className="relative top-full mt-[3.75rem] flex flex-col gap-4">
       {/* message box */}
       <div className="relative h-[12.5rem] overflow-hidden">
         <div
@@ -74,9 +77,14 @@ function CherrUpMessage() {
               </p>
 
               <div className="flex flex-col items-end justify-between ml-3">
-                <button className="w-[0.563rem] h-[0.563rem]">
-                  <img src={messageDelete} alt="delete message" />
-                </button>
+                {message.authorId === currentUserId && (
+                  <button className="w-[0.563rem] h-[0.563rem]">
+                    <img src={messageDelete} alt="delete message" />
+                  </button>
+                )}
+                {message.authorId !== currentUserId && (
+                  <div className="w-[0.563rem] h-[0.563rem]" />
+                )}
                 <span className="text-charcoal/50">{message.time}</span>
               </div>
             </div>
