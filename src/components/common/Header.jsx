@@ -40,6 +40,16 @@ function Header() {
           Login
         </button>
       </div>
+
+      {/* 로그인 시 프로필로 변경 */}
+      {/* <div className="flex flex-row gap-[0.813rem]">
+        <div className=" bg-gray5 px-[0.438rem] py-[0.313rem] rounded-[0.188rem]  text-xs font-medium font-roboto leading-[16px]">
+          + 340 days
+        </div>
+        <div className="rounded-full w-[1.625rem] h-[1.625rem] bg-red flex items-center justify-center  text-xs font-medium font-roboto leading-[16px] ">
+          E
+        </div>
+      </div> */}
     </header>
   );
 }

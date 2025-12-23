@@ -13,10 +13,22 @@ function Greeting() {
 
   const dotColor = onlineCount === 0 ? "bg-red" : "bg-lightgreen";
 
+  const getGreetingMessage = () => {
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 6 && currentHour < 12) {
+      return "Hello, Stranger! Good Morning";
+    } else if (currentHour >= 12 && currentHour < 18) {
+      return "Hello, Stranger! Good Afternoon";
+    } else {
+      return "Hello, Stranger! Good Evening";
+    }
+  };
+
   return (
     <div className="w-full font-chakra font-semibold flex justify-between">
       <div className="flex flex-col justify-between">
-        <h1 className=" text-title-lg">Hello, Stranger! Good Morning</h1>
+        <h1 className=" text-title-lg">{getGreetingMessage()}</h1>
         <div
           className="w-[6.563rem] h-[1.938rem] bg-gray5 rounded-full flex
             flex-row items-center justify-center gap-2 mt-4"
