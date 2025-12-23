@@ -44,7 +44,7 @@ function CherrUpMessage() {
     };
   }, [currentIndex]);
 
-  const getBgById = (id) => (id % 2 === 0 ? "bg-yellow" : "bg-lightgrey");
+  const getBgById = (id) => (id % 2 === 0 ? "bg-yellow" : "bg-gray5");
 
   const activeMessageInput = () => {
     setIsMessageActive((prev) => !prev);
@@ -107,7 +107,7 @@ function CherrUpMessage() {
             <img src={pointer} alt="" className="h-[85%]" />
           </button>
           {isMessageActive && (
-            <div className="h-[2rem] px-[0.5rem] py-[0.313rem] bg-lightgrey flex">
+            <div className="h-[2rem] px-[0.5rem] py-[0.313rem] bg-gray5 flex">
               <input
                 id="cheerUp"
                 type="text"

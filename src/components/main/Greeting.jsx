@@ -18,7 +18,7 @@ function Greeting() {
       <div className="flex flex-col justify-between">
         <h1 className=" text-title-lg">Hello, Stranger! Good Morning</h1>
         <div
-          className="w-[6.563rem] h-[1.938rem] bg-lightgrey rounded-full flex
+          className="w-[6.563rem] h-[1.938rem] bg-gray5 rounded-full flex
             flex-row items-center justify-center gap-2 mt-4"
         >
           <span

@@ -4,7 +4,7 @@ function TypingIndicator() {
       className="
         inline-flex items-center gap-1
         px-3 py-2
-        rounded-xl bg-lightgrey
+        rounded-xl bg-gray5
       "
       style={{
         animation: "typing 0.3s ease-in-out forwards",
