@@ -7,6 +7,7 @@ function Login() {
         <p>Start your day with 5 sentences.</p>
         <p>Small. Light. Daily</p>
       </div>
+
       <button
         type="button"
         className="bg-[#FBE64D] py-[0.75rem] px-[3.25rem] mt-[2.75rem] border-none rounded-full text-[1.125rem] font-chakra font-semibold hover:brightness-105"

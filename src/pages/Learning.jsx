@@ -1,7 +1,7 @@
-import React from "react";
+import FunnelContainer from "@/components/learning/FunnelContainer";
 
 function Learning() {
-  return <div>Learning</div>;
+  return <FunnelContainer />;
 }
 
 export default Learning;
