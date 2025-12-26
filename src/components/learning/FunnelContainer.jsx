@@ -15,9 +15,11 @@ export default function FunnelContainer() {
   const [stepPhase, setStepPhase] = useState("intro");
   const scrollRef = useRef(null);
 
+  // url & step 동기화
   useEffect(() => {
-    setSearchParams({ step });
-  }, [step, setSearchParams]);
+    const urlStep = Number(searchParams.get("step")) || 1;
+    setStep(urlStep);
+  }, [searchParams]);
 
   useEffect(() => {
     if (step < 1) setStep(1);
@@ -29,7 +31,20 @@ export default function FunnelContainer() {
   }, [step]);
 
   const goNext = () => {
-    setStep((prev) => prev + 1);
+    const next = Math.min(step + 1, MAX_STEP);
+    setStep(next);
+    setSearchParams({ step: next });
+
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = 0;
+    }
+  };
+
+  const goToStep = (targetStep) => {
+    if (targetStep > step + 1) return;
+
+    setSearchParams({ step: targetStep });
+
     if (scrollRef.current) {
       scrollRef.current.scrollTop = 0;
     }
@@ -49,7 +64,7 @@ export default function FunnelContainer() {
             {stepPhase === "reveal" && <>Check the English sentence below</>}
           </p>
         </div>
-        <StepIndicator step={step} />
+        <StepIndicator step={step} onStepChange={goToStep} />
       </div>
 
       {/*  change the sentence */}
