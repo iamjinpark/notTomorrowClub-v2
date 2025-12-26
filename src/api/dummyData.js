@@ -60,3 +60,26 @@ export const cheerUpMessages = [
     authorId: "system",
   },
 ];
+
+export const STEP_DATA = [
+  {
+    ko: "저 공룡은 엄청나게 커!",
+    en: "That dinosaur is ginormous!",
+  },
+  {
+    ko: "오늘은 커피를 마시지 않았어.",
+    en: "I didn’t drink coffee today.",
+  },
+  {
+    ko: "그녀는 나보다 빨리 달려.",
+    en: "She runs faster than me.",
+  },
+  {
+    ko: "우리는 어제 늦게까지 일했어.",
+    en: "We worked late yesterday.",
+  },
+  {
+    ko: "나는 지금 집에 가고 있어.",
+    en: "I’m on my way home now.",
+  },
+];

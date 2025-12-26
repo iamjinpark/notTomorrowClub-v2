@@ -2,7 +2,7 @@ import upperArrow from "@/assets/img/upperArrow.svg";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-export default function Step1({ scrollRef, onNext, onPhaseChange }) {
+export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
   const containerRef = useRef(null);
   const hintRef = useRef(null);
   const englishRef = useRef(null);
@@ -10,12 +10,10 @@ export default function Step1({ scrollRef, onNext, onPhaseChange }) {
 
   const tlRef = useRef(null);
 
-  // 1) timeline 만들기 (한 번만)
   useLayoutEffect(() => {
     if (!containerRef.current) return;
 
     const ctx = gsap.context(() => {
-      // 초기 상태
       gsap.set(hintRef.current, { autoAlpha: 1, y: 150 });
       gsap.set(englishRef.current, { autoAlpha: 0, y: 40 });
       gsap.set(buttonRef.current, { autoAlpha: 0, y: 30 });
@@ -49,7 +47,6 @@ export default function Step1({ scrollRef, onNext, onPhaseChange }) {
     };
   }, []);
 
-  // 2) 스크롤 -> progress 반영
   useEffect(() => {
     const scroller = scrollRef?.current;
     if (!scroller || !tlRef.current) return;
@@ -77,7 +74,7 @@ export default function Step1({ scrollRef, onNext, onPhaseChange }) {
     >
       <div className="relative mt-[9.625rem] flex flex-col items-center">
         <p className="font-pretendard font-medium text-[2.375rem] leading-[3.125rem] tracking-tight text-center">
-          저 공룡은 엄청나게 커!
+          {ko}
         </p>
 
         <div
@@ -92,7 +89,7 @@ export default function Step1({ scrollRef, onNext, onPhaseChange }) {
           ref={englishRef}
           className="text-[2.625rem] text-center font-roboto font-medium leading-[52.4px]"
         >
-          That dinosaur is ginormous!
+          {en}
         </p>
       </div>
 
