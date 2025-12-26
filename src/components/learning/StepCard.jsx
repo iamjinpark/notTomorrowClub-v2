@@ -1,13 +1,17 @@
 import upperArrow from "@/assets/img/upperArrow.svg";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import WorldToggleBtn from "./WordToggleBtn";
+
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
+  const [isToggled, setIsToggled] = useState(false);
+
   const containerRef = useRef(null);
   const hintRef = useRef(null);
   const englishRef = useRef(null);
   const buttonRef = useRef(null);
-
+  const viewToggleRef = useRef(null);
   const tlRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -17,6 +21,7 @@ export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
       gsap.set(hintRef.current, { autoAlpha: 1, y: 150 });
       gsap.set(englishRef.current, { autoAlpha: 0, y: 40 });
       gsap.set(buttonRef.current, { autoAlpha: 0, y: 30 });
+      gsap.set(viewToggleRef.current, { autoAlpha: 0, y: -20 });
 
       const tl = gsap.timeline({ paused: true });
 
@@ -26,6 +31,12 @@ export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
         duration: 0.3,
         ease: "none",
       })
+        .fromTo(
+          viewToggleRef.current,
+          { autoAlpha: 0, y: -20 },
+          { autoAlpha: 1, y: 0, duration: 0.2, ease: "none" },
+          "<"
+        )
         .fromTo(
           englishRef.current,
           { autoAlpha: 0, y: 40 },
@@ -70,8 +81,17 @@ export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
   return (
     <div
       ref={containerRef}
-      className="sticky top-0 h-[30.125rem] flex flex-col items-center px-8"
+      className="sticky top-0 h-[30.125rem] flex flex-col items-center px-8 relative"
     >
+      <div
+        ref={viewToggleRef}
+        type="button"
+        className="absolute top-[1.438rem] right-0 flex flex-row items-center gap-[0.875rem] cursor-pointer font-roboto font-medium text-[1.125rem] text-gray3"
+      >
+        {isToggled ? "Words Hide" : "View Words"}
+        <WorldToggleBtn checked={isToggled} onChange={setIsToggled} />
+      </div>
+
       <div className="relative mt-[9.625rem] flex flex-col items-center">
         <p className="font-pretendard font-medium text-[2.375rem] leading-[3.125rem] tracking-tight text-center">
           {ko}
@@ -91,6 +111,8 @@ export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
         >
           {en}
         </p>
+
+        {isToggled && <div>words gonna be here</div>}
       </div>
 
       <div className="mt-[7.438rem]">
