@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 
 export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
   const [isToggled, setIsToggled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const containerRef = useRef(null);
   const hintRef = useRef(null);
@@ -67,6 +68,7 @@ export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
       const progress = maxScroll <= 0 ? 0 : scroller.scrollTop / maxScroll;
 
       tlRef.current.progress(progress);
+      setScrollProgress(progress);
 
       if (progress < 0.3) onPhaseChange?.("intro");
       else onPhaseChange?.("reveal");
@@ -92,7 +94,11 @@ export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
         <WorldToggleBtn checked={isToggled} onChange={setIsToggled} />
       </div>
 
-      <div className="relative mt-[9.625rem] flex flex-col items-center">
+      <div
+        className={`relative mt-[9.625rem] flex flex-col items-center transition-transform duration-500 ease-out ${
+          isToggled ? "-translate-y-3" : ""
+        }`}
+      >
         <p className="font-pretendard font-medium text-[2.375rem] leading-[3.125rem] tracking-tight text-center">
           {ko}
         </p>
@@ -105,17 +111,23 @@ export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
           <span>Scroll to check English</span>
         </div>
 
-        <p
-          ref={englishRef}
-          className="text-[2.625rem] text-center font-roboto font-medium leading-[52.4px]"
-        >
-          {en}
-        </p>
+        <div className="flex flex-col items-center gap-[2.125rem]">
+          <p
+            ref={englishRef}
+            className="text-[2.625rem] text-center font-roboto font-medium leading-[52.4px]"
+          >
+            {en}
+          </p>
 
-        {isToggled && <div>words gonna be here</div>}
+          {isToggled && scrollProgress >= 0.3 && (
+            <div className="animate-fade-in transition-opacity duration-300">
+              words gonna be here
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="mt-[7.438rem]">
+      <div className="absolute bottom-[3.875rem] left-1/2 -translate-x-1/2">
         <button
           ref={buttonRef}
           onClick={onNext}

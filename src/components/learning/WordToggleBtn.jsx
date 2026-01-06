@@ -5,7 +5,7 @@ export default function WorldToggleBtn({ checked, onChange }) {
       onClick={() => onChange(!checked)}
       className={`
         relative w-[74px] h-[36px] rounded-full
-        border bordr-black
+        border border-black
         transition-colors duration-200 ease-in-out
         ${checked ? "bg-black" : "bg-white"}
       `}
