@@ -80,6 +80,7 @@ export default function FunnelContainer() {
               scrollRef={scrollRef}
               onNext={goNext}
               onPhaseChange={setStepPhase}
+              words={STEP_DATA[step - 1].words}
             />
           )}
 

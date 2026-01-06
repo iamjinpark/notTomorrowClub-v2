@@ -1,12 +1,48 @@
 import upperArrow from "@/assets/img/upperArrow.svg";
 import WorldToggleBtn from "./WordToggleBtn";
+import wordIcon from "@/assets/img/wordIcon.svg";
 
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
+export default function StepCard({
+  scrollRef,
+  onNext,
+  onPhaseChange,
+  ko,
+  en,
+  words = [],
+}) {
   const [isToggled, setIsToggled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  // 영어 문장에서 특정 단어들을 하이라이트
+  const highlightWords = (text, wordsToHighlight) => {
+    if (!wordsToHighlight || wordsToHighlight.length === 0) {
+      return <span>{text}</span>;
+    }
+
+    const englishWords = wordsToHighlight.map((word) => word.en);
+    const regex = new RegExp(`\\b(${englishWords.join("|")})\\b`, "gi");
+    const parts = text.split(regex);
+
+    return (
+      <span>
+        {parts.map((part, index) => {
+          const isHighlighted = englishWords.some(
+            (word) => word.toLowerCase() === part.toLowerCase()
+          );
+          return isHighlighted ? (
+            <span key={index} className="bg-lightyellow">
+              {part}
+            </span>
+          ) : (
+            <span key={index}>{part}</span>
+          );
+        })}
+      </span>
+    );
+  };
 
   const containerRef = useRef(null);
   const hintRef = useRef(null);
@@ -80,6 +116,11 @@ export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
     return () => scroller.removeEventListener("scroll", onScroll);
   }, [scrollRef, onPhaseChange]);
 
+  // 페이지가 변경될 때마다 toggle 상태 초기화
+  useEffect(() => {
+    setIsToggled(false);
+  }, [ko, en, words]);
+
   return (
     <div
       ref={containerRef}
@@ -116,12 +157,25 @@ export default function StepCard({ scrollRef, onNext, onPhaseChange, ko, en }) {
             ref={englishRef}
             className="text-[2.625rem] text-center font-roboto font-medium leading-[52.4px]"
           >
-            {en}
+            {isToggled ? highlightWords(en, words) : en}
           </p>
 
           {isToggled && scrollProgress >= 0.3 && (
-            <div className="animate-fade-in transition-opacity duration-300">
-              words gonna be here
+            <div className="animate-fade-in transition-opacity duration-300 flex gap-[2.75rem] items-center">
+              {words.map((word, index) => (
+                <div key={index} className="flex items-center gap-[0.3rem]">
+                  <img
+                    src={wordIcon}
+                    alt=""
+                    className="w-[9.68px] h-[9.93px]"
+                  />
+                  <span className="font-medium ">{word.en}</span>
+                  <span className="font-medium font-pretendard">{word.ko}</span>
+                </div>
+              ))}
+              {words.length === 0 && (
+                <div className="text-gray-500 italic">No words to display</div>
+              )}
             </div>
           )}
         </div>
