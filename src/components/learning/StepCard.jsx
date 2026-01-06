@@ -169,8 +169,14 @@ export default function StepCard({
                     alt=""
                     className="w-[9.68px] h-[9.93px]"
                   />
-                  <span className="font-medium ">{word.en}</span>
-                  <span className="font-medium font-pretendard">{word.ko}</span>
+                  <div className="flex items-baseline gap-2 leading-none">
+                    <span className="font-medium text-body-md leading-none">
+                      {word.en}
+                    </span>
+                    <span className="font-medium text-ko-headline-sm font-pretendard leading-none">
+                      {word.ko}
+                    </span>
+                  </div>
                 </div>
               ))}
               {words.length === 0 && (
