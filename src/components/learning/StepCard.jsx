@@ -105,14 +105,15 @@ export default function StepCard({
       const maxScroll = scroller.scrollHeight - scroller.clientHeight;
       const progress = maxScroll <= 0 ? 0 : scroller.scrollTop / maxScroll;
 
-      tlRef.current.progress(progress);
-      setScrollProgress(progress);
+      if (isLoggedIn) {
+        tlRef.current.progress(progress);
+        setScrollProgress(progress);
 
-      // 진행률을 부모 컴포넌트로 전달
+        if (progress < 0.3) onPhaseChange?.("intro");
+        else onPhaseChange?.("reveal");
+      }
+
       onScrollProgress?.(progress);
-
-      if (progress < 0.3) onPhaseChange?.("intro");
-      else onPhaseChange?.("reveal");
     };
 
     scroller.addEventListener("scroll", onScroll);
@@ -134,7 +135,7 @@ export default function StepCard({
       <div
         ref={viewToggleRef}
         type="button"
-        className="absolute top-[1.438rem] right-0 flex flex-row items-center gap-[0.875rem] cursor-pointer font-roboto font-medium text-[1.125rem] text-gray3"
+        className="absolute top-[1.438rem] right-0 flex flex-row items-center gap-[0.875rem] cursor-pointer font-roboto text-body-sm text-gray3"
       >
         {isToggled ? "Words Hide" : "View Words"}
         <WorldToggleBtn checked={isToggled} onChange={setIsToggled} />
@@ -142,10 +143,10 @@ export default function StepCard({
 
       <div
         className={`relative mt-[9.625rem] flex flex-col items-center transition-transform duration-500 ease-out ${
-          isToggled ? "-translate-y-3" : ""
+          isToggled ? "-translate-y-[1.875rem]" : ""
         }`}
       >
-        <p className="font-pretendard font-medium text-[2.375rem] leading-[3.125rem] tracking-tight text-center">
+        <p className="font-pretendard font-medium text-ko-headline-xl leading-[3.125rem] tracking-ko-headline text-center">
           {ko}
         </p>
 

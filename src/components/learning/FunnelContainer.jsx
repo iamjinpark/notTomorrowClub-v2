@@ -7,10 +7,7 @@ import { useSearchParams } from "react-router-dom";
 
 const MAX_STEP = 5;
 
-export default function FunnelContainer({
-  onScrollProgress,
-  isLoggedIn = true,
-}) {
+export default function FunnelContainer({ onScrollProgress, isLoggedIn }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const initialStep = Number(searchParams.get("step")) || 1;

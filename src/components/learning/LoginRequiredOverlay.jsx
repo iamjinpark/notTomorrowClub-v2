@@ -1,6 +1,6 @@
 import loginOverlay from "@/assets/img/loginOverlay.png";
 
-function LoginRequiredOverlay({ onLogin }) {
+function LoginRequiredOverlay({ goLogin }) {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-10 h-[600px] pointer-events-none">
       <div className="absolute inset-0">
@@ -11,7 +11,7 @@ function LoginRequiredOverlay({ onLogin }) {
               로그인하시면 영어 문장을 확인할 수 있어요.
             </p>
             <button
-              onClick={onLogin}
+              onClick={goLogin}
               className="rounded-full px-6 py-[0.625rem] bg-charcoal text-white mt-[2.625rem]"
             >
               Join NTC CLUB
