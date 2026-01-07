@@ -12,6 +12,8 @@ export default function StepCard({
   ko,
   en,
   words = [],
+  onScrollProgress,
+  isLoggedIn = true,
 }) {
   const [isToggled, setIsToggled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -105,6 +107,9 @@ export default function StepCard({
 
       tlRef.current.progress(progress);
       setScrollProgress(progress);
+
+      // 진행률을 부모 컴포넌트로 전달
+      onScrollProgress?.(progress);
 
       if (progress < 0.3) onPhaseChange?.("intro");
       else onPhaseChange?.("reveal");

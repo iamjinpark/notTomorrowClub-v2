@@ -1,13 +1,16 @@
-import { useEffect, useState, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
-
 import StepIndicator from "./StepIndicator";
 import StepCard from "./StepCard";
 import { STEP_DATA } from "@/api/dummyData";
 
+import { useEffect, useState, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
+
 const MAX_STEP = 5;
 
-export default function FunnelContainer() {
+export default function FunnelContainer({
+  onScrollProgress,
+  isLoggedIn = true,
+}) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const initialStep = Number(searchParams.get("step")) || 1;
@@ -81,6 +84,8 @@ export default function FunnelContainer() {
               onNext={goNext}
               onPhaseChange={setStepPhase}
               words={STEP_DATA[step - 1].words}
+              onScrollProgress={onScrollProgress}
+              isLoggedIn={isLoggedIn}
             />
           )}
 
