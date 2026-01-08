@@ -197,7 +197,7 @@ export default function StepCard({
         <button
           ref={buttonRef}
           onClick={onNext}
-          className="px-6 py-[0.625rem] font-roboto rounded-[2.5rem] border border-black text-[1.25rem]"
+          className="px-6 py-[0.625rem] font-roboto rounded-[2.5rem] border border-black text-[1.25rem] hover:bg-lightyellow"
         >
           Got it
         </button>

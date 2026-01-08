@@ -1,6 +1,7 @@
 import "@/assets/css/flip.css";
 import FlipCounter from "./FlipCounter";
 import { getSecUntilMidnight } from "@/utils/flipTimer";
+import flipColon from "@/assets/img/flipColon.svg";
 
 import { useEffect, useState } from "react";
 
@@ -37,21 +38,13 @@ export default function FlipTimer({ autoStart = true }) {
       <FlipCounter counter={h1} />
       <FlipCounter counter={h2} />
 
-      <img
-        src="/src/assets/img/flipColon.svg"
-        alt="colon"
-        className="flip-colon"
-      />
+      <img src={flipColon} alt="colon" className="flip-colon" />
 
       {/* mm */}
       <FlipCounter counter={m1} />
       <FlipCounter counter={m2} />
 
-      <img
-        src="/src/assets/img/flipColon.svg"
-        alt="colon"
-        className="flip-colon"
-      />
+      <img src={flipColon} alt="colon" className="flip-colon" />
 
       {/* ss */}
       <FlipCounter counter={s1} />
