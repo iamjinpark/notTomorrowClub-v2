@@ -1,0 +1,193 @@
+.flip-ul {
+  position: relative;
+  width: 100%;
+  height: 216px;
+  margin: 2px;
+  border-radius: 16.5px;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 218px;
+  font-weight: 300;
+  list-style: none;
+  padding: 32px 30px;
+}
+
+.flip-ul li {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 164px;
+  height: 100%;
+}
+
+/* 카드 기본 설정 */
+.flip-ul li div {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 50%;
+}
+
+/* 그림자 효과를 넣어줄 가상 요소 */
+/* .flip-ul li div::before {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  content: "";
+} */
+
+.flip-ul li div .num {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 200%;
+  align-items: center;
+  justify-content: center;
+  background-color: #efefef;
+  border-radius: 16.5px;
+  color: black;
+}
+
+/* upper */
+.flip-ul li div.upper {
+  top: 0;
+  transform-origin: 50% 100%;
+}
+
+.flip-ul li div.upper .num {
+  top: 0;
+  background: linear-gradient(to bottom, #efefef 0%, #dbdbdb 93%);
+}
+
+/* 카드 가운데 선 */
+.flip-ul li div.upper::after {
+  position: absolute;
+  z-index: 5;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: white;
+  content: "";
+}
+
+/* lower */
+.flip-ul li div.lower {
+  bottom: 0;
+  transform-origin: 50% 0%;
+}
+
+.flip-ul li div.lower .num {
+  bottom: 0;
+}
+
+/* back */
+.flip-ul li.back {
+  z-index: 3;
+}
+
+.flip-ul li.back .upper {
+  z-index: 2;
+  animation: top-to-middle 0.5s linear both;
+}
+
+.flip-ul li.back .upper::before {
+  animation: show 0.5s linear both;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+.flip-ul li.back .lower::before {
+  animation: show 0.5s linear both;
+}
+
+/* front */
+.flip-ul li.front {
+  z-index: 2;
+  animation: increase-zindex 0.5s 0.5s linear forwards;
+}
+
+.flip-ul li.front .upper::before {
+  animation: hide 0.5s 0.3s linear both;
+}
+
+.flip-ul li.front .lower {
+  z-index: 2;
+  animation: middle-to-bottom 0.5s 0.5s linear both;
+}
+
+.flip-ul li.front .lower::before {
+  animation: hide 0.5s 0.3s linear both;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+/* keyframes */
+@keyframes increase-zindex {
+  0% {
+    z-index: 4;
+  }
+  100% {
+    z-index: 4;
+  }
+}
+
+@keyframes middle-to-bottom {
+  0% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes top-to-middle {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(90deg);
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* FlipTimer.css */
+.flip-timer {
+  display: flex;
+  gap: 5px;
+}
+
+.flip-colon {
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}

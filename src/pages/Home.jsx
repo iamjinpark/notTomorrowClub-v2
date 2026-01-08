@@ -1,9 +1,10 @@
-import flipCountDownImage from "@/assets/img/flipCountDown.svg";
+// import flipCountDownImage from "@/assets/img/flipCountDown.svg";
 import Greeting from "@/components/main/Greeting";
 import CherrUpMessage from "@/components/main/CherrUpMessage";
 import BorderBtn from "@/components/common/BorderBtn";
 
 import { useNavigate } from "react-router-dom";
+import FlipTimer from "@/components/main/FlipTimer";
 
 function Home() {
   const navigate = useNavigate();
@@ -15,7 +16,8 @@ function Home() {
         <Greeting />
         {/* flip countdown */}
         <div className="w-full pt-[3.75rem] relative">
-          <img src={flipCountDownImage} alt="" className="w-full" />
+          {/* <img src={flipCountDownImage} alt="" className="w-full" /> */}
+          <FlipTimer initialSeconds={99} onDone={() => console.log("끝!")} />
           {/* cheer message*/}
           <div className="absolute">
             <CherrUpMessage />
