@@ -1,4 +1,4 @@
-import "@/assets/css/Flip.css";
+import "@/assets/css/flip.css";
 
 export default function FlipCounter({ counter = 0 }) {
   const current = ((counter % 10) + 10) % 10;

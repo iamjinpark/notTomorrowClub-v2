@@ -1,4 +1,4 @@
-import "@/assets/css/Flip.css";
+import "@/assets/css/flip.css";
 import FlipCounter from "./FlipCounter";
 import { getSecUntilMidnight } from "@/utils/flipTimer";
 
