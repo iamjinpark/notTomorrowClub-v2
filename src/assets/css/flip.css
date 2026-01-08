@@ -58,11 +58,13 @@
 .flip-ul li div.upper {
   top: 0;
   transform-origin: 50% 100%;
+  background: linear-gradient(to bottom, #efefef 0%, #dbdbdb 93%);
+  border-radius: 16.5px 16.5px 0 0;
 }
 
 .flip-ul li div.upper .num {
   top: 0;
-  background: linear-gradient(to bottom, #efefef 0%, #dbdbdb 93%);
+  background: transparent;
 }
 
 /* 카드 가운데 선 */
@@ -97,15 +99,6 @@
   animation: top-to-middle 0.5s linear both;
 }
 
-.flip-ul li.back .upper::before {
-  animation: show 0.5s linear both;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.1) 0%,
-    rgba(0, 0, 0, 1) 100%
-  );
-}
-
 .flip-ul li.back .lower::before {
   animation: show 0.5s linear both;
 }
@@ -114,10 +107,6 @@
 .flip-ul li.front {
   z-index: 2;
   animation: increase-zindex 0.5s 0.5s linear forwards;
-}
-
-.flip-ul li.front .upper::before {
-  animation: hide 0.5s 0.3s linear both;
 }
 
 .flip-ul li.front .lower {
