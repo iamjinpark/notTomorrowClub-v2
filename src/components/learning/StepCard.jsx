@@ -18,34 +18,6 @@ export default function StepCard({
   const [isToggled, setIsToggled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // 영어 문장에서 특정 단어들을 하이라이트
-  const highlightWords = (text, wordsToHighlight) => {
-    if (!wordsToHighlight || wordsToHighlight.length === 0) {
-      return <span>{text}</span>;
-    }
-
-    const englishWords = wordsToHighlight.map((word) => word.en);
-    const regex = new RegExp(`\\b(${englishWords.join("|")})\\b`, "gi");
-    const parts = text.split(regex);
-
-    return (
-      <span>
-        {parts.map((part, index) => {
-          const isHighlighted = englishWords.some(
-            (word) => word.toLowerCase() === part.toLowerCase()
-          );
-          return isHighlighted ? (
-            <span key={index} className="bg-lightyellow">
-              {part}
-            </span>
-          ) : (
-            <span key={index}>{part}</span>
-          );
-        })}
-      </span>
-    );
-  };
-
   const containerRef = useRef(null);
   const hintRef = useRef(null);
   const englishRef = useRef(null);
@@ -126,6 +98,34 @@ export default function StepCard({
   useEffect(() => {
     setIsToggled(false);
   }, [ko, en, words]);
+
+  // 영어 문장에서 특정 단어들을 하이라이트
+  const highlightWords = (text, wordsToHighlight) => {
+    if (!wordsToHighlight || wordsToHighlight.length === 0) {
+      return <span>{text}</span>;
+    }
+
+    const englishWords = wordsToHighlight.map((word) => word.en);
+    const regex = new RegExp(`\\b(${englishWords.join("|")})\\b`, "gi");
+    const parts = text.split(regex);
+
+    return (
+      <span>
+        {parts.map((part, index) => {
+          const isHighlighted = englishWords.some(
+            (word) => word.toLowerCase() === part.toLowerCase()
+          );
+          return isHighlighted ? (
+            <span key={index} className="bg-lightyellow">
+              {part}
+            </span>
+          ) : (
+            <span key={index}>{part}</span>
+          );
+        })}
+      </span>
+    );
+  };
 
   return (
     <div

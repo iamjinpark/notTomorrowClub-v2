@@ -4,8 +4,7 @@ import { STEP_DATA } from "@/api/dummyData";
 
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
-
-const MAX_STEP = 5;
+import { fetchLearningData } from "@/api/learning";
 
 export default function FunnelContainer({ onScrollProgress, isLoggedIn }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,6 +14,23 @@ export default function FunnelContainer({ onScrollProgress, isLoggedIn }) {
   const [stepPhase, setStepPhase] = useState("intro");
   const scrollRef = useRef(null);
 
+  const [learningData, setLearningData] = useState([]);
+  const item = learningData?.[step - 1];
+
+  // 학습 데이터 불러오기
+  useEffect(() => {
+    const loadLearningData = async () => {
+      try {
+        const data = await fetchLearningData();
+        setLearningData(data);
+      } catch (error) {
+        console.error("Failed to load learning data:", error);
+      }
+    };
+
+    loadLearningData();
+  }, []);
+
   // url & step 동기화
   useEffect(() => {
     const urlStep = Number(searchParams.get("step")) || 1;
@@ -23,7 +39,7 @@ export default function FunnelContainer({ onScrollProgress, isLoggedIn }) {
 
   useEffect(() => {
     if (step < 1) setStep(1);
-    if (step > MAX_STEP) setStep(MAX_STEP);
+    if (step > 5) setStep(5);
   }, [step]);
 
   useEffect(() => {
@@ -31,7 +47,7 @@ export default function FunnelContainer({ onScrollProgress, isLoggedIn }) {
   }, [step]);
 
   const goNext = () => {
-    const next = Math.min(step + 1, MAX_STEP);
+    const next = Math.min(step + 1, 5);
     setStep(next);
     setSearchParams({ step: next });
 
@@ -67,20 +83,19 @@ export default function FunnelContainer({ onScrollProgress, isLoggedIn }) {
         <StepIndicator step={step} onStepChange={goToStep} />
       </div>
 
-      {/*  change the sentence */}
       <div
         ref={scrollRef}
         className="mt-[1.125rem] h-[30.125rem] border-y border-gray1 overflow-y-auto relative"
       >
         <div className="relative">
-          {step >= 1 && step <= 5 && (
+          {step >= 1 && step <= 5 && item && (
             <StepCard
-              ko={STEP_DATA[step - 1].ko}
-              en={STEP_DATA[step - 1].en}
+              ko={item?.ko}
+              en={item?.en}
               scrollRef={scrollRef}
               onNext={goNext}
               onPhaseChange={setStepPhase}
-              words={STEP_DATA[step - 1].words}
+              words={item?.words}
               onScrollProgress={onScrollProgress}
               isLoggedIn={isLoggedIn}
             />
