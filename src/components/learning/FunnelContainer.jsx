@@ -1,69 +1,47 @@
 import StepIndicator from "./StepIndicator";
 import StepCard from "./StepCard";
-import { STEP_DATA } from "@/api/dummyData";
 
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
-import { fetchLearningData } from "@/api/learning";
 
-export default function FunnelContainer({ onScrollProgress, isLoggedIn }) {
+const MAX_STEP = 5;
+
+export default function FunnelContainer({
+  onScrollProgress,
+  isLoggedIn,
+  learningData,
+}) {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const initialStep = Number(searchParams.get("step")) || 1;
-  const [step, setStep] = useState(initialStep);
-  const [stepPhase, setStepPhase] = useState("intro");
   const scrollRef = useRef(null);
 
-  const [learningData, setLearningData] = useState([]);
+  const [stepPhase, setStepPhase] = useState("intro");
+  const stepFromUrl = Number(searchParams.get("step")) || 1;
+  const step = Math.min(Math.max(stepFromUrl, 1), MAX_STEP);
   const item = learningData?.[step - 1];
 
-  // 학습 데이터 불러오기
-  useEffect(() => {
-    const loadLearningData = async () => {
-      try {
-        const data = await fetchLearningData();
-        setLearningData(data);
-      } catch (error) {
-        console.error("Failed to load learning data:", error);
-      }
-    };
-
-    loadLearningData();
-  }, []);
-
-  // url & step 동기화
-  useEffect(() => {
-    const urlStep = Number(searchParams.get("step")) || 1;
-    setStep(urlStep);
-  }, [searchParams]);
-
-  useEffect(() => {
-    if (step < 1) setStep(1);
-    if (step > 5) setStep(5);
-  }, [step]);
-
-  useEffect(() => {
-    setStepPhase("intro");
-  }, [step]);
-
-  const goNext = () => {
-    const next = Math.min(step + 1, 5);
-    setStep(next);
-    setSearchParams({ step: next });
-
+  const resetScroll = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = 0;
     }
   };
 
+  useEffect(() => {
+    setStepPhase("intro");
+    resetScroll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
+  // 버튼으로 이동
+  const goNext = () => {
+    const next = Math.min(step + 1, MAX_STEP);
+    setSearchParams({ step: next });
+  };
+
+  // 인디케이터로 이동
   const goToStep = (targetStep) => {
     if (targetStep > step + 1) return;
 
     setSearchParams({ step: targetStep });
-
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = 0;
-    }
   };
 
   return (
@@ -88,14 +66,14 @@ export default function FunnelContainer({ onScrollProgress, isLoggedIn }) {
         className="mt-[1.125rem] h-[30.125rem] border-y border-gray1 overflow-y-auto relative"
       >
         <div className="relative">
-          {step >= 1 && step <= 5 && item && (
+          {item && (
             <StepCard
-              ko={item?.ko}
-              en={item?.en}
               scrollRef={scrollRef}
+              ko={item.ko}
+              en={item.en}
+              words={item.words}
               onNext={goNext}
               onPhaseChange={setStepPhase}
-              words={item?.words}
               onScrollProgress={onScrollProgress}
               isLoggedIn={isLoggedIn}
             />

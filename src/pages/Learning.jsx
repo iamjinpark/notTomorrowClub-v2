@@ -1,14 +1,29 @@
 import FunnelContainer from "@/components/learning/FunnelContainer";
 import LoginRequiredOverlay from "@/components/learning/LoginRequiredOverlay";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchLearningData } from "@/api/learning";
 
 function Learning() {
+  const navigate = useNavigate();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(true); // TODO : 로그인 로직 구현 후 false로 변경
+  const [learningData, setLearningData] = useState([]);
 
-  const navigate = useNavigate();
+  // 학습 데이터 불러오기
+  useEffect(() => {
+    const loadLearningData = async () => {
+      try {
+        const data = await fetchLearningData();
+        setLearningData(data);
+      } catch (error) {
+        console.error("Failed to load learning data:", error);
+      }
+    };
+
+    loadLearningData();
+  }, []);
 
   const handleScrollProgress = (progress) => {
     setScrollProgress(progress);
@@ -26,6 +41,7 @@ function Learning() {
       <FunnelContainer
         onScrollProgress={handleScrollProgress}
         isLoggedIn={isLoggedIn}
+        learningData={learningData}
       />
       {showOverlay && <LoginRequiredOverlay goLogin={goLogin} />}
     </div>
