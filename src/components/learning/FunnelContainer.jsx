@@ -1,5 +1,6 @@
 import StepIndicator from "./StepIndicator";
-import StepCard from "./StepCard";
+import LearningCard from "./LearningCard";
+import ReviewCard from "./ReviewCard";
 
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -7,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 const MAX_STEP = 5;
 
 export default function FunnelContainer({
+  type = "learning",
   onScrollProgress,
   isLoggedIn,
   learningData,
@@ -68,22 +70,33 @@ export default function FunnelContainer({
         className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y border-gray1 overflow-y-auto relative"
       >
         <div className="relative">
-          {item && (
-            <StepCard
-              scrollRef={scrollRef}
+          {item && type === "learning" && (
+            <div>
+              <LearningCard
+                scrollRef={scrollRef}
+                ko={item.ko}
+                en={item.en}
+                words={item.words}
+                onNext={goNext}
+                onPhaseChange={setStepPhase}
+                onScrollProgress={onScrollProgress}
+                isLoggedIn={isLoggedIn}
+                currentStep={step}
+              />
+              {/* 스크롤을 위한 추가 공간 */}
+              <div className="h-[60vh] min-h-[20rem] max-h-[30rem]"></div>
+            </div>
+          )}
+          {item && type === "review" && (
+            <ReviewCard
               ko={item.ko}
               en={item.en}
               words={item.words}
-              onNext={goNext}
               onPhaseChange={setStepPhase}
-              onScrollProgress={onScrollProgress}
-              isLoggedIn={isLoggedIn}
               currentStep={step}
+              onNext={goNext}
             />
           )}
-
-          {/* 스크롤을 위한 추가 공간 */}
-          <div className="h-[60vh] min-h-[20rem] max-h-[30rem]"></div>
         </div>
       </div>
     </div>

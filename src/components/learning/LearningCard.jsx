@@ -7,7 +7,7 @@ import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { useModal } from "@/hooks/useModal";
 
-export default function StepCard({
+export default function LearningCard({
   scrollRef,
   onNext,
   onPhaseChange,

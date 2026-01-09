@@ -5,7 +5,9 @@ import Footer from "@/components/common/Footer";
 
 export default function DefaultLayout() {
   const location = useLocation();
-  const isLearningPage = location.pathname.startsWith("/learning");
+  const hasFooter =
+    location.pathname.startsWith("/learning") ||
+    location.pathname.startsWith("/review");
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -18,7 +20,7 @@ export default function DefaultLayout() {
           <Outlet />
         </div>
       </main>
-      {!isLearningPage && <Footer />}
+      {!hasFooter && <Footer />}
     </div>
   );
 }

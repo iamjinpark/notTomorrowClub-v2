@@ -95,6 +95,7 @@ html {
   /* Korean Body - S */
   --text-ko-body-sm: 0.875rem; /* 14px */
   --leading-ko-body-sm: 1.375rem; /* 22px */
+
   --tracking-ko-body: -0.01em;
 
   /* Korean Caption 1 */

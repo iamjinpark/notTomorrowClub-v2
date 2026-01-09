@@ -39,6 +39,7 @@ function Learning() {
   return (
     <div className="relative">
       <FunnelContainer
+        type="learning"
         onScrollProgress={handleScrollProgress}
         isLoggedIn={isLoggedIn}
         learningData={learningData}
