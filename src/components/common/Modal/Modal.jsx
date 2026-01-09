@@ -95,7 +95,7 @@ function Modal({ isOpen, onClose, type, ...props }) {
         onClick={(e) => e.stopPropagation()}
       >
         <button onClick={onClose}>
-          <img src={closeIcon} alt="Close Icon" className="bg-black" />
+          <img src={closeIcon} alt="Close Icon" className="" />
         </button>
         {renderModalContent()}
       </div>
