@@ -130,7 +130,7 @@ export default function StepCard({
   return (
     <div
       ref={containerRef}
-      className="sticky top-0 h-[30.125rem] flex flex-col items-center px-8 relative"
+      className="sticky top-0 h-[60vh] min-h-[20rem] max-h-[30rem] flex flex-col items-center px-8 relative"
     >
       <div
         ref={viewToggleRef}
@@ -142,7 +142,7 @@ export default function StepCard({
       </div>
 
       <div
-        className={`relative mt-[9.625rem] flex flex-col items-center transition-transform duration-500 ease-out ${
+        className={`relative mt-[6rem] lg:mt-[9.625rem] flex flex-col items-center transition-transform duration-500 ease-out ${
           isToggled ? "-translate-y-[1.875rem]" : ""
         }`}
       >
@@ -193,7 +193,7 @@ export default function StepCard({
         </div>
       </div>
 
-      <div className="absolute bottom-[3.875rem] left-1/2 -translate-x-1/2">
+      <div className="absolute bottom-[2rem] lg:bottom-[3.875rem] left-1/2 -translate-x-1/2">
         <button
           ref={buttonRef}
           onClick={onNext}

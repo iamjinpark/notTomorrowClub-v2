@@ -63,7 +63,7 @@ export default function FunnelContainer({
 
       <div
         ref={scrollRef}
-        className="mt-[1.125rem] h-[30.125rem] border-y border-gray1 overflow-y-auto relative"
+        className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y border-gray1 overflow-y-auto relative"
       >
         <div className="relative">
           {item && (
@@ -80,7 +80,7 @@ export default function FunnelContainer({
           )}
 
           {/* 스크롤을 위한 추가 공간 */}
-          <div className="h-[30.125rem]"></div>
+          <div className="h-[60vh] min-h-[20rem] max-h-[30rem]"></div>
         </div>
       </div>
     </div>
