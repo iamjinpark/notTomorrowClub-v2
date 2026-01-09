@@ -10,12 +10,15 @@ export default function DefaultLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="h-[calc(100vh-61px)] px-[10rem] pt-[8rem] overflow-hidden">
-        <div className="w-full max-w-[70.25rem] mx-auto h-full">
+      <main
+        className="px-[10rem] pt-[8rem] overflow-hidden"
+        style={{ height: `calc(100vh - 61px)` }}
+      >
+        <div className="w-full max-w-[70.25rem] mx-auto h-full ">
           <Outlet />
         </div>
       </main>
-      {isLearningPage ? null : <Footer />}
+      {!isLearningPage && <Footer />}
     </div>
   );
 }

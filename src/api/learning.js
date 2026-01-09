@@ -9,6 +9,6 @@ const instance = axios.create({
 });
 
 export const fetchLearningData = async () => {
-  const response = await instance.get("/sentence/weekly");
+  const response = await instance.get("/sentence/latest");
   return response.data.data.sentence;
 };

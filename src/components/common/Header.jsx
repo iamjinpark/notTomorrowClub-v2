@@ -5,7 +5,7 @@ function Header() {
   const Navigate = useNavigate();
 
   return (
-    <header className="font-roboto flex items-center justify-between p-4 border-b border-charcoal sticky top-0 bg-white z-10">
+    <header className="font-roboto flex items-center justify-between h-[61px] p-4 border-b border-charcoal sticky top-0 bg-white z-10">
       <div>
         <Link to="/">
           <img src={logoImage} alt="NTC 로고" className="h-[1.5rem] w-auto" />
