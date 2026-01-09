@@ -76,6 +76,7 @@ export default function FunnelContainer({
               onPhaseChange={setStepPhase}
               onScrollProgress={onScrollProgress}
               isLoggedIn={isLoggedIn}
+              currentStep={step}
             />
           )}
 

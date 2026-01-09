@@ -3,29 +3,16 @@ import { useState, useCallback } from "react";
 /**
  * 모달 상태와 제어 함수를 제공하는 커스텀 훅
  * @param {boolean} defaultOpen - 초기 열림 상태 (기본: false)
- * @returns {object} - { isOpen, openModal, closeModal, toggleModal }
+ * @returns {object} - { isOpen, open, close, toggle }
  */
 export function useModal(defaultOpen = false) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
-  const openModal = useCallback(() => {
-    setIsOpen(true);
-  }, []);
+  const open = useCallback(() => setIsOpen(true), []);
+  const close = useCallback(() => setIsOpen(false), []);
+  const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
 
-  const closeModal = useCallback(() => {
-    setIsOpen(false);
-  }, []);
-
-  const toggleModal = useCallback(() => {
-    setIsOpen((prev) => !prev);
-  }, []);
-
-  return {
-    isOpen,
-    openModal,
-    closeModal,
-    toggleModal,
-  };
+  return { isOpen, open, close, toggle };
 }
 
 /**

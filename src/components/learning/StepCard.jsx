@@ -1,9 +1,11 @@
 import upperArrow from "@/assets/img/upperArrow.svg";
 import WorldToggleBtn from "./WordToggleBtn";
 import wordIcon from "@/assets/img/wordIcon.svg";
+import Modal from "@/components/common/Modal/Modal";
 
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { useModal } from "@/hooks/useModal";
 
 export default function StepCard({
   scrollRef,
@@ -14,9 +16,11 @@ export default function StepCard({
   words = [],
   onScrollProgress,
   isLoggedIn = true,
+  currentStep,
 }) {
   const [isToggled, setIsToggled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const learningModal = useModal();
 
   const containerRef = useRef(null);
   const hintRef = useRef(null);
@@ -98,6 +102,15 @@ export default function StepCard({
   useEffect(() => {
     setIsToggled(false);
   }, [ko, en, words]);
+
+  // Got it 버튼 핸들러
+  const handleGotItClick = () => {
+    if (currentStep === 5) {
+      learningModal.open();
+    } else {
+      onNext?.();
+    }
+  };
 
   // 영어 문장에서 특정 단어들을 하이라이트
   const highlightWords = (text, wordsToHighlight) => {
@@ -196,12 +209,18 @@ export default function StepCard({
       <div className="absolute bottom-[2rem] lg:bottom-[3.875rem] left-1/2 -translate-x-1/2">
         <button
           ref={buttonRef}
-          onClick={onNext}
+          onClick={handleGotItClick}
           className="px-6 py-[0.625rem] font-roboto rounded-[2.5rem] border border-black text-[1.25rem] hover:bg-lightyellow"
         >
           Got it
         </button>
       </div>
+
+      <Modal
+        type="learning"
+        isOpen={learningModal.isOpen}
+        onClose={() => learningModal.close()}
+      />
     </div>
   );
 }
