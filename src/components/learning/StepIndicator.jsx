@@ -1,16 +1,22 @@
 export default function StepIndicator({ step, onStepChange }) {
-  const X = [9, 83, 157, 239, 315];
+  const X = [10, 84, 158, 232, 306];
 
   return (
     <svg
-      width="324"
-      height="18"
-      viewBox="0 0 324 18"
+      width="316"
+      height="20"
+      viewBox="0 0 316 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-label={`step ${step}`}
     >
-      <path d="M9 8.71094L323.5 8.71094" stroke="#404040" strokeWidth="0.8" />
+      {/* 배경 라인 */}
+      <path d="M10 10H306" stroke="#D9D9D9" strokeWidth="0.8" />
+
+      {/* 진행도 라인 */}
+      {step > 1 && (
+        <path d={`M10 10H${X[step - 1]}`} stroke="#2B2B2B" strokeWidth="2.5" />
+      )}
 
       {X.map((cx, index) => {
         const stepNumber = index + 1;
@@ -31,14 +37,14 @@ export default function StepIndicator({ step, onStepChange }) {
           >
             <circle
               cx={cx}
-              cy="9"
-              r="9"
+              cy="10"
+              r="10"
               fill={completed ? "#2B2B2B" : "#D9D9D9"}
             />
             <circle
               cx={cx}
-              cy="9"
-              r="4"
+              cy="10"
+              r="5"
               fill={completed ? "#F3FF60" : "#8C8C8C"}
             />
           </g>

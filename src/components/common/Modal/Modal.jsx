@@ -1,8 +1,11 @@
+import closeIcon from "@/assets/img/closeIcon.svg";
 import LearningModal from "./LearningModal";
 import ConfirmModalContent from "./ConfirmModalContent";
 
+import Confetti from "react-confetti";
 import { createPortal } from "react-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 /**
  * 통합 모달 컴포넌트 - type으로 다양한 모달 타입 구분
@@ -13,6 +16,17 @@ import { useEffect } from "react";
  */
 
 function Modal({ isOpen, onClose, type, ...props }) {
+  const { width, height } = useWindowSize();
+  const [runConfetti, setRunConfetti] = useState(true);
+  const [confettiKey, setConfettiKey] = useState(0);
+
+  useEffect(() => {
+    setConfettiKey((k) => k + 1);
+    setRunConfetti(true);
+    const t = window.setTimeout(() => setRunConfetti(false), 10000);
+    return () => window.clearTimeout(t);
+  }, []);
+
   // ESC 키와 body 스크롤 제어
   useEffect(() => {
     if (!isOpen) return;
@@ -56,7 +70,33 @@ function Modal({ isOpen, onClose, type, ...props }) {
       className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-4"
       onClick={handleBackdropClick}
     >
-      <div className="relative" onClick={(e) => e.stopPropagation()}>
+      {type === "learning" && runConfetti && (
+        <Confetti
+          key={confettiKey}
+          width={width}
+          height={height}
+          numberOfPieces={300}
+          gravity={0.2}
+          wind={0.01}
+          recycle={true}
+          tweenDuration={3500}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            zIndex: 9999,
+            pointerEvents: "none",
+          }}
+        />
+      )}
+
+      <div
+        className="relative flex flex-col items-end gap-[0.938rem]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button onClick={onClose}>
+          <img src={closeIcon} alt="Close Icon" className="bg-black" />
+        </button>
         {renderModalContent()}
       </div>
     </div>
