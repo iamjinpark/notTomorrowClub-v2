@@ -23,8 +23,6 @@ function Modal({ isOpen, onClose, type, ...props }) {
   useEffect(() => {
     setConfettiKey((k) => k + 1);
     setRunConfetti(true);
-    const t = window.setTimeout(() => setRunConfetti(false), 10000);
-    return () => window.clearTimeout(t);
   }, []);
 
   // ESC 키와 body 스크롤 제어
@@ -79,6 +77,7 @@ function Modal({ isOpen, onClose, type, ...props }) {
           gravity={0.2}
           wind={0.01}
           recycle={true}
+          run={true}
           tweenDuration={3500}
           style={{
             position: "fixed",

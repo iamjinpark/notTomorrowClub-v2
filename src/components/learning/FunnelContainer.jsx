@@ -48,14 +48,16 @@ export default function FunnelContainer({
     <div>
       <div className="flex flex-row items-start justify-between">
         <div className="font-chakra">
-          <h1 className="text-[2.25rem] font-semibold leading-[49px] h-[1.813rem]">
+          <h1 className="text-title-xl font-semibold leading-6">
             Hello, Stranger! Good Morning
           </h1>
-          <p className="text-[1.5rem] text-gray3 font-mendium leading-[28px] mt-[1.125rem]">
+          <p className="font-pretendard text-ko-headline-lg text-gray3 font-mendium mt-[1.125rem]">
             {stepPhase === "intro" && (
-              <>Guess the English sentence from Korean!</>
+              <>한국어 문장을 보면서 영어 문장을 생각해보세요.</>
             )}
-            {stepPhase === "reveal" && <>Check the English sentence below</>}
+            {stepPhase === "reveal" && (
+              <>두 문장을 함께 보면서 스스로 맞는지 확인해보세요.</>
+            )}
           </p>
         </div>
         <StepIndicator step={step} onStepChange={goToStep} />

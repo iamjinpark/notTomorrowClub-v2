@@ -6,7 +6,7 @@ function LearningModal({ onClose }) {
   const navigate = useNavigate();
 
   const handleReadAgain = () => {
-    navigate("/learning");
+    navigate("/review");
     onClose();
   };
 
@@ -27,14 +27,14 @@ function LearningModal({ onClose }) {
       </p>
       <div className="flex flex-col items-center gap-[0.625rem]">
         <BorderBtn
-          text="Go read again"
+          text="Go to review"
           py="py-[0.813rem]"
           bg="bg-white"
           className="w-[15.875rem] font-roboto text-button-lg leading-[1.25rem]"
           onClick={handleReadAgain}
         />
         <BorderBtn
-          text="Go make it page"
+          text="Go to make it"
           py="py-[0.813rem]"
           bg="bg-white"
           className="w-[15.875rem] font-roboto text-button-lg leading-[1.25rem]"
