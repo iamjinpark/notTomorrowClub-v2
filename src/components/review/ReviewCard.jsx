@@ -1,4 +1,6 @@
 import BorderBtn from "../common/BorderBtn";
+import ReviewCounter from "./ReviewCounter";
+
 import { useState } from "react";
 
 function ReviewCard({ ko, en, words, onPhaseChange, currentStep, onNext }) {
@@ -11,7 +13,7 @@ function ReviewCard({ ko, en, words, onPhaseChange, currentStep, onNext }) {
 
   if (!isReviewStarted) {
     return (
-      <div className="flex flex-col items-center justify-center gap-[7rem] pt-[10rem]">
+      <div className="flex flex-col items-center justify-center gap-28 pt-40">
         <div className="font-pretendard font-medium text-center tracking-ko-headline">
           <p className="text-ko-headline-xl">
             공부한 문장을 3초 동안 다시 확인해보세요.
@@ -25,14 +27,18 @@ function ReviewCard({ ko, en, words, onPhaseChange, currentStep, onNext }) {
           text="start"
           py="py-[0.813rem]"
           px="px-[1.688rem]"
-          className="font-roboto text-[1.25rem] leading-[1.25rem]"
+          className="font-roboto text-[1.25rem] leading-5"
           onClick={handleStartReview}
         />
       </div>
     );
   }
 
-  return <div>복습중....</div>;
+  return (
+    <div>
+      <ReviewCounter />
+    </div>
+  );
 }
 
 export default ReviewCard;

@@ -19,6 +19,7 @@ export default function LearningCard({
   currentStep,
 }) {
   const [isToggled, setIsToggled] = useState(false);
+  const [showLater, setShowLater] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const learningModal = useModal();
 
@@ -98,6 +99,15 @@ export default function LearningCard({
     return () => scroller.removeEventListener("scroll", onScroll);
   }, [scrollRef, onPhaseChange]);
 
+  useEffect(() => {
+    if (scrollProgress >= 0.3) {
+      const timer = setTimeout(() => setShowLater(true), 1500);
+      return () => clearTimeout(timer);
+    }
+    setShowLater(false);
+    setIsToggled(false);
+  }, [scrollProgress]);
+
   // 페이지가 변경될 때마다 toggle 상태 초기화
   useEffect(() => {
     setIsToggled(false);
@@ -145,18 +155,20 @@ export default function LearningCard({
       ref={containerRef}
       className="sticky top-0 h-[60vh] min-h-[20rem] max-h-[30rem] flex flex-col items-center px-8 relative"
     >
-      <div
-        ref={viewToggleRef}
-        type="button"
-        className="absolute top-[1.438rem] right-0 flex flex-row items-center gap-[0.875rem] cursor-pointer font-roboto text-body-sm text-gray3"
-      >
-        {isToggled ? "Words Hide" : "View Words"}
-        <WorldToggleBtn checked={isToggled} onChange={setIsToggled} />
-      </div>
+      {showLater && (
+        <div
+          ref={viewToggleRef}
+          type="button"
+          className="absolute top-[1.438rem] right-0 flex flex-row items-center gap-[0.875rem] cursor-pointer font-roboto text-body-sm text-gray3"
+        >
+          {isToggled ? "Words Hide" : "View Words"}
+          <WorldToggleBtn checked={isToggled} onChange={setIsToggled} />
+        </div>
+      )}
 
       <div
         className={`relative mt-[6rem] lg:mt-[9.625rem] flex flex-col items-center transition-transform duration-500 ease-out ${
-          isToggled ? "-translate-y-[1.875rem]" : ""
+          isToggled && scrollProgress >= 0.3 ? "-translate-y-[1.875rem]" : ""
         }`}
       >
         <p className="font-pretendard font-medium text-ko-headline-xl leading-[3.125rem] tracking-ko-headline text-center">
@@ -172,12 +184,14 @@ export default function LearningCard({
         </div>
 
         <div className="flex flex-col items-center gap-[2.125rem]">
-          <p
-            ref={englishRef}
-            className="text-[2.625rem] text-center font-roboto font-medium leading-[52.4px]"
-          >
-            {isToggled ? highlightWords(en, words) : en}
-          </p>
+          {scrollProgress >= 0.3 && (
+            <p
+              ref={englishRef}
+              className="text-[2.625rem] text-center font-roboto font-medium leading-[52.4px]"
+            >
+              {isToggled ? highlightWords(en, words) : en}
+            </p>
+          )}
 
           {isToggled && scrollProgress >= 0.3 && (
             <div className="animate-fade-in transition-opacity duration-300 flex gap-[2.75rem] items-center">
@@ -206,15 +220,17 @@ export default function LearningCard({
         </div>
       </div>
 
-      <div className="absolute bottom-[2rem] lg:bottom-[3.875rem] left-1/2 -translate-x-1/2">
-        <button
-          ref={buttonRef}
-          onClick={handleGotItClick}
-          className="px-6 py-[0.625rem] font-roboto rounded-[2.5rem] border border-black text-[1.25rem] hover:bg-lightyellow"
-        >
-          Got it
-        </button>
-      </div>
+      {showLater && (
+        <div className="absolute bottom-[2rem] lg:bottom-[3.875rem] left-1/2 -translate-x-1/2">
+          <button
+            ref={buttonRef}
+            onClick={handleGotItClick}
+            className="px-6 py-[0.625rem] font-roboto rounded-[2.5rem] border border-black text-[1.25rem] hover:bg-lightyellow"
+          >
+            Got it
+          </button>
+        </div>
+      )}
 
       <Modal
         type="learning"

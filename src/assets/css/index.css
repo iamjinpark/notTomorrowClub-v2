@@ -124,6 +124,18 @@ html {
   }
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+/* Firefox */
+body {
+  scrollbar-width: none;
+}
+/* IE/Edge */
+body {
+  -ms-overflow-style: none;
+}
+
 .message {
   box-sizing: border-box;
   flex-shrink: 0;

@@ -1,6 +1,6 @@
 import StepIndicator from "./StepIndicator";
 import LearningCard from "./LearningCard";
-import ReviewCard from "./ReviewCard";
+import ReviewCard from "@/components/review/ReviewCard";
 
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -50,10 +50,10 @@ export default function FunnelContainer({
     <div>
       <div className="flex flex-row items-start justify-between">
         <div className="font-chakra">
-          <h1 className="text-title-xl font-semibold leading-6">
+          <h1 className="text-title-xl font-semibold">
             Hello, Stranger! Good Morning
           </h1>
-          <p className="font-pretendard text-ko-headline-lg text-gray3 font-mendium mt-[1.125rem]">
+          <p className="font-pretendard text-ko-headline-lg text-gray3 font-mendium mt-[0.563rem]">
             {stepPhase === "intro" && (
               <>한국어 문장을 보면서 영어 문장을 생각해보세요.</>
             )}

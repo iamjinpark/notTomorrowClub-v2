@@ -25,6 +25,8 @@ export default function StepIndicator({ step, onStepChange }) {
           const stepNumber = index + 1;
           const completed = stepNumber <= step;
           const clickable = stepNumber < step;
+          const isActive = stepNumber === step;
+
           return (
             <g
               key={cx}
