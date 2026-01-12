@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function useWeather() {
   const [weather, setWeather] = useState(null);
-  const [city, setLocation] = useState(null);
+  const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -13,10 +13,11 @@ function useWeather() {
         const ipRes = await fetch("https://ipwho.is/");
         const ipData = await ipRes.json();
 
-        const { latitude, longitude, city } = ipData;
+        const { latitude, longitude, city, country } = ipData;
 
         setLocation({
-          city: city,
+          location: city,
+          country: country,
         });
 
         // 날씨 조회
@@ -40,7 +41,7 @@ function useWeather() {
     fetchWeather();
   }, []);
 
-  return { weather, city, loading, error };
+  return { weather, location, loading, error };
 }
 
 export default useWeather;

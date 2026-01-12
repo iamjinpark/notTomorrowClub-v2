@@ -49,11 +49,11 @@ export default function FunnelContainer({
   return (
     <div>
       <div className="flex flex-row items-start justify-between">
-        <div className="font-chakra">
-          <h1 className="text-title-xl font-semibold">
+        <div>
+          <h1 className="en-title-xl leading-[2.25rem]">
             Hello, Stranger! Good Morning
           </h1>
-          <p className="font-pretendard text-ko-headline-lg text-gray3 font-mendium mt-[0.563rem]">
+          <p className="ko-headline-lg text-gray3 mt-[0.563rem]">
             {stepPhase === "intro" && (
               <>한국어 문장을 보면서 영어 문장을 생각해보세요.</>
             )}

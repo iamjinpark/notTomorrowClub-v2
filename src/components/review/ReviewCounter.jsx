@@ -56,7 +56,7 @@ export default function ReviewCounter() {
     <div className="grid place-items-center bg-transparent">
       <div
         ref={dialRef}
-        className="font-chakra font-medium text-title-xl w-16.5 h-16.5 grid place-items-center select-none rounded-full text-black will-change-[background] transition-[background] duration-150 ease-linear"
+        className="en-title-xl w-16.5 h-16.5 grid place-items-center select-none rounded-full text-black will-change-[background] transition-[background] duration-150 ease-linear"
         style={{
           background:
             "conic-gradient(var(--fillColor) var(--angle), var(--trackColor) var(--angle))",

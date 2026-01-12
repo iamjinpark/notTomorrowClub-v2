@@ -2,7 +2,7 @@ export default function StepIndicator({ step, onStepChange }) {
   const X = [10, 84, 158, 232, 306];
 
   return (
-    <div className="mt-[0.563rem]">
+    <div className="mt-[1.125rem]">
       <svg
         width="316"
         height="20"

@@ -1,0 +1,150 @@
+/* -------------------------------------------------------------------------- */
+/*                                     eng                                    */
+/* -------------------------------------------------------------------------- */
+/* titles */
+.en-title-xl {
+  font-family: var(--font-chakra);
+  font-weight: 600;
+  font-size: 2.25rem; /* 36px */
+}
+
+.en-title-lg {
+  font-family: var(--font-chakra);
+  font-weight: 600;
+  font-size: 1.625rem; /* 26px */
+}
+
+.en-title-md {
+  font-family: var(--font-chakra);
+  font-weight: 600;
+  font-size: 1.5rem; /* 24px */
+}
+
+.en-title-sm {
+  font-family: var(--font-chakra);
+  font-weight: 700;
+  font-size: 1.125rem; /* 18px */
+}
+
+/* headline */
+.en-headline-lg {
+  font-family: var(--font-roboto);
+  font-weight: 400;
+  font-size: 2.625rem; /* 42px */
+}
+
+.en-headline-md {
+  font-family: var(--font-roboto);
+  font-weight: 400;
+  font-size: 2.375rem; /* 38px */
+}
+
+.en-headline-sm {
+  font-family: var(--font-roboto);
+  font-weight: 400;
+  font-size: 1.75rem; /* 28px */
+}
+
+/* body */
+.en-body-lg {
+  font-family: var(--font-roboto);
+  font-weight: 400;
+  font-size: 1.5rem; /* 24px */
+}
+
+.en-body-md {
+  font-family: var(--font-roboto);
+  font-weight: 400;
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.875rem; /* 30px */
+}
+
+.en-body-sm {
+  font-family: var(--font-roboto);
+  font-weight: 400;
+  font-size: 1rem; /* 16px */
+}
+
+/* caption */
+.en-caption-1 {
+  font-family: var(--font-roboto);
+  font-weight: 500;
+  font-size: 0.875rem; /* 14px */
+}
+
+.en-caption-2 {
+  font-family: var(--font-roboto);
+  font-weight: 500;
+  font-size: 0.75rem; /* 12px */
+}
+
+.en-caption-3 {
+  font-family: var(--font-roboto);
+  font-weight: 500;
+  font-size: 0.625rem; /* 10px */
+}
+
+/* button */
+.en-button-1 {
+  font-family: var(--font-roboto);
+  font-weight: 400;
+  font-size: 1.25rem; /* 20px */
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                     kor                                    */
+/* -------------------------------------------------------------------------- */
+/* headline */
+.ko-headline-xl {
+  font-family: var(--font-pretendard);
+  font-weight: 500;
+  font-size: 2.375rem; /* 38px */
+  letter-spacing: -0.01em;
+}
+
+.ko-headline-lg {
+  font-family: var(--font-pretendard);
+  font-weight: 500;
+  font-size: 1.5rem; /* 24px */
+  letter-spacing: -0.01em;
+}
+
+.ko-headline-md {
+  font-family: var(--font-pretendard);
+  font-weight: 500;
+  font-size: 1.125rem; /* 18px */
+  letter-spacing: -0.01em;
+}
+
+.ko-headline-sm {
+  font-family: var(--font-pretendard);
+  font-weight: 500;
+  font-size: 1rem; /* 16px */
+  letter-spacing: -0.01em;
+}
+
+/* body */
+.ko-body-sm {
+  font-family: var(--font-pretendard);
+  font-weight: 400;
+  font-size: 0.875rem; /* 14px */
+  letter-spacing: -0.01em;
+  line-height: 1.375rem; /* 22px */
+}
+
+/* caption */
+.ko-caption-1 {
+  font-family: var(--font-pretendard);
+  font-weight: 400;
+  font-size: 0.875rem; /* 14px */
+  letter-spacing: -0.01em;
+  line-height: 1.375rem; /* 22px */
+}
+
+/* button */
+.ko-button-1 {
+  font-family: var(--font-pretendard);
+  font-weight: 400;
+  font-size: 0.875rem; /* 14px */
+  letter-spacing: -0.05em;
+}

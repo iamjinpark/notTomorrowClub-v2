@@ -13,7 +13,7 @@ export default function DefaultLayout() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main
-        className="px-[10rem] pt-[8rem] overflow-hidden"
+        className="px-[9.875rem] pt-[7.75rem] overflow-hidden"
         style={{ height: `calc(100vh - 61px)` }}
       >
         <div className="w-full max-w-[70.25rem] mx-auto h-full ">

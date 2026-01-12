@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 function Greeting() {
   const [onlineCount, setOnlineCount] = useState(0);
-  const { weather, city, loading } = useWeather();
+  const { weather, location } = useWeather();
 
   useEffect(() => {
     const random = Math.floor(Math.random() * 51);
@@ -26,31 +26,31 @@ function Greeting() {
   };
 
   return (
-    <div className="w-full font-chakra font-semibold flex justify-between">
-      <div className="flex flex-col justify-between">
-        <h1 className="text-title-xl">{getGreetingMessage()}</h1>
+    <div className="w-full flex justify-between items-end">
+      <div className="flex flex-col">
+        <h1 className="en-title-xl leading-[2.25rem]">
+          {getGreetingMessage()}
+        </h1>
         <div
           className="w-[6.563rem] h-[1.938rem] bg-gray5 rounded-full flex
-            flex-row items-center justify-center gap-2 mt-4"
+            flex-row items-center justify-center gap-2 mt-[0.813rem]"
         >
           <span
             className={`inline-block w-[13px] h-[13px] ${dotColor} rounded-full`}
           />
-          <span className="font-roboto font-semibold">
-            {onlineCount} online
-          </span>
+          <span className="font-roboto font-medium">{onlineCount} online</span>
         </div>
       </div>
-      <div className="text-title-sm flex flex-col items-end pt-3">
-        <p>{new Date().toLocaleDateString()}</p>
-        <p>{city?.city}</p>
+      <div className="font-chakra font-semibold text-[1.125rem] flex flex-col items-end leading-[1.125rem] gap-[0.438rem]">
+        <span>{new Date().toLocaleDateString("sv-SE").replace(/-/g, "/")}</span>
+        <span>{location?.country}</span>
         {weather && weather.weather && weather.weather.length > 0 ? (
-          <p>
+          <span>
             {weather?.weather[0]?.main}, {Math.round(weather?.main?.temp)}℃,{" "}
             {weather?.wind?.speed} m/s
-          </p>
+          </span>
         ) : (
-          <p>Ready for weather data</p>
+          <span>Ready for weather data</span>
         )}
       </div>
     </div>

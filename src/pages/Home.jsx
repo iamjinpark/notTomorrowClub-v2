@@ -24,11 +24,11 @@ function Home() {
           </div>
         </div>
         {/* start btn */}
-        <div className="pt-[7.75rem] font-regular font-roboto text-title-sm">
+        <div className="pt-[7.75rem] font-regular font-roboto text-[1.25rem] leading-[1.25rem]">
           <BorderBtn
             text="To meet today's English"
-            px="px-5"
-            py="py-2"
+            px="px-[1.625rem]"
+            py="py-[0.813rem]"
             onClick={() => {
               navigate("/learning");
             }}

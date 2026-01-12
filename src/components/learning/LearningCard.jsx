@@ -159,7 +159,7 @@ export default function LearningCard({
         <div
           ref={viewToggleRef}
           type="button"
-          className="absolute top-[1.438rem] right-0 flex flex-row items-center gap-[0.875rem] cursor-pointer font-roboto text-body-sm text-gray3"
+          className="absolute top-[1.438rem] right-0 flex flex-row items-center gap-[0.875rem] cursor-pointer font-roboto en-body-sm text-gray3"
         >
           {isToggled ? "Words Hide" : "View Words"}
           <WorldToggleBtn checked={isToggled} onChange={setIsToggled} />
@@ -171,16 +171,14 @@ export default function LearningCard({
           isToggled && scrollProgress >= 0.3 ? "-translate-y-[1.875rem]" : ""
         }`}
       >
-        <p className="font-pretendard font-medium text-ko-headline-xl leading-[3.125rem] tracking-ko-headline text-center">
-          {ko}
-        </p>
+        <p className="ko-headline-xl text-center leading-[3.125rem]">{ko}</p>
 
         <div
           ref={hintRef}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 flex flex-col gap-4 items-center text-lg font-chakra font-semibold"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 flex flex-col gap-4 items-center font-chakra font-semibold text-[1.125rem] leading-[1.125rem]"
         >
           <img src={upperArrow} alt="" className="w-[30px] h-[17px]" />
-          <span>Scroll to check English</span>
+          <span className="whitespace-nowrap">Scroll to check English</span>
         </div>
 
         <div className="flex flex-col items-center gap-[2.125rem]">
@@ -203,17 +201,17 @@ export default function LearningCard({
                     className="w-[9.68px] h-[9.93px]"
                   />
                   <div className="flex items-baseline gap-2 leading-none">
-                    <span className="font-medium text-body-md leading-none">
-                      {word.en}
-                    </span>
-                    <span className="font-medium text-ko-headline-sm font-pretendard leading-none">
+                    <span className="en-body-md leading-none">{word.en}</span>
+                    <span className="ko-headline-sm leading-none">
                       {word.ko}
                     </span>
                   </div>
                 </div>
               ))}
               {words.length === 0 && (
-                <div className="text-gray-500 italic">No words to display</div>
+                <div className="text-gray-500 italic">
+                  No words for this one!
+                </div>
               )}
             </div>
           )}
@@ -225,7 +223,7 @@ export default function LearningCard({
           <button
             ref={buttonRef}
             onClick={handleGotItClick}
-            className="px-6 py-[0.625rem] font-roboto rounded-[2.5rem] border border-black text-[1.25rem] hover:bg-lightyellow"
+            className="px-[1.563rem] py-[0.813rem] font-roboto rounded-[2.5rem] border border-black text-[1.25rem] leading-[1.25rem] hover:bg-lightyellow"
           >
             Got it
           </button>
