@@ -30,6 +30,8 @@ export default function LearningCard({
   const viewToggleRef = useRef(null);
   const tlRef = useRef(null);
 
+  const shouldDisplay = scrollProgress >= 0.3;
+
   useLayoutEffect(() => {
     if (!containerRef.current) return;
 
@@ -99,19 +101,20 @@ export default function LearningCard({
     return () => scroller.removeEventListener("scroll", onScroll);
   }, [scrollRef, onPhaseChange]);
 
+  // step 바뀌면 리셋
   useEffect(() => {
-    if (scrollProgress >= 0.3) {
+    setShowLater(false);
+    setIsToggled(false);
+    setScrollProgress(0);
+  }, [currentStep]);
+
+  // step 내에서 한 번만 3초 대기 후 unlock
+  useEffect(() => {
+    if (scrollProgress >= 0.3 && !showLater) {
       const timer = setTimeout(() => setShowLater(true), 1500);
       return () => clearTimeout(timer);
     }
-    setShowLater(false);
-    setIsToggled(false);
-  }, [scrollProgress]);
-
-  // 페이지가 변경될 때마다 toggle 상태 초기화
-  useEffect(() => {
-    setIsToggled(false);
-  }, [ko, en, words]);
+  }, [scrollProgress, showLater]);
 
   // Got it 버튼 핸들러
   const handleGotItClick = () => {
@@ -155,7 +158,7 @@ export default function LearningCard({
       ref={containerRef}
       className="sticky top-0 h-[60vh] min-h-[20rem] max-h-[30rem] flex flex-col items-center px-8 relative"
     >
-      {showLater && (
+      {showLater && shouldDisplay && (
         <div
           ref={viewToggleRef}
           type="button"
@@ -218,7 +221,7 @@ export default function LearningCard({
         </div>
       </div>
 
-      {showLater && (
+      {showLater && shouldDisplay && (
         <div className="absolute bottom-[2rem] lg:bottom-[3.875rem] left-1/2 -translate-x-1/2">
           <button
             ref={buttonRef}
