@@ -53,14 +53,21 @@ export default function FunnelContainer({
           <h1 className="en-title-xl leading-[2.25rem]">
             Hello, Stranger! Good Morning
           </h1>
-          <p className="ko-headline-lg text-gray3 mt-[0.563rem]">
-            {stepPhase === "intro" && (
-              <>한국어 문장을 보면서 영어 문장을 생각해보세요.</>
-            )}
-            {stepPhase === "reveal" && (
-              <>두 문장을 함께 보면서 스스로 맞는지 확인해보세요.</>
-            )}
-          </p>
+          {type === "learning" && (
+            <p className="ko-headline-lg text-gray3 mt-[0.563rem]">
+              {stepPhase === "intro" && (
+                <>한국어 문장을 보면서 영어 문장을 생각해보세요.</>
+              )}
+              {stepPhase === "reveal" && (
+                <>두 문장을 함께 보면서 스스로 맞는지 확인해보세요.</>
+              )}
+            </p>
+          )}
+          {type === "review" && (
+            <p className="ko-headline-lg text-gray3 mt-[0.563rem]">
+              공부한 문장을 3초 동안 다시 확인해보세요.
+            </p>
+          )}
         </div>
         <StepIndicator step={step} onStepChange={goToStep} />
       </div>
