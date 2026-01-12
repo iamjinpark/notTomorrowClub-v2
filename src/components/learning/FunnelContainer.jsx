@@ -102,6 +102,7 @@ export default function FunnelContainer({
               onPhaseChange={setStepPhase}
               currentStep={step}
               onNext={goNext}
+              learningData={learningData}
             />
           )}
         </div>

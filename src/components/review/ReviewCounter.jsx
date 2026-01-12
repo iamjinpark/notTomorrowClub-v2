@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function ReviewCounter() {
+export default function ReviewCounter({ onComplete }) {
   const start = 3;
   const tickMs = 1000;
   const colors = ["#F5FF76", "#F5FF76", "#F5FF76"];
@@ -24,6 +24,8 @@ export default function ReviewCounter() {
       if (elapsed >= total) {
         el.style.setProperty("--angle", "360deg");
         setTime(0);
+        // 카운트다운 완료 시 콜백 호출
+        onComplete?.();
         return;
       }
 
