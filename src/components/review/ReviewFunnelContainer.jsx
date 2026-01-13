@@ -18,7 +18,7 @@ export default function ReviewFunnelContainer({ learningData }) {
   const isReviewStep = stepParam && stepParam !== "words";
   const isReviewWords = stepParam === "words";
 
-  const stepNumber = isReviewStep ? Number(stepParam) : 1;
+  const stepNumber = isReviewStep ? Number(stepParam) : isReviewWords ? 5 : 1;
   const step = Math.min(Math.max(stepNumber, 1), MAX_STEP);
   const item = learningData?.[step - 1];
 

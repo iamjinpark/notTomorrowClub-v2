@@ -1,9 +1,11 @@
+import Modal from "@/components/common/Modal/Modal";
+import wordIcon from "@/assets/img/wordIcon.svg";
+import downloadIcon from "@/assets/img/downloadIcon.svg";
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchLearningData } from "@/api/learning";
-import Modal from "@/components/common/Modal/Modal";
 import { useModal } from "@/hooks/useModal";
-import wordIcon from "@/assets/img/wordIcon.svg";
 
 function ReviewWords() {
   const navigate = useNavigate();
@@ -36,9 +38,19 @@ function ReviewWords() {
   }, []);
 
   return (
-    <div className="pt-[4.813rem] flex flex-col items-center gap-[3.75rem] text-center">
+    <div className="pt-[1.938rem] flex flex-col items-center text-center">
+      <div className="w-full flex justify-end">
+        <button className="en-body-sm text-gray3 flex items-center gap-[0.625rem]">
+          voca Img Download
+          <img
+            src={downloadIcon}
+            alt="Word Icon"
+            className="w-[1.188rem] h-[1.25rem]"
+          />
+        </button>
+      </div>
       {allWords && allWords.length > 0 && (
-        <div className="grid grid-cols-2 gap-x-[3.75rem] gap-y-[1.125rem]">
+        <div className="pt-[1.938rem] grid grid-cols-2 gap-x-[3.75rem] gap-y-[1.125rem]">
           {allWords.map((word, index) => (
             <div key={index} className="flex items-center gap-[0.5rem]">
               <img src={wordIcon} alt="" className="w-[9.68px] h-[9.93px]" />
@@ -53,7 +65,7 @@ function ReviewWords() {
 
       <button
         onClick={handleGotItClick}
-        className="px-[1.563rem] py-[0.813rem] font-roboto rounded-[2.5rem] border border-black text-[1.25rem] leading-[1.25rem] hover:bg-lightyellow"
+        className="mt-[3.75rem] px-[1.563rem] py-[0.813rem] font-roboto rounded-[2.5rem] border border-black text-[1.25rem] leading-[1.25rem] hover:bg-lightyellow"
       >
         Got it
       </button>
