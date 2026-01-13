@@ -1,7 +1,7 @@
-import wordIcon from "@/assets/img/wordIcon.svg";
 import ReviewStart from "./ReviewStart";
 import ReviewCard from "./ReviewCard";
 import ReviewWords from "./ReviewWords";
+import ReviewWordsForCapture from "./ReviewWordsForCapture";
 import StepIndicator from "../learning/StepIndicator";
 
 import { useRef } from "react";
@@ -80,10 +80,7 @@ export default function ReviewFunnelContainer({ learningData }) {
         </div>
         <StepIndicator step={step} onStepChange={goToStep} />
       </div>
-      <div
-        className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y border-gray1 overflow-y-auto"
-        ref={exportRef}
-      >
+      <div className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y border-gray1 overflow-y-auto">
         {isReviewStart && <ReviewStart />}
         {isReviewStep && item && (
           <ReviewCard
@@ -96,6 +93,7 @@ export default function ReviewFunnelContainer({ learningData }) {
           <ReviewWords allWords={allWords} onDownload={handleDownloadImage} />
         )}
       </div>
+      <ReviewWordsForCapture ref={exportRef} allWords={allWords} />
     </div>
   );
 }
