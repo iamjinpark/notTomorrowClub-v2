@@ -1,4 +1,4 @@
-import FunnelContainer from "@/components/learning/FunnelContainer";
+import ReviewFunnelContainer from "@/components/review/ReviewFunnelContainer";
 
 import { useState, useEffect } from "react";
 import { fetchLearningData } from "@/api/learning"; // 같은 API 재사용 또는 별도 API
@@ -22,7 +22,7 @@ function Review() {
 
   return (
     <div className="relative">
-      <FunnelContainer type="review" learningData={reviewData} />
+      <ReviewFunnelContainer learningData={reviewData} />
     </div>
   );
 }

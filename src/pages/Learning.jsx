@@ -1,4 +1,4 @@
-import FunnelContainer from "@/components/learning/FunnelContainer";
+import LearningFunnelContainer from "@/components/learning/LearningFunnelContainer";
 import LoginRequiredOverlay from "@/components/learning/LoginRequiredOverlay";
 
 import { useState, useEffect } from "react";
@@ -38,8 +38,7 @@ function Learning() {
 
   return (
     <div className="relative">
-      <FunnelContainer
-        type="learning"
+      <LearningFunnelContainer
         onScrollProgress={handleScrollProgress}
         isLoggedIn={isLoggedIn}
         learningData={learningData}

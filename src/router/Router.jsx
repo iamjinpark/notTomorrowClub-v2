@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
       {
         element: <RouterGuard />,
         children: [
-          { path: "review", element: <Review />, children: [] },
+          { path: "review", element: <Review /> },
           { path: "make-it", element: <MakeIt /> },
           { path: "tracker", element: <Tracker /> },
           { path: "notice", element: <Notice /> },

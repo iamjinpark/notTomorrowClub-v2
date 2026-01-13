@@ -1,14 +1,12 @@
 import StepIndicator from "./StepIndicator";
 import LearningCard from "./LearningCard";
-import ReviewCard from "@/components/review/ReviewCard";
 
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const MAX_STEP = 5;
 
-export default function FunnelContainer({
-  type = "learning",
+export default function LearningFunnelContainer({
   onScrollProgress,
   isLoggedIn,
   learningData,
@@ -42,7 +40,6 @@ export default function FunnelContainer({
   // 인디케이터로 이동
   const goToStep = (targetStep) => {
     if (targetStep > step + 1) return;
-
     setSearchParams({ step: targetStep });
   };
 
@@ -53,21 +50,14 @@ export default function FunnelContainer({
           <h1 className="en-title-xl leading-[2.25rem]">
             Hello, Stranger! Good Morning
           </h1>
-          {type === "learning" && (
-            <p className="ko-headline-lg text-gray3 mt-[0.563rem]">
-              {stepPhase === "intro" && (
-                <>한국어 문장을 보면서 영어 문장을 생각해보세요.</>
-              )}
-              {stepPhase === "reveal" && (
-                <>두 문장을 함께 보면서 스스로 맞는지 확인해보세요.</>
-              )}
-            </p>
-          )}
-          {type === "review" && (
-            <p className="ko-headline-lg text-gray3 mt-[0.563rem]">
-              공부한 문장을 3초 동안 다시 확인해보세요.
-            </p>
-          )}
+          <p className="ko-headline-lg text-gray3 mt-[0.563rem]">
+            {stepPhase === "intro" && (
+              <>한국어 문장을 보면서 영어 문장을 생각해보세요.</>
+            )}
+            {stepPhase === "reveal" && (
+              <>두 문장을 함께 보면서 스스로 맞는지 확인해보세요.</>
+            )}
+          </p>
         </div>
         <StepIndicator step={step} onStepChange={goToStep} />
       </div>
@@ -77,7 +67,7 @@ export default function FunnelContainer({
         className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y border-gray1 overflow-y-auto relative"
       >
         <div className="relative">
-          {item && type === "learning" && (
+          {item && (
             <div>
               <LearningCard
                 scrollRef={scrollRef}
@@ -93,17 +83,6 @@ export default function FunnelContainer({
               {/* 스크롤을 위한 추가 공간 */}
               <div className="h-[60vh] min-h-[20rem] max-h-[30rem]"></div>
             </div>
-          )}
-          {item && type === "review" && (
-            <ReviewCard
-              ko={item.ko}
-              en={item.en}
-              words={item.words}
-              onPhaseChange={setStepPhase}
-              currentStep={step}
-              onNext={goNext}
-              learningData={learningData}
-            />
           )}
         </div>
       </div>
