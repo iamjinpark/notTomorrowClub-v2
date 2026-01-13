@@ -1,15 +1,17 @@
+import wordIcon from "@/assets/img/wordIcon.svg";
 import ReviewStart from "./ReviewStart";
 import ReviewCard from "./ReviewCard";
 import ReviewWords from "./ReviewWords";
 import StepIndicator from "../learning/StepIndicator";
 
-import { useEffect } from "react";
+import { useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const MAX_STEP = 5;
 
 export default function ReviewFunnelContainer({ learningData }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const exportRef = useRef(null);
 
   // URL 상태 확인
   const stepParam = searchParams.get("step");
@@ -31,15 +33,36 @@ export default function ReviewFunnelContainer({ learningData }) {
     }
   };
 
-  useEffect(() => {
-    console.log("stepParam:", stepParam);
-  }, [stepParam]);
-
   // 타이머 완료 시 다음 단계로
   const handleTimerComplete = () => {
     console.log("timer complete, current step:", step);
     if (step < MAX_STEP) goToStep(step + 1);
     else setSearchParams({ step: "words" });
+  };
+
+  const allWords = learningData.reduce((acc, step) => {
+    if (step.words && step.words.length > 0) {
+      return [...acc, ...step.words];
+    }
+    return acc;
+  }, []);
+
+  // 이미지 다운로드
+  const handleDownloadImage = async () => {
+    if (!exportRef.current) return;
+
+    const html2canvas = (await import("html2canvas")).default;
+    const canvas = await html2canvas(exportRef.current, {
+      backgroundColor: "#ffffff",
+      scale: 2,
+      useCORS: true,
+      logging: false,
+    });
+
+    const link = document.createElement("a");
+    link.download = `vocabulary-${new Date().toISOString().split("T")[0]}.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
   };
 
   return (
@@ -57,7 +80,10 @@ export default function ReviewFunnelContainer({ learningData }) {
         </div>
         <StepIndicator step={step} onStepChange={goToStep} />
       </div>
-      <div className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y border-gray1 overflow-y-auto relative">
+      <div
+        className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y border-gray1 overflow-y-auto"
+        ref={exportRef}
+      >
         {isReviewStart && <ReviewStart />}
         {isReviewStep && item && (
           <ReviewCard
@@ -66,7 +92,9 @@ export default function ReviewFunnelContainer({ learningData }) {
             onNext={handleTimerComplete}
           />
         )}
-        {isReviewWords && <ReviewWords learningData={learningData} />}
+        {isReviewWords && (
+          <ReviewWords allWords={allWords} onDownload={handleDownloadImage} />
+        )}
       </div>
     </div>
   );

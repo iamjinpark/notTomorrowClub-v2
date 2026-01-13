@@ -74,6 +74,10 @@ html {
   button {
     cursor: pointer;
   }
+
+  img {
+    @apply inline-block;
+  }
 }
 
 /* 스크롤바 제거 */
