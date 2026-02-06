@@ -18,7 +18,6 @@ import NotFound from "@/pages/NotFound";
 export const router = createBrowserRouter([
   {
     element: <DefaultLayout />,
-
     children: [
       {
         index: true,

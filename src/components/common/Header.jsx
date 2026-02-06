@@ -2,10 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import logoImage from "@/assets/img/logo.svg";
 
 function Header() {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
-    <header className="font-roboto flex items-center justify-between h-[61px] p-4 border-b border-charcoal sticky top-0 bg-white z-10">
+    <header className="fixed top-0 left-0 w-full font-roboto flex items-center justify-between px-4 py-3 border-b border-charcoal bg-white z-50">
       <div>
         <Link to="/">
           <img src={logoImage} alt="NTC 로고" className="h-[1.5rem] w-auto" />
@@ -35,7 +35,7 @@ function Header() {
         <button
           type="button"
           className="text-sm font-medium bg-[#D9D9D9] px-2 py-1 rounded-sm"
-          onClick={() => Navigate("/login")}
+          onClick={() => navigate("/login")}
         >
           Login
         </button>

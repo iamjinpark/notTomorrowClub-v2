@@ -5,22 +5,19 @@ import Footer from "@/components/common/Footer";
 
 export default function DefaultLayout() {
   const location = useLocation();
-  const hasFooter =
+  const hideFooter =
     location.pathname.startsWith("/learning") ||
     location.pathname.startsWith("/review");
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col h-screen ">
       <Header />
-      <main
-        className="px-[9.875rem] pt-[7.75rem] overflow-hidden"
-        style={{ height: `calc(100vh - 61px)` }}
-      >
-        <div className="w-full max-w-[70.25rem] mx-auto h-full ">
+      <main className="flex-1 bg-yellow px-[10rem]  flex flex-col items-center">
+        <div className="w-full bg-red max-w-[70.25rem] h-full pt-[17.56vh]">
           <Outlet />
         </div>
       </main>
-      {!hasFooter && <Footer />}
+      {!hideFooter && <Footer />}
     </div>
   );
 }
