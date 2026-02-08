@@ -19,7 +19,6 @@ export default function LearningCard({
   currentStep,
 }) {
   const [isToggled, setIsToggled] = useState(false);
-  const [showLater, setShowLater] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const learningModal = useModal();
 
@@ -53,17 +52,17 @@ export default function LearningCard({
           viewToggleRef.current,
           { autoAlpha: 0, y: -20 },
           { autoAlpha: 1, y: 0, duration: 0.2, ease: "none" },
-          "<"
+          "<",
         )
         .fromTo(
           englishRef.current,
           { autoAlpha: 0, y: 40 },
-          { autoAlpha: 1, y: 0, duration: 0.4, ease: "none" }
+          { autoAlpha: 1, y: 0, duration: 0.4, ease: "none" },
         )
         .fromTo(
           buttonRef.current,
           { autoAlpha: 0, y: 30 },
-          { autoAlpha: 1, y: 0, duration: 0.3, ease: "none" }
+          { autoAlpha: 1, y: 0, duration: 0.3, ease: "none" },
         );
 
       tlRef.current = tl;
@@ -103,18 +102,9 @@ export default function LearningCard({
 
   // step 바뀌면 리셋
   useEffect(() => {
-    setShowLater(false);
     setIsToggled(false);
     setScrollProgress(0);
   }, [currentStep]);
-
-  // step 내에서 한 번만 3초 대기 후 unlock
-  useEffect(() => {
-    if (scrollProgress >= 0.3 && !showLater) {
-      const timer = setTimeout(() => setShowLater(true), 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [scrollProgress, showLater]);
 
   // Got it 버튼 핸들러
   const handleGotItClick = () => {
@@ -139,7 +129,7 @@ export default function LearningCard({
       <span>
         {parts.map((part, index) => {
           const isHighlighted = englishWords.some(
-            (word) => word.toLowerCase() === part.toLowerCase()
+            (word) => word.toLowerCase() === part.toLowerCase(),
           );
           return isHighlighted ? (
             <span key={index} className="bg-lightyellow">
@@ -158,7 +148,7 @@ export default function LearningCard({
       ref={containerRef}
       className="sticky top-0 h-[60vh] min-h-[20rem] max-h-[30rem] flex flex-col items-center px-8 relative"
     >
-      {showLater && shouldDisplay && (
+      {shouldDisplay && (
         <div
           ref={viewToggleRef}
           type="button"
@@ -221,7 +211,7 @@ export default function LearningCard({
         </div>
       </div>
 
-      {showLater && shouldDisplay && (
+      {shouldDisplay && (
         <div className="absolute bottom-[2rem] lg:bottom-[3.875rem] left-1/2 -translate-x-1/2">
           <button
             ref={buttonRef}
