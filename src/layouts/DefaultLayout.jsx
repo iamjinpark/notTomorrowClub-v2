@@ -12,8 +12,8 @@ export default function DefaultLayout() {
   return (
     <div className="flex flex-col h-screen ">
       <Header />
-      <main className="flex-1 bg-yellow px-[10rem]  flex flex-col items-center">
-        <div className="w-full bg-red max-w-[70.25rem] h-full pt-[17.56vh]">
+      <main className="flex-1 px-[10rem] flex flex-col items-center">
+        <div className="w-full max-w-[70.25rem] h-full pt-[17.56vh]">
           <Outlet />
         </div>
       </main>

@@ -1,7 +1,6 @@
 import messageDelete from "@/assets/img/delete_sm.svg";
 import { cheerUpMessages } from "@/api/dummyData";
 import TypingIndicator from "./TypingIndicator";
-import pointer from "@/assets/img/pointer.png";
 
 import { useState, useEffect } from "react";
 
@@ -12,7 +11,6 @@ function CherrUpMessage() {
   const [visibleMessage, setVisibleMessage] = useState([]); // 원본메세지
   const [currentIndex, setCurrentIndex] = useState(0); // 실제 렌더링되는 메세지
   const [isTyping, setIsTyping] = useState(false); // 타이핑 애니메이션
-  const [isMessageActive, setIsMessageActive] = useState(false);
 
   // 3초마다 한개씩 메세지 추가
   useEffect(() => {
@@ -46,33 +44,25 @@ function CherrUpMessage() {
 
   const getBgById = (id) => (id % 2 === 0 ? "bg-yellow" : "bg-gray5");
 
-  const activeMessageInput = () => {
-    setIsMessageActive((prev) => !prev);
-  };
-
-  const sendMessage = () => {
-    console.log("send message");
-  };
-
   return (
-    <div className="relative top-full mt-[3.75rem] flex flex-col gap-4">
+    <div className="relative top-full flex flex-col gap-4 w-[16.25rem]">
       {/* message box */}
-      <div className="relative h-[12.5rem] overflow-hidden">
+      <div className="relative h-50 overflow-hidden">
         <div
           className="pointer-events-none absolute top-0 left-0 right-0 h-28
-          bg-gradient-to-b from-white to-transparent z-10"
+          bg-linear-to-b from-white to-transparent z-10"
         />
 
         {/* message stack */}
         <div className="flex flex-col items-start gap-3 justify-end h-full">
-          {visibleMessage.map((message, index) => (
+          {visibleMessage.map((message) => (
             <div
               key={message.id}
-              className={`message inline-flex max-w-[16.25rem]
-              min-h-[3.125rem] px-[0.625rem] py-2
+              className={`message inline-flex max-w-65
+              min-h-12.5 px-2.5 py-2
               text-xs font-roboto  ${getBgById(message.id)}`}
             >
-              <p className="inline-block max-w-[11rem] leading-4 break-all box-border">
+              <p className="inline-block max-w-44 leading-4 break-all box-border">
                 {message.text}
               </p>
 
@@ -92,35 +82,6 @@ function CherrUpMessage() {
           {isTyping && (
             <div>
               <TypingIndicator />
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* input */}
-      <div className="flex flex-col items-start gap-[1.313rem]">
-        <div className="flex flex-row gap-2">
-          <button
-            className="w-[2.313rem] h-[2rem] cursor-pointer"
-            onClick={activeMessageInput}
-          >
-            <img src={pointer} alt="" className="h-[85%]" />
-          </button>
-          {isMessageActive && (
-            <div className="h-[2rem] px-[0.5rem] py-[0.313rem] bg-gray5 flex">
-              <input
-                id="cheerUp"
-                type="text"
-                maxLength={40}
-                placeholder="40 characters or fewer"
-                className="w-[11.063rem] h-full bg-white text-xs px-[0.313rem] outline-none"
-              />
-              <button
-                className="text-xs pl-[0.563rem] h-full cursor-pointer"
-                onClick={sendMessage}
-              >
-                send
-              </button>
             </div>
           )}
         </div>

@@ -12,25 +12,23 @@ function Home() {
   return (
     <div>
       <div className="w-full flex flex-col justify-center items-center">
-        {/* greeting */}
         <Greeting />
-        {/* flip countdown */}
-        <section className="w-full pt-[3.75rem]">
+
+        <section className="w-full pt-14.5">
           {/* <img src={flipCountDownImage} alt="" className="w-full" /> */}
           <FlipTimer initialSeconds={99} onDone={() => console.log("끝!")} />
         </section>
-        {/* cheer up message + learning button */}
-        <div className="flex flex-row font-regular font-roboto text-title-sm">
+
+        <section className="w-full flex items-center justify-start gap-[10.5rem] py-[2.6875rem]">
           <CherrUpMessage />
           <BorderBtn
             text="To meet today's English"
-            px="px-[1.625rem]"
-            py="py-[0.813rem]"
-            onClick={() => {
-              navigate("/learning");
-            }}
+            px="px-[1.875rem]"
+            py="py-[0.8125rem]"
+            className="font-regular font-roboto en-button-1 leading-[1.25rem]"
+            onClick={() => navigate("/learning")}
           />
-        </div>
+        </section>
       </div>
     </div>
   );
