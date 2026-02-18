@@ -1,6 +1,7 @@
 import closeIcon from "@/assets/img/closeIcon.svg";
 import LearningModal from "./LearningModal";
 import ConfirmModalContent from "./ConfirmModalContent";
+import PolicyModal from "./PolicyModal";
 
 import Confetti from "react-confetti";
 import { createPortal } from "react-dom";
@@ -21,6 +22,7 @@ function Modal({ isOpen, onClose, type, ...props }) {
   const [confettiKey, setConfettiKey] = useState(0);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setConfettiKey((k) => k + 1);
     setRunConfetti(true);
   }, []);
@@ -58,6 +60,8 @@ function Modal({ isOpen, onClose, type, ...props }) {
         return <LearningModal onClose={onClose} {...props} />;
       case "confirm":
         return <ConfirmModalContent onClose={onClose} {...props} />;
+      case "policy":
+        return <PolicyModal onClose={onClose} {...props} />;
       default:
         return null; // TODO : 추후 에러 모달 적용
     }
@@ -89,13 +93,7 @@ function Modal({ isOpen, onClose, type, ...props }) {
         />
       )}
 
-      <div
-        className="relative flex flex-col items-end gap-[0.938rem]"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button onClick={onClose}>
-          <img src={closeIcon} alt="Close Icon" className="" />
-        </button>
+      <div className="relative" onClick={(e) => e.stopPropagation()}>
         {renderModalContent()}
       </div>
     </div>

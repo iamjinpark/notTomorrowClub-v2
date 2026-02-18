@@ -93,6 +93,29 @@ body {
   -ms-overflow-style: none;
 }
 
+/* 모달창 스크롤바 노출 */
+.show-scrollbar::-webkit-scrollbar {
+  display: block;
+  width: 4px;
+}
+
+.show-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-gray3);
+}
+
+.show-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray2); /* 호버 시 색상 */
+}
+
+.show-scrollbar::-webkit-scrollbar-track {
+  background: var(--color-gray6);
+}
+
+.show-scrollbar {
+  scrollbar-width: auto;
+  -ms-overflow-style: auto;
+}
+
 .message {
   box-sizing: border-box;
   flex-shrink: 0;
