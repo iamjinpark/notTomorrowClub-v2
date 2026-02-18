@@ -1,7 +1,7 @@
-import closeIcon from "@/assets/img/closeIcon.svg";
 import LearningModal from "./LearningModal";
 import ConfirmModalContent from "./ConfirmModalContent";
 import PolicyModal from "./PolicyModal";
+import HelpLoginModal from "./HelpLoginModal";
 
 import Confetti from "react-confetti";
 import { createPortal } from "react-dom";
@@ -12,7 +12,7 @@ import { useWindowSize } from "@/hooks/useWindowSize";
  * 통합 모달 컴포넌트 - type으로 다양한 모달 타입 구분
  * @param {boolean} isOpen - 모달 열림 상태
  * @param {function} onClose - 모달 닫기 함수
- * @param {string} type - 모달 타입 ('learning','confirm')
+ * @param {string} type - 모달 타입 ('learning','confirm','policy')
  * @param {object} props - 각 모달 타입별 추가 props
  */
 
@@ -62,6 +62,8 @@ function Modal({ isOpen, onClose, type, ...props }) {
         return <ConfirmModalContent onClose={onClose} {...props} />;
       case "policy":
         return <PolicyModal onClose={onClose} {...props} />;
+      case "helpLogin":
+        return <HelpLoginModal onClose={onClose} {...props} />;
       default:
         return null; // TODO : 추후 에러 모달 적용
     }
@@ -93,9 +95,7 @@ function Modal({ isOpen, onClose, type, ...props }) {
         />
       )}
 
-      <div className="relative" onClick={(e) => e.stopPropagation()}>
-        {renderModalContent()}
-      </div>
+      <div onClick={(e) => e.stopPropagation()}>{renderModalContent()}</div>
     </div>
   );
 

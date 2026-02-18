@@ -8,6 +8,11 @@ function Login() {
     open: openPolicy,
     close: closePolicy,
   } = useModal();
+  const {
+    isOpen: isHelpLoginOpen,
+    open: openHelpLogin,
+    close: closeHelpLogin,
+  } = useModal();
 
   return (
     <>
@@ -32,13 +37,21 @@ function Login() {
             개인정보 처리방침 자세히 보기
           </button>
 
-          <button className="h-3.5 text-gray3 underline underline-offset-1 decoration-1">
+          <button
+            onClick={openHelpLogin}
+            className="h-3.5 text-gray3 underline underline-offset-1 decoration-1"
+          >
             로그인 관련 도움말
           </button>
         </div>
       </div>
 
       <Modal isOpen={isPolicyOpen} onClose={closePolicy} type="policy" />
+      <Modal
+        isOpen={isHelpLoginOpen}
+        onClose={closeHelpLogin}
+        type="helpLogin"
+      />
     </>
   );
 }
