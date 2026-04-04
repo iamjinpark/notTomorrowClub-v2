@@ -2,6 +2,7 @@ import upperArrow from "@/assets/img/upperArrow.svg";
 import WorldToggleBtn from "./WordToggleBtn";
 import wordIcon from "@/assets/img/wordIcon.svg";
 import Modal from "@/components/common/Modal/Modal";
+import BorderBtn from "@/components/common/BorderBtn";
 
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
@@ -212,13 +213,14 @@ export default function LearningCard({
 
       {/* GSAP autoAlpha로 제어 — 항상 DOM에 존재 */}
       <div className="absolute bottom-[2rem] lg:bottom-[3.875rem] left-1/2 -translate-x-1/2">
-        <button
+        <BorderBtn
           ref={buttonRef}
+          text="Got it"
+          px="px-[1.563rem]"
+          py="py-[0.813rem]"
           onClick={handleGotItClick}
-          className="px-[1.563rem] py-[0.813rem] font-roboto rounded-[2.5rem] border border-black text-[1.25rem] leading-[1.25rem] hover:bg-lightyellow"
-        >
-          Got it
-        </button>
+          className="border-black font-roboto text-[1.25rem] leading-[1.25rem]"
+        />
       </div>
 
       <Modal

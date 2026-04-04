@@ -1,18 +1,17 @@
-function BorderBtn({
-  text,
-  px,
-  py,
-  bg = "bg-transparent",
-  onClick,
-  className = "",
-}) {
+import { forwardRef } from "react";
+
+const BorderBtn = forwardRef(function BorderBtn(
+  { text, px, py, bg = "bg-transparent", onClick, className = "" },
+  ref
+) {
   return (
     <button
+      ref={ref}
       type="button"
       onClick={onClick}
       className={`
         ${px} ${py} ${bg}
-        border rounded-full
+        border-[0.8px] rounded-full
         hover:bg-lightyellow
         transition-colors
         disabled:bg-black disabled:text-white disabled:cursor-not-allowed
@@ -22,6 +21,6 @@ function BorderBtn({
       {text}
     </button>
   );
-}
+});
 
 export default BorderBtn;

@@ -5,7 +5,7 @@ function Header() {
   const navigate = useNavigate();
 
   return (
-    <header className="fixed top-0 left-0 w-full font-roboto flex items-center justify-between px-4 py-3 border-b border-charcoal bg-white z-50">
+    <header className="fixed top-0 left-0 w-full font-roboto flex items-center justify-between px-4 py-3 border-b border-b-[0.6px] border-charcoal bg-white z-50">
       <div>
         <Link to="/">
           <img src={logoImage} alt="NTC 로고" className="h-[1.5rem] w-auto" />
