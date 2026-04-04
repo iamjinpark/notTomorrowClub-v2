@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 function Greeting() {
   const [onlineCount, setOnlineCount] = useState(0);
-  const { weather, location } = useWeather();
+  const { weather, location, error } = useWeather();
 
   useEffect(() => {
     const random = Math.floor(Math.random() * 51);
@@ -43,14 +43,15 @@ function Greeting() {
       </div>
       <div className="font-chakra font-semibold text-[1.125rem] flex flex-col items-end leading-[1.125rem] gap-[0.438rem]">
         <span>{new Date().toLocaleDateString("sv-SE").replace(/-/g, "/")}</span>
-        <span>{location?.country}</span>
-        {weather && weather.weather && weather.weather.length > 0 ? (
+        <span>{error ? "City unavailable" : location?.country}</span>
+        {weather ? (
           <span>
-            {weather?.weather[0]?.main}, {Math.round(weather?.main?.temp)}℃,{" "}
-            {weather?.wind?.speed} m/s
+            {weather.description}, {weather.temp}℃, {weather.windSpeed} m/s
           </span>
         ) : (
-          <span>Ready for weather data</span>
+          <span>
+            {error ? "Weather unavailable" : "Ready for weather data"}
+          </span>
         )}
       </div>
     </div>
