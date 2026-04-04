@@ -149,20 +149,19 @@ export default function LearningCard({
       ref={containerRef}
       className="sticky top-0 h-[60vh] min-h-[20rem] max-h-[30rem] flex flex-col items-center px-8 relative"
     >
-      {shouldDisplay && (
-        <div
-          ref={viewToggleRef}
-          type="button"
-          className="absolute top-[1.438rem] right-0 flex flex-row items-center gap-[0.875rem] cursor-pointer font-roboto en-body-sm text-gray3"
-        >
-          {isToggled ? "Words Hide" : "View Words"}
-          <WorldToggleBtn checked={isToggled} onChange={setIsToggled} />
-        </div>
-      )}
+      {/* GSAP autoAlpha로 제어 — 항상 DOM에 존재 */}
+      <div
+        ref={viewToggleRef}
+        type="button"
+        className="absolute top-[1.438rem] right-0 flex flex-row items-center gap-[0.875rem] cursor-pointer font-roboto en-body-sm text-gray3"
+      >
+        {isToggled ? "Words Hide" : "View Words"}
+        <WorldToggleBtn checked={isToggled} onChange={setIsToggled} />
+      </div>
 
       <div
         className={`relative mt-[6rem] lg:mt-[9.625rem] flex flex-col items-center transition-transform duration-500 ease-out ${
-          isToggled && scrollProgress >= SCROLL_REVEAL_THRESHOLD ? "-translate-y-[1.875rem]" : ""
+          isToggled && shouldDisplay ? "-translate-y-[1.875rem]" : ""
         }`}
       >
         <p className="ko-headline-xl text-center leading-[3.125rem]">{ko}</p>
@@ -176,16 +175,15 @@ export default function LearningCard({
         </div>
 
         <div className="flex flex-col items-center gap-[2.125rem]">
-          {scrollProgress >= SCROLL_REVEAL_THRESHOLD && (
-            <p
-              ref={englishRef}
-              className="text-[2.625rem] text-center font-roboto font-medium leading-[52.4px]"
-            >
-              {isToggled ? highlightWords(en, words) : en}
-            </p>
-          )}
+          {/* GSAP autoAlpha로 제어 — 항상 DOM에 존재 */}
+          <p
+            ref={englishRef}
+            className="text-[2.625rem] text-center font-roboto font-medium leading-[52.4px]"
+          >
+            {isToggled ? highlightWords(en, words) : en}
+          </p>
 
-          {isToggled && scrollProgress >= SCROLL_REVEAL_THRESHOLD && (
+          {isToggled && shouldDisplay && (
             <div className="animate-fade-in transition-opacity duration-300 flex gap-[2.75rem] items-center">
               {words.map((word, index) => (
                 <div key={index} className="flex items-center gap-[0.3rem]">
@@ -212,17 +210,16 @@ export default function LearningCard({
         </div>
       </div>
 
-      {shouldDisplay && (
-        <div className="absolute bottom-[2rem] lg:bottom-[3.875rem] left-1/2 -translate-x-1/2">
-          <button
-            ref={buttonRef}
-            onClick={handleGotItClick}
-            className="px-[1.563rem] py-[0.813rem] font-roboto rounded-[2.5rem] border border-black text-[1.25rem] leading-[1.25rem] hover:bg-lightyellow"
-          >
-            Got it
-          </button>
-        </div>
-      )}
+      {/* GSAP autoAlpha로 제어 — 항상 DOM에 존재 */}
+      <div className="absolute bottom-[2rem] lg:bottom-[3.875rem] left-1/2 -translate-x-1/2">
+        <button
+          ref={buttonRef}
+          onClick={handleGotItClick}
+          className="px-[1.563rem] py-[0.813rem] font-roboto rounded-[2.5rem] border border-black text-[1.25rem] leading-[1.25rem] hover:bg-lightyellow"
+        >
+          Got it
+        </button>
+      </div>
 
       <Modal
         type="learning"
