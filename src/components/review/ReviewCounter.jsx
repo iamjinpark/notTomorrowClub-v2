@@ -1,10 +1,16 @@
 import { useEffect, useRef, useState } from "react";
+import {
+  REVIEW_COUNTER_START,
+  REVIEW_COUNTER_TICK_MS,
+  REVIEW_COUNTER_COLORS,
+  REVIEW_COUNTER_TRACK_COLOR,
+} from "@/constants";
 
 export default function ReviewCounter({ onComplete }) {
-  const start = 3;
-  const tickMs = 1000;
-  const colors = ["#F5FF76", "#F5FF76", "#F5FF76"];
-  const trackColor = "#dcdcdc";
+  const start = REVIEW_COUNTER_START;
+  const tickMs = REVIEW_COUNTER_TICK_MS;
+  const colors = REVIEW_COUNTER_COLORS;
+  const trackColor = REVIEW_COUNTER_TRACK_COLOR;
 
   const dialRef = useRef(null);
   const rafRef = useRef(0);

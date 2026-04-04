@@ -6,6 +6,7 @@ import Modal from "@/components/common/Modal/Modal";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { useModal } from "@/hooks/useModal";
+import { SCROLL_REVEAL_THRESHOLD } from "@/constants";
 
 export default function LearningCard({
   scrollRef,
@@ -29,7 +30,7 @@ export default function LearningCard({
   const viewToggleRef = useRef(null);
   const tlRef = useRef(null);
 
-  const shouldDisplay = scrollProgress >= 0.3;
+  const shouldDisplay = scrollProgress >= SCROLL_REVEAL_THRESHOLD;
 
   useLayoutEffect(() => {
     if (!containerRef.current) return;
@@ -87,7 +88,7 @@ export default function LearningCard({
         tlRef.current.progress(progress);
         setScrollProgress(progress);
 
-        if (progress < 0.3) onPhaseChange?.("intro");
+        if (progress < SCROLL_REVEAL_THRESHOLD) onPhaseChange?.("intro");
         else onPhaseChange?.("reveal");
       }
 
@@ -161,7 +162,7 @@ export default function LearningCard({
 
       <div
         className={`relative mt-[6rem] lg:mt-[9.625rem] flex flex-col items-center transition-transform duration-500 ease-out ${
-          isToggled && scrollProgress >= 0.3 ? "-translate-y-[1.875rem]" : ""
+          isToggled && scrollProgress >= SCROLL_REVEAL_THRESHOLD ? "-translate-y-[1.875rem]" : ""
         }`}
       >
         <p className="ko-headline-xl text-center leading-[3.125rem]">{ko}</p>
@@ -175,7 +176,7 @@ export default function LearningCard({
         </div>
 
         <div className="flex flex-col items-center gap-[2.125rem]">
-          {scrollProgress >= 0.3 && (
+          {scrollProgress >= SCROLL_REVEAL_THRESHOLD && (
             <p
               ref={englishRef}
               className="text-[2.625rem] text-center font-roboto font-medium leading-[52.4px]"
@@ -184,7 +185,7 @@ export default function LearningCard({
             </p>
           )}
 
-          {isToggled && scrollProgress >= 0.3 && (
+          {isToggled && scrollProgress >= SCROLL_REVEAL_THRESHOLD && (
             <div className="animate-fade-in transition-opacity duration-300 flex gap-[2.75rem] items-center">
               {words.map((word, index) => (
                 <div key={index} className="flex items-center gap-[0.3rem]">

@@ -1,5 +1,7 @@
+import { STEP_INDICATOR_X } from "@/constants";
+
 export default function StepIndicator({ step, onStepChange }) {
-  const X = [10, 84, 158, 232, 306];
+  const X = STEP_INDICATOR_X;
 
   return (
     <div className="mt-[1.125rem]">

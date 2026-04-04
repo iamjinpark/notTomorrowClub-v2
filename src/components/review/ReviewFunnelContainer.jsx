@@ -6,8 +6,7 @@ import StepIndicator from "../learning/StepIndicator";
 
 import { useRef } from "react";
 import { useSearchParams } from "react-router-dom";
-
-const MAX_STEP = 5;
+import { MAX_STEP } from "@/constants";
 
 export default function ReviewFunnelContainer({ learningData }) {
   const [searchParams, setSearchParams] = useSearchParams();

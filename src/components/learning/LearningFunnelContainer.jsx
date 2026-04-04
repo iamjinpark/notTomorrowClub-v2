@@ -3,8 +3,7 @@ import LearningCard from "./LearningCard";
 
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
-
-const MAX_STEP = 5;
+import { MAX_STEP } from "@/constants";
 
 export default function LearningFunnelContainer({
   onScrollProgress,
