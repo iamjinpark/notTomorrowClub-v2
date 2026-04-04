@@ -1,24 +1,8 @@
 import ReviewFunnelContainer from "@/components/review/ReviewFunnelContainer";
-
-import { useState, useEffect } from "react";
-import { fetchLearningData } from "@/api/learning"; // 같은 API 재사용 또는 별도 API
+import { useLearningData } from "@/context/LearningDataContext";
 
 function Review() {
-  const [reviewData, setReviewData] = useState([]);
-
-  // 리뷰 데이터 불러오기
-  useEffect(() => {
-    const loadReviewData = async () => {
-      try {
-        const data = await fetchLearningData();
-        setReviewData(data);
-      } catch (error) {
-        console.error("Failed to load review data:", error);
-      }
-    };
-
-    loadReviewData();
-  }, []);
+  const reviewData = useLearningData();
 
   return (
     <div className="relative">

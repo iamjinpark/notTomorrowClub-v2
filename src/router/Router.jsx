@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // Layouts
 import DefaultLayout from "@/layouts/DefaultLayout";
 import { RouterGuard } from "./RouterGuard";
+import { LearningDataLayout } from "@/context/LearningDataContext";
 
 // pages
 import Home from "@/pages/Home";
@@ -27,15 +28,22 @@ export const router = createBrowserRouter([
         path: "login",
         element: <Login />,
       },
-      {
-        path: "learning",
-        element: <Learning />,
-      },
+
       // 로그인시 접근 가능한 페이지
       {
         element: <RouterGuard />,
         children: [
-          { path: "review", element: <Review /> },
+          // 학습 데이터를 공유하는 라우트 그룹 (API 1회 호출)
+          {
+            element: <LearningDataLayout />,
+            children: [
+              { path: "learning", element: <Learning /> },
+              {
+                element: <RouterGuard />,
+                children: [{ path: "review", element: <Review /> }],
+              },
+            ],
+          },
           { path: "make-it", element: <MakeIt /> },
           { path: "tracker", element: <Tracker /> },
           { path: "notice", element: <Notice /> },
