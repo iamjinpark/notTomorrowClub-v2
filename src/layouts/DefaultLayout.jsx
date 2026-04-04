@@ -10,9 +10,9 @@ export default function DefaultLayout() {
     location.pathname.startsWith("/review");
 
   return (
-    <div className="flex flex-col h-screen ">
+    <div className="flex flex-col">
       <Header />
-      <main className="flex-1 px-[10rem] flex flex-col items-center">
+      <main className="min-h-screen px-[10rem] flex flex-col items-center">
         <div className="w-full max-w-[70.25rem] h-full pt-[17.56vh]">
           <Outlet />
         </div>
