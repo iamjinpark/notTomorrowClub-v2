@@ -63,7 +63,7 @@ export default function LearningFunnelContainer({
 
       <div
         ref={scrollRef}
-        className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y border-gray1 overflow-y-auto relative"
+        className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y border-gray1 overflow-y-auto overscroll-y-none relative"
       >
         <div className="relative">
           {item && (
