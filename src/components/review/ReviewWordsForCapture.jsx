@@ -2,22 +2,21 @@ import wordIcon from "@/assets/img/wordIcon.svg";
 
 function ReviewWordsForCapture({ ref, allWords }) {
   return (
-    <div
-      className="fixed left-[-9999px] top-0"
-    >
-      <div
-        ref={ref}
-        className="bg-lightyellow flex items-center justify-center w-[1080px] h-[1350px] py-[315px] px-[290px]"
-      >
-        <div className="flex flex-col items-start gap-[20px]">
+    <div className="fixed left-0 top-0 z-50 overflow-auto" ref={ref}>
+      <div className="bg-lightyellow flex items-center justify-center w-[1080px] h-[1350px] py-[315px] px-[290px]">
+        <div className="h-full ₩flex flex-col items-start">
           {allWords.map((word, index) => (
-            <div key={index} className="flex items-center gap-[16px]">
-              <img src={wordIcon} alt="" className="w-[10px] h-[10px] shrink-0" />
-              <div className="flex items-baseline gap-[20px]">
-                <span className="font-roboto font-normal text-[40px] leading-[125%] whitespace-nowrap">
+            <div key={index} className="flex items-center gap-[20px]">
+              <img
+                src={wordIcon}
+                alt=""
+                className="w-[14px] h-[14px] shrink-0"
+              />
+              <div className="flex items-baseline gap-[28px]">
+                <span className="font-roboto font-normal text-[52px] leading-[125%]">
                   {word.en}
                 </span>
-                <span className="font-pretendard font-medium text-[34px] leading-[100%] whitespace-nowrap">
+                <span className="font-pretendard font-medium text-[45px] leading-[100%]">
                   {word.ko}
                 </span>
               </div>
