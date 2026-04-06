@@ -14,7 +14,7 @@ function Header() {
 
       <div>
         <nav>
-          <ul className="flex flex-row gap-7 font-semibold">
+          <ul className="flex flex-row gap-7 font-medium">
             <li>
               <Link to="/make-it">make it</Link>
             </li>

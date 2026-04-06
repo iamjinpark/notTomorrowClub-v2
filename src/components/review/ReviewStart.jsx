@@ -9,12 +9,17 @@ function ReviewStart() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-28 pt-40">
-      <div className="font-pretendard font-medium text-center tracking-ko-headline">
-        <p className="ko-headline-xl">
-          공부한 문장을 3초 동안 다시 확인해보세요.
+    <div className="flex flex-col items-center justify-center gap-[96px] pt-[127px]">
+      <div className="font-pretendard text-center">
+        <div className="flex flex-col gap-[7px] mb-[20px]">
+          <p className="h-[42px] en-headline-lg">
+            Review the sentence you studied
+          </p>
+          <p className="h-[42px] en-headline-lg">for 5 seconds</p>
+        </div>
+        <p className="h-[24px] ko-headline-lg text-gray3">
+          English and Korean sentence will be displayed together
         </p>
-        <p className="ko-headline-lg text-gray3">총 15초 동안 플레이 됩니다.</p>
       </div>
 
       <BorderBtn

@@ -2,26 +2,27 @@ import wordIcon from "@/assets/img/wordIcon.svg";
 
 function ReviewWordsForCapture({ ref, allWords }) {
   return (
-    <div className="fixed left-[-9999px] top-0" ref={ref}>
-      <div className="bg-white w-[1120px] h-[482px]">
-        <div className="pt-[3.125rem] flex flex-col items-center text-center">
-          <div className="flex flex-col items-center">
-            <p className="en-title-lg">Today's Vocabulary</p>
-            <p className="ko-caption-1 text-gray3">
-              {new Date().toISOString().slice(0, 10).replace(/-/g, "/")}
-            </p>
-          </div>
-          <div className="pt-[3.125rem] grid grid-cols-2 gap-x-[3.75rem] gap-y-[1.125rem]">
-            {allWords.map((word, index) => (
-              <div key={index} className="flex items-center gap-[0.5rem]">
-                <img src={wordIcon} alt="" className="w-[9.68px] h-[9.93px]" />
-                <div className="flex items-baseline gap-[0.875rem] leading-none">
-                  <span className="en-body-md leading-none">{word.en}</span>
-                  <span className="ko-headline-sm leading-none">{word.ko}</span>
-                </div>
+    <div
+      className="fixed left-[-9999px] top-0"
+    >
+      <div
+        ref={ref}
+        className="bg-lightyellow flex items-center justify-center w-[1080px] h-[1350px] py-[315px] px-[290px]"
+      >
+        <div className="flex flex-col items-start gap-[20px]">
+          {allWords.map((word, index) => (
+            <div key={index} className="flex items-center gap-[16px]">
+              <img src={wordIcon} alt="" className="w-[10px] h-[10px] shrink-0" />
+              <div className="flex items-baseline gap-[20px]">
+                <span className="font-roboto font-normal text-[40px] leading-[125%] whitespace-nowrap">
+                  {word.en}
+                </span>
+                <span className="font-pretendard font-medium text-[34px] leading-[100%] whitespace-nowrap">
+                  {word.ko}
+                </span>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

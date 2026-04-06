@@ -74,12 +74,12 @@ export default function ReviewFunnelContainer({ learningData }) {
           <p className="ko-headline-lg text-gray3 mt-[0.563rem]">
             {isReviewWords
               ? "오늘 배운 단어들을 확인하고 오늘을 마무리해요."
-              : "공부한 문장을 3초 동안 다시 확인해보세요."}
+              : "공부한 문장을 5초 동안 다시 확인해보세요."}
           </p>
         </div>
         <StepIndicator step={step} onStepChange={goToStep} />
       </div>
-      <div className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y border-gray1 overflow-y-auto">
+      <div className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y-[0.6px] border-gray1 overflow-y-auto">
         {isReviewStart && <ReviewStart />}
         {isReviewStep && item && (
           <ReviewCard

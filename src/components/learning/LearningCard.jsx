@@ -179,7 +179,7 @@ export default function LearningCard({
           {/* GSAP autoAlpha로 제어 — 항상 DOM에 존재 */}
           <p
             ref={englishRef}
-            className="text-[2.625rem] text-center font-roboto font-medium leading-[52.4px]"
+            className="text-[2.625rem] text-center font-roboto font-normal leading-[52.4px]"
           >
             {isToggled ? highlightWords(en, words) : en}
           </p>
