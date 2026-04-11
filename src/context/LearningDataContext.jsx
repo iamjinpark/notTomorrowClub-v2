@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { fetchLearningData } from "@/api/learning";
+import { STEP_DATA } from "@/api/dummyData";
 
 const LearningDataContext = createContext([]);
 
@@ -14,6 +15,7 @@ export function LearningDataLayout() {
         setLearningData(data);
       } catch (error) {
         console.error("Failed to load learning data:", error);
+        setLearningData(STEP_DATA);
       }
     };
     load();
