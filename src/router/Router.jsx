@@ -14,6 +14,7 @@ import MakeIt from "@/pages/MakeIt";
 import Tracker from "@/pages/Tracker";
 import Notice from "@/pages/Notice";
 import MyPage from "@/pages/MyPage";
+import About from "@/pages/About";
 import NotFound from "@/pages/NotFound";
 
 export const router = createBrowserRouter([
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "about",
+        element: <About />,
       },
 
       // 로그인시 접근 가능한 페이지
