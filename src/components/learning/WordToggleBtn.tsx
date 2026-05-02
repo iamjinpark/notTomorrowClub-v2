@@ -1,0 +1,34 @@
+interface WordToggleBtnProps {
+  checked: boolean;
+  onChange: (value: boolean) => void;
+}
+
+export default function WordToggleBtn({ checked, onChange }: WordToggleBtnProps) {
+  return (
+    <button
+      type="button"
+      onClick={() => onChange(!checked)}
+      className={`
+        relative w-[74px] h-[36px] rounded-full
+        border border-black border-[0.8px]
+        transition-colors duration-200 ease-in-out
+        ${checked ? "bg-black" : "bg-white"}
+      `}
+      aria-pressed={checked}
+    >
+      <span
+        className={`
+          absolute top-[3px] left-[4px]
+          w-[28px] h-[28px] rounded-full
+          bg-black
+          transition-transform duration-200 ease-in-out
+          ${
+            checked
+              ? "translate-x-[36px] bg-lightyellow"
+              : "translate-x-0 bg-black"
+          }
+        `}
+      />
+    </button>
+  );
+}
