@@ -50,7 +50,7 @@ export default function ReviewFunnelContainer({
 
   return (
     <div>
-      <div className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y-[0.6px] border-gray1 overflow-y-auto">
+      <div className="border-gray1 h-[60vh] max-h-[30rem] min-h-[20rem] overflow-y-auto border-y-[0.6px]">
         {isReviewStart && <ReviewStart />}
         {isReviewStep && item && (
           <ReviewCard item={item} currentStep={step} onNext={onTimerComplete} />

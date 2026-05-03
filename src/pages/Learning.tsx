@@ -38,7 +38,7 @@ function Learning() {
   const showOverlay = !isLoggedIn && scrollProgress > SCROLL_REVEAL_THRESHOLD;
 
   return (
-    <div className="relative">
+    <div className="relative flex flex-col gap-[23px]">
       <PageHeader title="Hello, Stranger! Good Morning" subtitle={subtitle}>
         <StepIndicator step={step} onStepChange={goToStep} />
       </PageHeader>
