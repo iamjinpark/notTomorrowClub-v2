@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { MAKE_IT_POSTS } from "@/api/dummyData";
-import DateRangeFilter from "@/components/makeIt/DateRangeFilter";
+import PostFilterBar from "@/components/makeIt/PostFilterBar";
 import PostCard from "@/components/makeIt/PostCard";
 import PostListControls from "@/components/makeIt/PostListControls";
 import LoginRequiredOverlay from "@/components/learning/LoginRequiredOverlay";
@@ -86,7 +86,7 @@ export default function MakeIt() {
         title="See how others used Today's sentence"
         subtitle="오늘의 문장, 다들 이렇게 썼어요. 이제 당신 차례예요"
       >
-        <DateRangeFilter
+        <PostFilterBar
           fromDate={fromDate}
           toDate={toDate}
           search={search}

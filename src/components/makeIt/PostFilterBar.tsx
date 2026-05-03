@@ -1,7 +1,7 @@
 import directionDownIcon from "@/assets/icon/direction-down.svg";
 import searchIcon from "@/assets/icon/search.svg";
 
-interface DateRangeFilterProps {
+interface PostFilterBarProps {
   fromDate: string;
   toDate: string;
   search: string;
@@ -9,13 +9,13 @@ interface DateRangeFilterProps {
   onOpenCalendar?: () => void;
 }
 
-export default function DateRangeFilter({
+export default function PostFilterBar({
   fromDate,
   toDate,
   search,
   onSearchChange,
   onOpenCalendar,
-}: DateRangeFilterProps) {
+}: PostFilterBarProps) {
   return (
     <div className="flex w-[325px] flex-col justify-between gap-[13px] pt-[8px]">
       <button
