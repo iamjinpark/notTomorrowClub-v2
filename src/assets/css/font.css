@@ -6,24 +6,32 @@
   font-family: var(--font-chakra);
   font-weight: 600;
   font-size: 2.25rem; /* 36px */
+  line-height: 1;
+  letter-spacing: -0.01em;
 }
 
 .en-title-lg {
   font-family: var(--font-chakra);
   font-weight: 600;
   font-size: 1.625rem; /* 26px */
+  line-height: 1;
+  letter-spacing: -0.01em;
 }
 
 .en-title-md {
   font-family: var(--font-chakra);
   font-weight: 600;
   font-size: 1.5rem; /* 24px */
+  line-height: 1;
+  letter-spacing: -0.01em;
 }
 
 .en-title-sm {
   font-family: var(--font-chakra);
   font-weight: 500;
   font-size: 1.125rem; /* 18px */
+  line-height: 1;
+  letter-spacing: -0.01em;
 }
 
 /* body - headline */
@@ -31,18 +39,21 @@
   font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 2.625rem; /* 42px */
+  line-height: 1;
 }
 
 .en-headline-md {
   font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 2.375rem; /* 38px */
+  line-height: 1;
 }
 
 .en-headline-sm {
   font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 1.75rem; /* 28px */
+  line-height: 1;
 }
 
 /* body - body */
@@ -50,19 +61,22 @@
   font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 1.5rem; /* 24px */
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .en-body-md {
   font-family: var(--font-roboto);
   font-weight: 400;
-  font-size: 1.25rem; /* 20px */
-  line-height: 1.875rem; /* 30px */
+  font-size: 1.375rem; /* 22px */
+  line-height: 1;
 }
 
 .en-body-sm {
   font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 1rem; /* 16px */
+  line-height: 1;
 }
 
 /* detail - caption */
@@ -70,18 +84,21 @@
   font-family: var(--font-roboto);
   font-weight: 500;
   font-size: 0.875rem; /* 14px */
+  line-height: 1;
 }
 
 .en-caption-2 {
   font-family: var(--font-roboto);
-  font-weight: 500;
+  font-weight: 400;
   font-size: 0.75rem; /* 12px */
+  line-height: 1;
 }
 
 .en-caption-3 {
   font-family: var(--font-roboto);
   font-weight: 500;
   font-size: 0.625rem; /* 10px */
+  line-height: 1;
 }
 
 /* detail - button */
@@ -89,6 +106,14 @@
   font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 1.25rem; /* 20px */
+  line-height: 1;
+}
+
+.en-button-2 {
+  font-family: var(--font-roboto);
+  font-weight: 400;
+  font-size: 0.9375rem; /* 15px */
+  line-height: 1;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -99,6 +124,7 @@
   font-family: var(--font-pretendard);
   font-weight: 500;
   font-size: 2.375rem; /* 38px */
+  line-height: 1;
   letter-spacing: -0.01em;
 }
 
@@ -106,6 +132,7 @@
   font-family: var(--font-pretendard);
   font-weight: 500;
   font-size: 1.5rem; /* 24px */
+  line-height: 1;
   letter-spacing: -0.01em;
 }
 
@@ -113,6 +140,7 @@
   font-family: var(--font-pretendard);
   font-weight: 500;
   font-size: 1.125rem; /* 18px */
+  line-height: 1;
   letter-spacing: -0.01em;
 }
 
@@ -120,6 +148,7 @@
   font-family: var(--font-pretendard);
   font-weight: 500;
   font-size: 1rem; /* 16px */
+  line-height: 1;
   letter-spacing: -0.01em;
 }
 
@@ -146,5 +175,6 @@
   font-family: var(--font-pretendard);
   font-weight: 400;
   font-size: 0.875rem; /* 14px */
+  line-height: 1;
   letter-spacing: -0.05em;
 }
