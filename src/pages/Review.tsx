@@ -35,7 +35,7 @@ function Review() {
     : "공부한 문장을 5초 동안 다시 확인해보세요.";
 
   return (
-    <div className="relative">
+    <div className="relative flex flex-col gap-[23px]">
       <PageHeader title="Hello, Stranger! Good Morning" subtitle={subtitle}>
         <StepIndicator step={step} onStepChange={goToStep} />
       </PageHeader>

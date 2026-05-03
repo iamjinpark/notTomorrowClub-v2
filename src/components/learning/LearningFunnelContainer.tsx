@@ -35,7 +35,7 @@ export default function LearningFunnelContainer({
   return (
     <div
       ref={scrollRef}
-      className="mt-[1.125rem] h-[60vh] min-h-[20rem] max-h-[30rem] border-y-[0.6px] border-gray1 overflow-y-auto overscroll-y-none relative"
+      className="border-gray1 relative h-[60vh] max-h-[30rem] min-h-[20rem] overflow-y-auto overscroll-y-none border-y-[0.6px]"
     >
       <div className="relative">
         {item && (
@@ -52,7 +52,7 @@ export default function LearningFunnelContainer({
               currentStep={step}
             />
             {/* 스크롤을 위한 추가 공간 */}
-            <div className="h-[60vh] min-h-[20rem] max-h-[30rem]"></div>
+            <div className="h-[60vh] max-h-[30rem] min-h-[20rem]"></div>
           </div>
         )}
       </div>
