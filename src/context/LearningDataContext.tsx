@@ -1,26 +1,13 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext } from "react";
 import { Outlet } from "react-router-dom";
-import { fetchLearningData } from "@/api/learning";
 import { STEP_DATA } from "@/api/dummyData";
 import type { StepData } from "@/types";
 
 const LearningDataContext = createContext<StepData[]>([]);
 
 export function LearningDataLayout() {
-  const [learningData, setLearningData] = useState<StepData[]>([]);
-
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const data = await fetchLearningData();
-        setLearningData(data);
-      } catch (error) {
-        console.error("Failed to load learning data:", error);
-        setLearningData(STEP_DATA);
-      }
-    };
-    load();
-  }, []);
+  // teammaker 서버 미사용 → 더미데이터(STEP_DATA) 사용
+  const learningData: StepData[] = STEP_DATA;
 
   return (
     <LearningDataContext.Provider value={learningData}>
