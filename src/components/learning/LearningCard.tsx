@@ -102,11 +102,12 @@ export default function LearningCard({
       const progress = maxScroll <= 0 ? 0 : scroller.scrollTop / maxScroll;
 
       if (isLoggedIn) {
-        tlRef.current!.progress(progress);
+        // 스크롤에 따라 부드럽게 따라오지 않고, 임계점에서 한 번에 탁 전환
+        const revealed = progress >= SCROLL_REVEAL_THRESHOLD;
+        tlRef.current!.progress(revealed ? 1 : 0);
         setScrollProgress(progress);
 
-        if (progress < SCROLL_REVEAL_THRESHOLD) onPhaseChange?.("intro");
-        else onPhaseChange?.("reveal");
+        onPhaseChange?.(revealed ? "reveal" : "intro");
       }
 
       onScrollProgress?.(progress);
