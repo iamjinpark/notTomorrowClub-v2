@@ -6,5 +6,5 @@ export const SCROLL_REVEAL_THRESHOLD = 0.3;
 
 export const REVIEW_COUNTER_START = 5;
 export const REVIEW_COUNTER_TICK_MS = 1000;
-export const REVIEW_COUNTER_COLORS = ["#F5FF76", "#F5FF76", "#F5FF76"] as const;
+export const REVIEW_COUNTER_FILL_COLOR = "#F5FF76";
 export const REVIEW_COUNTER_TRACK_COLOR = "#dcdcdc";

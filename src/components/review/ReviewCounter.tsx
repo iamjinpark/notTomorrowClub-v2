@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   REVIEW_COUNTER_START,
   REVIEW_COUNTER_TICK_MS,
-  REVIEW_COUNTER_COLORS,
+  REVIEW_COUNTER_FILL_COLOR,
   REVIEW_COUNTER_TRACK_COLOR,
 } from "@/constants";
 
@@ -11,14 +11,9 @@ interface ReviewCounterProps {
 }
 
 export default function ReviewCounter({ onComplete }: ReviewCounterProps) {
-  const start = REVIEW_COUNTER_START;
-  const tickMs = REVIEW_COUNTER_TICK_MS;
-  const colors = REVIEW_COUNTER_COLORS;
-  const trackColor = REVIEW_COUNTER_TRACK_COLOR;
-
   const dialRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
-  const [time, setTime] = useState(start);
+  const [time, setTime] = useState(REVIEW_COUNTER_START);
 
   useEffect(() => {
     const el = dialRef.current;
@@ -29,7 +24,7 @@ export default function ReviewCounter({ onComplete }: ReviewCounterProps) {
 
     const loop = (now: number) => {
       const elapsed = now - startTime;
-      const total = start * tickMs;
+      const total = REVIEW_COUNTER_START * REVIEW_COUNTER_TICK_MS;
 
       if (elapsed >= total) {
         el.style.setProperty("--angle", "360deg");
@@ -38,26 +33,24 @@ export default function ReviewCounter({ onComplete }: ReviewCounterProps) {
         return;
       }
 
-      const secIdx = Math.floor(elapsed / tickMs);
-      const secElapsed = elapsed - secIdx * tickMs;
-      const frac = secElapsed / tickMs;
+      const secIdx = Math.floor(elapsed / REVIEW_COUNTER_TICK_MS);
+      const secElapsed = elapsed - secIdx * REVIEW_COUNTER_TICK_MS;
+      const frac = secElapsed / REVIEW_COUNTER_TICK_MS;
       const angle = frac * 360;
 
       el.style.setProperty("--angle", `${angle}deg`);
 
       if (secIdx !== lastSecondIdx) {
         lastSecondIdx = secIdx;
-        const color = colors[secIdx] ?? colors[colors.length - 1];
-        el.style.setProperty("--fillColor", color);
-        setTime(start - secIdx);
+        setTime(REVIEW_COUNTER_START - secIdx);
       }
 
       rafRef.current = requestAnimationFrame(loop);
     };
 
     el.style.setProperty("--angle", "0deg");
-    el.style.setProperty("--fillColor", colors[0] ?? "#2ecc71");
-    el.style.setProperty("--trackColor", trackColor);
+    el.style.setProperty("--fillColor", REVIEW_COUNTER_FILL_COLOR);
+    el.style.setProperty("--trackColor", REVIEW_COUNTER_TRACK_COLOR);
 
     rafRef.current = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(rafRef.current);

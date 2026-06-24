@@ -1,15 +1,16 @@
-import { forwardRef } from "react";
+import type { Ref } from "react";
 import wordIcon from "@/assets/img/wordIcon.svg";
 import type { Word } from "@/types";
 
 interface ReviewWordsForCaptureProps {
   allWords: Word[];
+  ref?: Ref<HTMLDivElement>;
 }
 
-const ReviewWordsForCapture = forwardRef<
-  HTMLDivElement,
-  ReviewWordsForCaptureProps
->(function ReviewWordsForCapture({ allWords }, ref) {
+export default function ReviewWordsForCapture({
+  allWords,
+  ref,
+}: ReviewWordsForCaptureProps) {
   return (
     <div className="fixed left-[-9999px] top-0" ref={ref}>
       <div className="bg-lightyellow flex items-center justify-center w-[1080px] h-[1350px] py-[315px] px-[290px]">
@@ -35,6 +36,4 @@ const ReviewWordsForCapture = forwardRef<
       </div>
     </div>
   );
-});
-
-export default ReviewWordsForCapture;
+}

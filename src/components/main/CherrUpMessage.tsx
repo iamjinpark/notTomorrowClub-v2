@@ -1,6 +1,7 @@
 import messageDelete from "@/assets/img/delete_sm.svg";
 import { cheerUpMessages } from "@/api/dummyData";
 import TypingIndicator from "./TypingIndicator";
+import type { CheerUpMessage as CheerUpMessageType } from "@/types";
 
 import { useState, useEffect } from "react";
 
@@ -8,7 +9,7 @@ function CherrUpMessage() {
   // TODO: 추후 전역 상태나 context에서 가져올 현재 로그인한 사용자 ID
   const currentUserId = "user123";
 
-  const [visibleMessage, setVisibleMessage] = useState(cheerUpMessages.slice(0, 0));
+  const [visibleMessage, setVisibleMessage] = useState<CheerUpMessageType[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
 
