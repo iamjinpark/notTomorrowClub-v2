@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import type { Ref } from "react";
 
 interface BorderBtnProps {
   text: string;
@@ -7,19 +7,24 @@ interface BorderBtnProps {
   bg?: string;
   onClick?: () => void;
   className?: string;
+  ref?: Ref<HTMLButtonElement>;
 }
 
-const BorderBtn = forwardRef<HTMLButtonElement, BorderBtnProps>(
-  function BorderBtn(
-    { text, px, py, bg = "bg-transparent", onClick, className = "" },
-    ref,
-  ) {
-    return (
-      <button
-        ref={ref}
-        type="button"
-        onClick={onClick}
-        className={`
+export default function BorderBtn({
+  text,
+  px,
+  py,
+  bg = "bg-transparent",
+  onClick,
+  className = "",
+  ref,
+}: BorderBtnProps) {
+  return (
+    <button
+      ref={ref}
+      type="button"
+      onClick={onClick}
+      className={`
         ${px} ${py} ${bg}
         border-[0.8px] rounded-full
         hover:bg-lightyellow
@@ -27,11 +32,8 @@ const BorderBtn = forwardRef<HTMLButtonElement, BorderBtnProps>(
         disabled:bg-black disabled:text-white disabled:cursor-not-allowed
         ${className}
       `}
-      >
-        {text}
-      </button>
-    );
-  },
-);
-
-export default BorderBtn;
+    >
+      {text}
+    </button>
+  );
+}
