@@ -14,7 +14,7 @@ export default function BorderBtn({
   text,
   px,
   py,
-  bg = "bg-transparent",
+  bg = "bg-transparent hover:bg-lightyellow",
   onClick,
   className = "",
   ref,
@@ -27,7 +27,6 @@ export default function BorderBtn({
       className={`
         ${px} ${py} ${bg}
         border-[0.8px] rounded-full
-        hover:bg-lightyellow
         transition-colors
         disabled:bg-black disabled:text-white disabled:cursor-not-allowed
         ${className}
