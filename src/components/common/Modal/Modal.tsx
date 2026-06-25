@@ -3,6 +3,7 @@ import ConfirmModalContent from "./ConfirmModalContent";
 import PolicyModal from "./PolicyModal";
 import HelpLoginModal from "./HelpLoginModal";
 import ShareModalContent from "./ShareModalContent";
+import AlertModalContent from "./AlertModalContent";
 
 import Confetti from "react-confetti";
 import { createPortal } from "react-dom";
@@ -28,7 +29,8 @@ type ModalProps =
       isOpen: boolean;
       onClose: () => void;
       onSave?: (share: boolean) => void;
-    };
+    }
+  | { type: "alert"; isOpen: boolean; onClose: () => void; message?: string };
 
 function Modal(modalProps: ModalProps) {
   const { isOpen, onClose } = modalProps;
@@ -90,6 +92,8 @@ function Modal(modalProps: ModalProps) {
         return <HelpLoginModal onClose={onClose} />;
       case "share":
         return <ShareModalContent onClose={onClose} onSave={modalProps.onSave} />;
+      case "alert":
+        return <AlertModalContent onClose={onClose} message={modalProps.message} />;
       default:
         return null;
     }
