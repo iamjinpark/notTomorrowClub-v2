@@ -11,6 +11,7 @@ import Login from "@/pages/Login";
 import Learning from "@/pages/Learning";
 import Review from "@/pages/Review";
 import MakeIt from "@/pages/MakeIt";
+import MakeItCreate from "@/pages/MakeItCreate";
 import Tracker from "@/pages/Tracker";
 import Notice from "@/pages/Notice";
 import MyPage from "@/pages/MyPage";
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
             ],
           },
           { path: "make-it", element: <MakeIt /> },
+          { path: "make-it/create", element: <MakeItCreate /> },
           { path: "tracker", element: <Tracker /> },
           { path: "notice", element: <Notice /> },
           { path: "mypage", element: <MyPage /> },
