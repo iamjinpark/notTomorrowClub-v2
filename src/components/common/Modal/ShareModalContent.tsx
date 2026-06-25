@@ -10,7 +10,7 @@ function ShareModalContent({ onClose, onSave }: ShareModalContentProps) {
   const [share, setShare] = useState(false);
 
   return (
-    <div className="bg-yellow flex w-[34.5rem] flex-col items-center gap-[2.5rem] px-10 py-[3.75rem] text-center">
+    <div className="bg-lightyellow flex w-[34.5rem] flex-col items-center gap-[2.5rem] px-10 py-[3.75rem] text-center">
       <p className="en-title-md text-black">
         Do you want to share your sentence?
       </p>

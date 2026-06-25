@@ -4,6 +4,9 @@ import PolicyModal from "./PolicyModal";
 import HelpLoginModal from "./HelpLoginModal";
 import ShareModalContent from "./ShareModalContent";
 import AlertModalContent from "./AlertModalContent";
+import PostDetailModalContent from "./PostDetailModalContent";
+import DateRangeCalendarContent from "./DateRangeCalendarContent";
+import type { MakeItPost } from "@/types/makeIt";
 
 import Confetti from "react-confetti";
 import { createPortal } from "react-dom";
@@ -30,7 +33,23 @@ type ModalProps =
       onClose: () => void;
       onSave?: (share: boolean) => void;
     }
-  | { type: "alert"; isOpen: boolean; onClose: () => void; message?: string };
+  | { type: "alert"; isOpen: boolean; onClose: () => void; message?: string }
+  | {
+      type: "postDetail";
+      isOpen: boolean;
+      onClose: () => void;
+      post: MakeItPost;
+      isMine?: boolean;
+      onDownload?: () => void;
+      onEdit?: () => void;
+      onDelete?: () => void;
+    }
+  | {
+      type: "dateRange";
+      isOpen: boolean;
+      onClose: () => void;
+      onApply: (from: Date, to: Date) => void;
+    };
 
 function Modal(modalProps: ModalProps) {
   const { isOpen, onClose } = modalProps;
@@ -94,6 +113,24 @@ function Modal(modalProps: ModalProps) {
         return <ShareModalContent onClose={onClose} onSave={modalProps.onSave} />;
       case "alert":
         return <AlertModalContent onClose={onClose} message={modalProps.message} />;
+      case "postDetail":
+        return (
+          <PostDetailModalContent
+            onClose={onClose}
+            post={modalProps.post}
+            isMine={modalProps.isMine}
+            onDownload={modalProps.onDownload}
+            onEdit={modalProps.onEdit}
+            onDelete={modalProps.onDelete}
+          />
+        );
+      case "dateRange":
+        return (
+          <DateRangeCalendarContent
+            onClose={onClose}
+            onApply={modalProps.onApply}
+          />
+        );
       default:
         return null;
     }
