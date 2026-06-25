@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import { STEP_DATA } from "@/api/dummyData";
 import BorderBtn from "@/components/common/BorderBtn";
+import Modal from "@/components/common/Modal/Modal";
 import PageHeader from "@/layouts/PageHeader";
+import { useModal } from "@/hooks/useModal";
 import directionDownIcon from "@/assets/icon/direction-down.svg";
 
 const TEXT_LIMIT = 500;
@@ -15,11 +17,13 @@ export default function MakeItCreate() {
   const [open, setOpen] = useState(false);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [text, setText] = useState("");
+  const shareModal = useModal();
 
   const selected = selectedIdx !== null ? sentences[selectedIdx] : null;
 
-  const handleSave = () => {
-    // TODO: 실제 저장 API 연동 후 응답 처리
+  const handleSave = (share: boolean) => {
+    // TODO: 실제 저장 API 연동 후 응답 처리 (share: 공유 여부)
+    void share;
     navigate("/make-it");
   };
 
@@ -102,12 +106,19 @@ export default function MakeItCreate() {
             text="Save"
             px="px-[1.625rem]"
             py="py-[0.625rem]"
-            onClick={handleSave}
+            onClick={shareModal.open}
           />
         </div>
       </div>
 
       <div className="mt-[1.875rem] border-b border-black" />
+
+      <Modal
+        type="share"
+        isOpen={shareModal.isOpen}
+        onClose={shareModal.close}
+        onSave={handleSave}
+      />
     </div>
   );
 }
