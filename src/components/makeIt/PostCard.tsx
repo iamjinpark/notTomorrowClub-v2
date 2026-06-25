@@ -7,7 +7,7 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <div className="flex flex-col justify-between bg-white px-3 pt-[0.9375rem] pb-3 min-h-[12.3125rem]">
+    <div className="flex flex-col justify-between bg-white transition-colors hover:bg-yellow px-3 pt-[0.9375rem] pb-3 min-h-[12.3125rem]">
       <p className="en-body-md text-black line-clamp-4 flex-1 min-h-0">
         {post.content}
       </p>

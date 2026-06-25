@@ -1,9 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { MAKE_IT_POSTS } from "@/api/dummyData";
 import DateRangeFilter from "@/components/makeIt/DateRangeFilter";
 import PostCard from "@/components/makeIt/PostCard";
 import PostListControls from "@/components/makeIt/PostListControls";
+import LoginRequiredOverlay from "@/components/learning/LoginRequiredOverlay";
 import PageHeader from "@/layouts/PageHeader";
 
 type Cols = 1 | 2 | 3;
@@ -11,7 +13,19 @@ type Cols = 1 | 2 | 3;
 const POSTS_PER_LAYOUT: Record<Cols, number> = { 1: 2, 2: 4, 3: 6 };
 
 export default function MakeIt() {
+  const navigate = useNavigate();
+  const [isLoggedIn] = useState(true); // TODO : 로그인 로직 구현 후 false로 변경
   const [cols, setCols] = useState<Cols>(2);
+
+  // 비로그인 시 스크롤 잠금 — 오버레이가 footer까지 덮지 않도록 (Modal과 동일 패턴)
+  useEffect(() => {
+    if (isLoggedIn) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isLoggedIn]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
 
@@ -72,6 +86,10 @@ export default function MakeIt() {
         totalPages={totalPages}
         onPageChange={setCurrentPage}
       />
+
+      {!isLoggedIn && (
+        <LoginRequiredOverlay goLogin={() => navigate("/login")} />
+      )}
     </div>
   );
 }
