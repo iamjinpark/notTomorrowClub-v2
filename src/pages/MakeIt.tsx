@@ -6,11 +6,15 @@ import DateRangeFilter from "@/components/makeIt/DateRangeFilter";
 import PostCard from "@/components/makeIt/PostCard";
 import PostListControls from "@/components/makeIt/PostListControls";
 import LoginRequiredOverlay from "@/components/learning/LoginRequiredOverlay";
+import Modal from "@/components/common/Modal/Modal";
 import PageHeader from "@/layouts/PageHeader";
+import { useModal } from "@/hooks/useModal";
+import type { MakeItPost } from "@/types/makeIt";
 
 type Cols = 1 | 2 | 3;
 
 const POSTS_PER_LAYOUT: Record<Cols, number> = { 1: 2, 2: 4, 3: 6 };
+const CURRENT_USER = "Ezi Park"; // TODO: 로그인 사용자로 교체
 
 export default function MakeIt() {
   const navigate = useNavigate();
@@ -28,6 +32,13 @@ export default function MakeIt() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
+  const detailModal = useModal();
+  const [selectedPost, setSelectedPost] = useState<MakeItPost | null>(null);
+
+  const openDetail = (post: MakeItPost) => {
+    setSelectedPost(post);
+    detailModal.open();
+  };
 
   const filteredPosts = useMemo(() => {
     if (!search.trim()) return MAKE_IT_POSTS;
@@ -75,7 +86,7 @@ export default function MakeIt() {
         style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}
       >
         {paginatedPosts.map((post) => (
-          <PostCard key={post.id} post={post} />
+          <PostCard key={post.id} post={post} onClick={openDetail} />
         ))}
       </div>
 
@@ -89,6 +100,16 @@ export default function MakeIt() {
 
       {!isLoggedIn && (
         <LoginRequiredOverlay goLogin={() => navigate("/login")} />
+      )}
+
+      {selectedPost && (
+        <Modal
+          type="postDetail"
+          isOpen={detailModal.isOpen}
+          onClose={detailModal.close}
+          post={selectedPost}
+          isMine={selectedPost.author === CURRENT_USER}
+        />
       )}
     </div>
   );
