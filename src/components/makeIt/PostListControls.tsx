@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import arrowsOutIcon from "@/assets/icon/arrows-out.svg";
 import directionLeftIcon from "@/assets/icon/direction-left.svg";
 import directionRightIcon from "@/assets/icon/direction-right.svg";
@@ -22,6 +24,7 @@ export default function PostListControls({
   totalPages,
   onPageChange,
 }: PostListControlsProps) {
+  const navigate = useNavigate();
   const pageNumbers = getPageNumbers(currentPage, totalPages);
 
   return (
@@ -72,7 +75,11 @@ export default function PostListControls({
       </div>
 
       <div className="flex items-center gap-1 justify-end w-[9.375rem]">
-        <button type="button" className="flex items-center gap-1">
+        <button
+          type="button"
+          onClick={() => navigate("/make-it/create")}
+          className="flex items-center gap-1"
+        >
           <span className="en-title-sm not-italic capitalize text-black">
             Go to Make It
           </span>
