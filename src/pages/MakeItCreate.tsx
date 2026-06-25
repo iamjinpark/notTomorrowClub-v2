@@ -18,8 +18,17 @@ export default function MakeItCreate() {
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [text, setText] = useState("");
   const shareModal = useModal();
+  const alertModal = useModal();
 
   const selected = selectedIdx !== null ? sentences[selectedIdx] : null;
+
+  const handleSaveClick = () => {
+    if (selectedIdx === null) {
+      alertModal.open();
+      return;
+    }
+    shareModal.open();
+  };
 
   const handleSave = (share: boolean) => {
     // TODO: 실제 저장 API 연동 후 응답 처리 (share: 공유 여부)
@@ -106,7 +115,7 @@ export default function MakeItCreate() {
             text="Save"
             px="px-[1.625rem]"
             py="py-[0.625rem]"
-            onClick={shareModal.open}
+            onClick={handleSaveClick}
           />
         </div>
       </div>
@@ -119,6 +128,7 @@ export default function MakeItCreate() {
         onClose={shareModal.close}
         onSave={handleSave}
       />
+      <Modal type="alert" isOpen={alertModal.isOpen} onClose={alertModal.close} />
     </div>
   );
 }
