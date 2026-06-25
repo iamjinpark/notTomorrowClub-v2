@@ -32,7 +32,7 @@ function PostDetailModalContent({
   const { fontSize, lineHeight } = getTextSize(post.content.length);
 
   return (
-    <div className="bg-yellow flex h-[29.5625rem] w-[36.25rem] flex-col">
+    <div className="bg-lightyellow flex h-[29.5625rem] w-[36.25rem] flex-col">
       <div className="flex justify-end px-6 pt-5 pb-3">
         <button onClick={onClose} aria-label="닫기">
           <img src={closeIcon} alt="" className="size-7" />

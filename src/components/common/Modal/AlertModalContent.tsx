@@ -10,7 +10,7 @@ function AlertModalContent({
   message = "Choose a Today's Sentence first.\nSelect Sentence before you start writing.",
 }: AlertModalContentProps) {
   return (
-    <div className="bg-yellow flex w-[34.5rem] flex-col items-center gap-[2.5rem] px-10 py-[3.75rem] text-center">
+    <div className="bg-lightyellow flex w-[34.5rem] flex-col items-center gap-[2.5rem] px-10 py-[3.75rem] text-center">
       <p className="en-title-md whitespace-pre-line text-black">{message}</p>
       <BorderBtn
         text="OK"
