@@ -6,6 +6,7 @@ interface DateRangeFilterProps {
   toDate: string;
   search: string;
   onSearchChange: (v: string) => void;
+  onOpenCalendar?: () => void;
 }
 
 export default function DateRangeFilter({
@@ -13,10 +14,15 @@ export default function DateRangeFilter({
   toDate,
   search,
   onSearchChange,
+  onOpenCalendar,
 }: DateRangeFilterProps) {
   return (
     <div className="flex w-[325px] flex-col justify-between gap-[13px] pt-[8px]">
-      <div className="flex items-center justify-between gap-[10px]">
+      <button
+        type="button"
+        onClick={onOpenCalendar}
+        className="flex items-center justify-between gap-[10px]"
+      >
         <div className="en-title-sm flex items-center gap-[5px] capitalize">
           <span className="text-gray3">From</span>
           <span className="text-black">{fromDate}</span>
@@ -26,7 +32,7 @@ export default function DateRangeFilter({
           <span className="text-black">{toDate}</span>
         </div>
         <img src={directionDownIcon} alt="" className="size-[22px]" />
-      </div>
+      </button>
       <div className="flex flex-row items-end">
         <input
           type="text"

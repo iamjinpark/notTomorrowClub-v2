@@ -40,6 +40,19 @@ export default function MakeIt() {
     detailModal.open();
   };
 
+  const calendarModal = useModal();
+  const [fromDate, setFromDate] = useState("2025/07/20");
+  const [toDate, setToDate] = useState("2025/11/21");
+
+  const handleApplyRange = (from: Date, to: Date) => {
+    const fmt = (d: Date) =>
+      `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, "0")}/${String(d.getDate()).padStart(2, "0")}`;
+    setFromDate(fmt(from));
+    setToDate(fmt(to));
+    calendarModal.close();
+    // TODO: 선택한 날짜 범위로 게시글 필터링 연동
+  };
+
   const filteredPosts = useMemo(() => {
     if (!search.trim()) return MAKE_IT_POSTS;
     const q = search.toLowerCase();
@@ -74,10 +87,11 @@ export default function MakeIt() {
         subtitle="오늘의 문장, 다들 이렇게 썼어요. 이제 당신 차례예요"
       >
         <DateRangeFilter
-          fromDate="2025/07/20"
-          toDate="2025/11/21"
+          fromDate={fromDate}
+          toDate={toDate}
           search={search}
           onSearchChange={handleSearchChange}
+          onOpenCalendar={calendarModal.open}
         />
       </PageHeader>
 
@@ -111,6 +125,13 @@ export default function MakeIt() {
           isMine={selectedPost.author === CURRENT_USER}
         />
       )}
+
+      <Modal
+        type="dateRange"
+        isOpen={calendarModal.isOpen}
+        onClose={calendarModal.close}
+        onApply={handleApplyRange}
+      />
     </div>
   );
 }

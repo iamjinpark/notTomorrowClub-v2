@@ -5,6 +5,7 @@ import HelpLoginModal from "./HelpLoginModal";
 import ShareModalContent from "./ShareModalContent";
 import AlertModalContent from "./AlertModalContent";
 import PostDetailModalContent from "./PostDetailModalContent";
+import DateRangeCalendarContent from "./DateRangeCalendarContent";
 import type { MakeItPost } from "@/types/makeIt";
 
 import Confetti from "react-confetti";
@@ -42,6 +43,12 @@ type ModalProps =
       onDownload?: () => void;
       onEdit?: () => void;
       onDelete?: () => void;
+    }
+  | {
+      type: "dateRange";
+      isOpen: boolean;
+      onClose: () => void;
+      onApply: (from: Date, to: Date) => void;
     };
 
 function Modal(modalProps: ModalProps) {
@@ -115,6 +122,13 @@ function Modal(modalProps: ModalProps) {
             onDownload={modalProps.onDownload}
             onEdit={modalProps.onEdit}
             onDelete={modalProps.onDelete}
+          />
+        );
+      case "dateRange":
+        return (
+          <DateRangeCalendarContent
+            onClose={onClose}
+            onApply={modalProps.onApply}
           />
         );
       default:
