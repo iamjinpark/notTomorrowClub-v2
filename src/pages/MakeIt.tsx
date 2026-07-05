@@ -96,7 +96,7 @@ export default function MakeIt() {
       </PageHeader>
 
       <div
-        className="bg-gray5 border-gray5 grid gap-px border"
+        className="bg-gray5 border-gray5 grid gap-px border-y"
         style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}
       >
         {paginatedPosts.map((post) => (
