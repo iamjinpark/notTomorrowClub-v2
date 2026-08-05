@@ -39,18 +39,18 @@ export default function MakeItCreate() {
   return (
     <div className="flex flex-col">
       <PageHeader
-        title="Let's make your sentence!"
-        subtitle="배웠던 문장을 생각해보며 나만의 문장을 만들어보세요"
+        title="Make today's sentence your own!"
+        subtitle="오늘의 표현으로 나만의 문장을 써보세요"
       />
 
       <div className="mt-[26px] flex flex-col border-t border-black">
         {/* 입력 카드 */}
-        <div className="relative flex min-h-[27.5rem] flex-col">
+        <div className="relative flex min-h-[20rem] flex-col">
           {/* 드롭다운 헤더 */}
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
-            className="bg-gray6 en-title-md text-gray3 relative flex h-[3.75rem] shrink-0 items-center justify-center"
+            className="bg-gray6 en-title-md text-gray3 relative flex h-[2.625rem] shrink-0 items-center justify-center"
           >
             {selected ? selected.en : "Select Today's Sentence"}
             <img
@@ -71,7 +71,7 @@ export default function MakeItCreate() {
 
           {/* 선택 시 단어 힌트 */}
           {selected && (
-            <div className="ko-caption-1 text-gray3 flex shrink-0 flex-wrap gap-x-[2.5rem] gap-y-1 border-t border-dashed border-gray4 pt-[0.875rem]">
+            <div className="ko-caption-1 text-gray3 border-gray4 flex shrink-0 flex-wrap gap-x-[1.375rem] gap-y-1 border-t border-dashed pt-[0.875rem]">
               {selected.words.map((w, i) => (
                 <span key={i}>
                   * {w.en}: {w.ko}
@@ -82,7 +82,7 @@ export default function MakeItCreate() {
 
           {/* 열렸을 때 옵션 목록 (textarea 위에 겹침) */}
           {open && (
-            <ul className="absolute inset-x-0 top-[3.75rem] z-10 bg-gray5">
+            <ul className="bg-gray5 absolute inset-x-0 top-[2.625rem] z-10">
               {sentences.map((s, i) => (
                 <li key={i}>
                   <button
@@ -91,7 +91,7 @@ export default function MakeItCreate() {
                       setSelectedIdx(i);
                       setOpen(false);
                     }}
-                    className={`en-body-lg block w-full px-4 py-[0.5rem] text-center transition-colors hover:bg-yellow ${
+                    className={`en-body-lg hover:bg-yellow block w-full px-4 py-[0.5rem] text-center transition-colors ${
                       i === selectedIdx ? "bg-yellow text-black" : "text-gray3"
                     }`}
                   >
@@ -104,17 +104,19 @@ export default function MakeItCreate() {
         </div>
 
         {/* 액션 버튼 */}
-        <div className="flex justify-center gap-[0.875rem] pt-[1.875rem]">
+        <div className="flex justify-center gap-[0.875rem] pt-[2.5rem]">
           <BorderBtn
             text="Cancel"
             px="px-[1.625rem]"
             py="py-[0.625rem]"
+            className="en-button-1"
             onClick={() => navigate(-1)}
           />
           <BorderBtn
             text="Save"
             px="px-[1.625rem]"
             py="py-[0.625rem]"
+            className="en-button-1"
             onClick={handleSaveClick}
           />
         </div>
@@ -128,7 +130,11 @@ export default function MakeItCreate() {
         onClose={shareModal.close}
         onSave={handleSave}
       />
-      <Modal type="alert" isOpen={alertModal.isOpen} onClose={alertModal.close} />
+      <Modal
+        type="alert"
+        isOpen={alertModal.isOpen}
+        onClose={alertModal.close}
+      />
     </div>
   );
 }
