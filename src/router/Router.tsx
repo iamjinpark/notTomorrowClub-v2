@@ -15,6 +15,7 @@ import MakeItCreate from "@/pages/MakeItCreate";
 import Tracker from "@/pages/Tracker";
 import Notice from "@/pages/Notice";
 import MyPage from "@/pages/MyPage";
+import MyPageCard from "@/pages/MyPageCard";
 import About from "@/pages/About";
 import NotFound from "@/pages/NotFound";
 
@@ -58,6 +59,11 @@ export const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  // 시안에 사이트 헤더/푸터가 없고 배경이 전체 어두운 색이라 DefaultLayout 밖에 둔다
+  {
+    element: <RouterGuard />,
+    children: [{ path: "mypage/card", element: <MyPageCard /> }],
   },
   {
     path: "*",
