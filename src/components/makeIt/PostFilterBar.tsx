@@ -1,7 +1,7 @@
 import directionDownIcon from "@/assets/icon/direction-down.svg";
 import searchIcon from "@/assets/icon/search.svg";
 
-interface DateRangeFilterProps {
+interface PostFilterBarProps {
   fromDate: string;
   toDate: string;
   search: string;
@@ -9,15 +9,15 @@ interface DateRangeFilterProps {
   onOpenCalendar?: () => void;
 }
 
-export default function DateRangeFilter({
+export default function PostFilterBar({
   fromDate,
   toDate,
   search,
   onSearchChange,
   onOpenCalendar,
-}: DateRangeFilterProps) {
+}: PostFilterBarProps) {
   return (
-    <div className="flex w-[325px] flex-col justify-between gap-[13px] pt-[8px]">
+    <div className="flex w-[325px] flex-col justify-between gap-[10px] pt-[8px]">
       <button
         type="button"
         onClick={onOpenCalendar}
@@ -38,12 +38,12 @@ export default function DateRangeFilter({
           type="text"
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="border-gray4 en-caption-1 w-full border-b bg-transparent pb-2 text-black outline-none"
+          className="border-gray3 en-caption-1 w-full border-b-[0.6px] bg-transparent pb-2 text-black outline-none"
         />
         <button
           type="button"
           aria-label="검색"
-          className="border-gray4 border-b"
+          className="border-gray3 border-b-[0.6px]"
         >
           <img src={searchIcon} alt="" className="size-8" />
         </button>
