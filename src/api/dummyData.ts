@@ -1,5 +1,6 @@
 import type { CheerUpMessage, StepData } from "@/types";
 import type { MakeItPost } from "@/types/makeIt";
+import type { MyPageStat, MyPageUser, RecentMakeItPost } from "@/types/myPage";
 
 export const cheerUpMessages: CheerUpMessage[] = [
   {
@@ -204,4 +205,24 @@ export const STEP_DATA: StepData[] = [
       { en: "home", ko: "집" },
     ],
   },
+];
+
+export const MY_PAGE_USER: MyPageUser = {
+  name: "EZ PARK",
+  email: "ezpark@naver.com",
+  issuedYear: "2026.03.28",
+};
+
+export const MY_PAGE_RECENT: RecentMakeItPost = {
+  date: "July.2",
+  title: "Have you ever been in love?",
+  body: "Have you ever been in love?\nI have never been in love before. I watched a youtube video. There were a white woman and a white man. They were doing everything to look like Jimin, to his skin.",
+  views: 999,
+  likes: 999,
+};
+
+export const MY_PAGE_STATS: MyPageStat[] = [
+  { label: "Times Studied", value: 60, ratio: 0.54, color: "bg-yellow" },
+  { label: "Times Written", value: 24, ratio: 0.3, color: "bg-gray4" },
+  { label: "Days Attended", value: 182, ratio: 0.66, color: "bg-purple" },
 ];
