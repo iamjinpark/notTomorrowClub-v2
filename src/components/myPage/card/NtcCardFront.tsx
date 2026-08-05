@@ -83,20 +83,21 @@ export default function NtcCardFront({ card }: NtcCardFrontProps) {
         <CardField label="Expire" value={card.expire} tight />
       </div>
 
-      {/* IC칩 — 시안은 그라디언트(multiply) 위에 사진 placeholder 이미지를 20%로 겹친다.
-          그라디언트는 인라인으로 쓴다 (Tailwind 정지점 유틸리티가 rgba 알파를 정확히 못 옮김) */}
-      <div className="absolute top-[8.4375rem] left-[19.125rem] h-[2.5625rem] w-[2.0625rem]">
-        <div
-          className="absolute inset-0 mix-blend-multiply"
-          style={{
-            backgroundImage:
-              "linear-gradient(to bottom, #c4c4c4 0%, rgba(94,94,94,0.37) 100%)",
-          }}
-        />
+      {/* IC칩 — 시안은 #c4c4c4 -> rgba(94,94,94,0.37) 그라디언트에 mix-blend-multiply.
+          스트라이프와 같은 이유로 노란 카드색을 미리 곱한 값으로 대체한다.
+          자식에 absolute inset-0을 쓰지 않는다 — html2canvas가 wrapper를 containing block으로
+          처리하지 못해 다운로드 이미지에서 그라디언트가 카드 전체로 퍼졌다 */}
+      <div
+        className="absolute top-[8.4375rem] left-[19.125rem] h-[2.5625rem] w-[2.0625rem]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, #bbc44a 0%, #bac34a 100%)",
+        }}
+      >
         <img
           src={photoPlaceholder}
           alt=""
-          className="absolute inset-0 size-full object-cover opacity-20"
+          className="size-full object-cover opacity-20"
         />
       </div>
 

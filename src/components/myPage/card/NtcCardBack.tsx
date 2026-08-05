@@ -11,13 +11,16 @@ interface NtcCardBackProps {
 export default function NtcCardBack({ card }: NtcCardBackProps) {
   return (
     <div className="bg-lightyellow relative h-[13.5625rem] w-[22rem] overflow-hidden rounded-[0.75rem] text-[#2b2b2b] shadow-[0.125rem_0.125rem_0.0625rem_0_rgba(0,0,0,0.25)]">
-      {/* 마그네틱 스트라이프. 정지점을 인라인으로 쓴다 — Tailwind의 black 토큰은 #2b2b2b라
-          시안의 순수 #000과 다르고, via 위치(61.058%)도 유틸리티로는 적용되지 않는다 */}
+      {/* 마그네틱 스트라이프. 시안은 #000 -> #424242 -> #000 그라디언트에 mix-blend-multiply인데,
+          multiply는 채널별 상수 곱이라 그라디언트 보간과 교환 가능하다. 노란 카드색을 미리 곱한
+          값을 쓰면 결과가 동일하면서 blend mode 의존이 없어진다 (html2canvas가 blend를 격리하지
+          못해 다운로드 이미지에서 카드 전체가 어두워졌다). 정지점은 인라인 — Tailwind black
+          토큰은 #2b2b2b이고 via 위치 유틸리티도 적용되지 않는다 */}
       <div
-        className="absolute top-[1.375rem] left-0 h-[3.6875rem] w-[22rem] mix-blend-multiply"
+        className="absolute top-[1.375rem] left-0 h-[3.6875rem] w-[22rem]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #000 0%, #424242 61.058%, #000 100%)",
+            "linear-gradient(to right, #000 0%, #3f4218 61.058%, #000 100%)",
         }}
       />
 
