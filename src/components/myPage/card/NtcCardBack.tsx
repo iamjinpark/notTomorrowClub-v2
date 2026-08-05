@@ -44,7 +44,7 @@ export default function NtcCardBack({ card }: NtcCardBackProps) {
         No perfect grammar required.
       </p>
 
-      <span className="font-signature absolute top-[7.375rem] left-[15.8125rem] text-[0.8125rem] leading-none text-[#404040]">
+      <span className="font-signature absolute top-[7.375rem] left-[15.8125rem] text-[0.75rem] leading-none tracking-[-0.05em] text-[#404040]">
         {card.signatureName}
       </span>
 

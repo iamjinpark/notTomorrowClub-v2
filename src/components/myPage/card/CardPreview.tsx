@@ -75,7 +75,7 @@ export default function CardPreview({
       </div>
 
       {/* 서명 — 문서 (76, 555) */}
-      <span className="font-signature absolute top-[23.8125rem] left-[4.75rem] text-[3.125rem] leading-none tracking-[-0.09375rem] text-[#404040]">
+      <span className="font-signature absolute top-[23.8125rem] left-[4.75rem] text-[2.9375rem] leading-none tracking-[-0.05em] text-[#404040]">
         {card.signatureName}
       </span>
     </>

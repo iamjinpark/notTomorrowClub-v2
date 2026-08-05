@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-/* NTC 카드 인쇄물 전용 — 시안이 항목 라벨에 Roboto Condensed, 값에 Roboto Mono를 쓴다 */
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500&family=Roboto+Mono:wght@500&display=swap");
+/* NTC 카드 인쇄물 전용 — 시안이 항목 라벨에 Roboto Condensed, 값에 Roboto Mono를 쓴다.
+   Beau Rivage는 서명용. 시안 원본 Valentine Soul은 개인 사용 전용 라이선스라 쓸 수 없다.
+   50px 잉크 폭이 172로 시안(160)보다 넓어 0.94배로 줄여 같은 비중을 맞춘다. */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500&family=Roboto+Mono:wght@500&family=Beau+Rivage&display=swap");
 
 @import url("./animation.css");
 @import url("./font.css");
@@ -36,6 +38,7 @@ html {
   --font-roboto: "Roboto", system-ui, -apple-system, sans-serif;
   --font-roboto-condensed: "Roboto Condensed", "Roboto", sans-serif;
   --font-roboto-mono: "Roboto Mono", ui-monospace, monospace;
+  --font-signature: "Beau Rivage", cursive;
 
   --color-charcoal: #2c2c2c;
   --color-darkgrey: #838383;

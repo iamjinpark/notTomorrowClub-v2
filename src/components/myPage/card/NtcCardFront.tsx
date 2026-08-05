@@ -59,7 +59,7 @@ export default function NtcCardFront({ card }: NtcCardFrontProps) {
         className="absolute top-[3.4375rem] left-[1.125rem] h-[8.4375rem] w-[6.875rem] object-cover"
       />
 
-      <span className="font-signature absolute top-[11.0625rem] left-[1.3125rem] rotate-[0.18deg] text-[1.375rem] leading-none tracking-[-0.04125rem] text-[#404040]">
+      <span className="font-signature absolute top-[11.0625rem] left-[1.3125rem] rotate-[0.18deg] text-[1.3125rem] leading-none tracking-[-0.05em] text-[#404040]">
         {card.signatureName}
       </span>
 
