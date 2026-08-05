@@ -12,7 +12,7 @@ export default function DefaultLayout() {
   return (
     <div className="flex flex-col">
       <Header />
-      <main className="min-h-screen px-[10rem] flex flex-col items-center">
+      <main className="min-h-screen px-4 md:px-10 lg:px-20 xl:px-[10rem] flex flex-col items-center">
         <div className="w-full max-w-[70.25rem] h-full pt-[17.56vh]">
           <Outlet />
         </div>
