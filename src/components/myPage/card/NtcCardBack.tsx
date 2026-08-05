@@ -29,28 +29,38 @@ export default function NtcCardBack({ card }: NtcCardBackProps) {
         className="absolute top-[5.25rem] left-[-0.0625rem] h-[4.125rem] w-[1.875rem]"
       />
 
-      <div className="font-roboto-mono absolute top-[5.4375rem] left-[2rem] w-[20rem] text-[0.5rem] leading-[0.6rem] font-medium tracking-[0.0025rem]">
-        <p>NOT AN OFFICIAL IDENTIFICATION CARD.</p>
-        <p>FOR NTC MEMBERSHIP AND ROUTINE PRACTICE ONLY.</p>
-        <p>REST: NONE</p>
-        <p>&nbsp;</p>
-        <p>No perfect grammar required.</p>
-      </div>
+      <p className="font-roboto-mono text-cap-trim absolute top-[5.4375rem] left-[2rem] w-[20rem] text-[0.5rem] leading-[0.625rem] font-medium tracking-[0.0025rem]">
+        NOT AN OFFICIAL IDENTIFICATION CARD.
+        <br />
+        FOR NTC MEMBERSHIP AND ROUTINE PRACTICE ONLY.
+        <br />
+        REST: NONE
+        <br />
+        &nbsp;
+        <br />
+        No perfect grammar required.
+      </p>
 
       <span className="font-signature absolute top-[7.375rem] left-[15.8125rem] text-[0.8125rem] leading-none text-[#404040]">
         {card.signatureName}
       </span>
 
       {/* 시안은 Roboto Condensed Regular이고 박스(67px)를 넘겨도 줄바꿈하지 않는다 */}
-      <div className="font-roboto-condensed absolute top-[8.5rem] left-[16.625rem] w-[4.1875rem] text-[0.5rem] leading-[0.6rem] font-normal tracking-[0.0025rem] whitespace-nowrap">
-        <p>Emergency Contact:</p>
-        <p>you who did not quit.</p>
-        <p>&nbsp;</p>
-        <p>Allergic reaction to:</p>
-        <p>Overthinking</p>
-        <p>Perfect grammar</p>
-        <p>Starting tomorrow</p>
-      </div>
+      <p className="font-roboto-condensed text-cap-trim absolute top-[8.5rem] left-[16.625rem] w-[4.1875rem] text-[0.5rem] leading-[0.625rem] font-normal tracking-[0.0025rem] whitespace-nowrap">
+        Emergency Contact:
+        <br />
+        you who did not quit.
+        <br />
+        &nbsp;
+        <br />
+        Allergic reaction to:
+        <br />
+        Overthinking
+        <br />
+        Perfect grammar
+        <br />
+        Starting tomorrow
+      </p>
 
       {/* 일련번호 — 시안은 가로 바코드 왼쪽에 아래에서 위로 읽히게 회전 */}
       <span className="font-roboto-condensed absolute top-[9.6875rem] left-[2.5rem] h-[2.5rem] rotate-180 text-[0.5rem] leading-none font-medium [writing-mode:vertical-rl]">
@@ -63,7 +73,7 @@ export default function NtcCardBack({ card }: NtcCardBackProps) {
         className="absolute top-[9.25rem] left-[3.0625rem] h-[2.9375rem] w-[11.4375rem]"
       />
 
-      <p className="font-roboto-mono absolute top-[12.375rem] left-[3.0625rem] w-[9.6875rem] text-[0.5rem] leading-[0.6rem] font-medium tracking-[0.0025rem]">
+      <p className="font-roboto-mono text-cap-trim absolute top-[12.375rem] left-[3.0625rem] w-[9.6875rem] text-[0.5rem] leading-[1.2] font-medium tracking-[0.0025rem]">
         SCAN TO RETURN TO TODAY&rsquo;S PHRASE
       </p>
     </div>

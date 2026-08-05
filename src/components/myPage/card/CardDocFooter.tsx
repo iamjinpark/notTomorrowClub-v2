@@ -23,17 +23,18 @@ export default function CardDocFooter({ card }: CardDocFooterProps) {
 
       <div className="flex shrink-0 flex-col gap-[1.5rem] text-[#2b2b2b]">
         {/* 시안은 "Tap in."이 별도 단락이라 Tap in. / Write five. / Leave proud. 로 끊긴다 */}
-        <div className="font-roboto w-[9rem] text-[1.5rem] leading-[1.6042rem]">
-          <p>Tap in.</p>
-          <p>Write five. Leave proud.</p>
-        </div>
-        <div className="font-roboto w-[8.5rem] text-[0.75rem] leading-[0.5625rem] font-medium">
-          <p>@not.tomorrow.club</p>
-          <p className="mt-[0.375rem]">{card.webUrl}</p>
+        <p className="font-roboto text-cap-trim mt-[0.0625rem] w-[9rem] text-[1.5rem] leading-[1.23]">
+          Tap in.
+          <br />
+          Write five. Leave proud.
+        </p>
+        <div className="font-roboto flex w-[8.5rem] flex-col gap-[0.375rem] text-[0.75rem] leading-[1.2] font-medium">
+          <p className="text-cap-trim">@not.tomorrow.club</p>
+          <p className="text-cap-trim">{card.webUrl}</p>
         </div>
       </div>
 
-      <p className="font-roboto w-[22.5rem] shrink-0 text-[1rem] leading-[1.1696rem] text-[#2b2b2b]">
+      <p className="font-roboto text-cap-trim w-[22.5rem] shrink-0 text-[1rem] leading-[1.25rem] text-[#2b2b2b]">
         The NTC Card is not a credit card, debit card, gift card, prepaid card,
         or any financial instrument. It does not hold any monetary value. It
         cannot be used for purchases, payments, cash withdrawals, or any other

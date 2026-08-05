@@ -84,6 +84,13 @@ html {
   }
 }
 
+/* Figma가 텍스트 노드에 적용하는 text-box-trim(cap height 트림)과 동일.
+   시안의 좌표·박스 높이가 이 트림 기준이라, 이 클래스를 쓰면 line-height를
+   근사하지 않고 시안 값을 그대로 옮길 수 있다. (Chrome 133+, Safari 18.2+) */
+.text-cap-trim {
+  text-box: trim-both cap alphabetic;
+}
+
 /* 스크롤바 제거 */
 ::-webkit-scrollbar {
   display: none;

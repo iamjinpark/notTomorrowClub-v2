@@ -12,15 +12,17 @@ export default function CardDisclaimer() {
       className="h-[11.1875rem] bg-[#000] pt-[2.5rem] pr-[1.625rem] pl-[1.75rem] text-white"
       data-band="disclaimer"
     >
-      <p className="font-roboto text-[1.5rem] leading-[1.125rem]">
+      <p className="font-roboto text-cap-trim text-[1.5rem] leading-[1.23]">
         NTC Card is not a credit card
       </p>
-      <ol className="font-roboto mt-[1.875rem] flex w-[41.875rem] gap-[1.25rem] text-[1rem] leading-[1.0625rem]">
+      <ol className="font-roboto mt-[2rem] flex w-[41.875rem] gap-[1.25rem] text-[1rem] leading-[1.25rem]">
         {NOTES.map(([first, second], i) => (
-          <li key={first} className="w-[13.125rem] shrink-0">
-            <p>{i + 1}.</p>
-            <p>{first}</p>
-            <p>{second}</p>
+          <li key={first} className="text-cap-trim w-[13.125rem] shrink-0">
+            {i + 1}.
+            <br />
+            {first}
+            <br />
+            {second}
           </li>
         ))}
       </ol>

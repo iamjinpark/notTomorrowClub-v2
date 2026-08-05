@@ -70,10 +70,11 @@ export default function NtcCardFront({ card }: NtcCardFrontProps) {
         className="absolute top-[1.25rem] left-[8.8125rem] h-[0.625rem] w-[10rem]"
       />
 
-      <div className="font-roboto-mono absolute top-[2.875rem] left-[17.5625rem] w-[3.75rem] text-[0.5rem] leading-[0.5rem] font-medium text-[#656565]">
-        <p>CLASS: NTC-5</p>
-        <p>DAILY ACCESS</p>
-      </div>
+      <p className="font-roboto-mono text-cap-trim absolute top-[2.875rem] left-[17.5625rem] w-[3.75rem] text-[0.5rem] leading-[0.625rem] font-medium text-[#656565]">
+        CLASS: NTC-5
+        <br />
+        DAILY ACCESS
+      </p>
 
       <div className="absolute top-[2.75rem] left-[8.8125rem] flex w-[11rem] flex-col gap-[0.625rem]">
         <CardField label="Name" value={card.holderName} />
