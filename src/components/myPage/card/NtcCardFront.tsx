@@ -1,5 +1,6 @@
 import logoImage from "@/assets/img/logo.svg";
 import nameplateImage from "@/assets/img/ntc-card-nameplate.svg";
+import photoPlaceholder from "@/assets/img/ntc-card-photo-placeholder.png";
 import type { NtcCard } from "@/types/myPage";
 
 interface NtcCardFrontProps {
@@ -51,8 +52,12 @@ export default function NtcCardFront({ card }: NtcCardFrontProps) {
         className="absolute top-[1.125rem] left-[1.125rem] h-[1.3054rem] w-[3.1875rem]"
       />
 
-      {/* 사진 자리. 시안에서도 투명 placeholder라 배경을 두지 않는다 */}
-      <div className="absolute top-[3.4375rem] left-[1.125rem] h-[8.4375rem] w-[6.875rem]" />
+      {/* 사진 자리 — 시안은 회색 체커보드 placeholder 이미지. 사용자 사진이 들어갈 슬롯 */}
+      <img
+        src={photoPlaceholder}
+        alt=""
+        className="absolute top-[3.4375rem] left-[1.125rem] h-[8.4375rem] w-[6.875rem] object-cover"
+      />
 
       <span className="font-signature absolute top-[11.0625rem] left-[1.3125rem] rotate-[0.18deg] text-[1.375rem] leading-none tracking-[-0.04125rem] text-[#404040]">
         {card.signatureName}
@@ -77,8 +82,22 @@ export default function NtcCardFront({ card }: NtcCardFrontProps) {
         <CardField label="Expire" value={card.expire} tight />
       </div>
 
-      {/* IC칩 — 시안은 그라디언트에 mix-blend-multiply */}
-      <div className="absolute top-[8.4375rem] left-[19.125rem] h-[2.5625rem] w-[2.0625rem] bg-gradient-to-b from-[#c4c4c4] to-[rgba(94,94,94,0.37)] mix-blend-multiply" />
+      {/* IC칩 — 시안은 그라디언트(multiply) 위에 사진 placeholder 이미지를 20%로 겹친다.
+          그라디언트는 인라인으로 쓴다 (Tailwind 정지점 유틸리티가 rgba 알파를 정확히 못 옮김) */}
+      <div className="absolute top-[8.4375rem] left-[19.125rem] h-[2.5625rem] w-[2.0625rem]">
+        <div
+          className="absolute inset-0 mix-blend-multiply"
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom, #c4c4c4 0%, rgba(94,94,94,0.37) 100%)",
+          }}
+        />
+        <img
+          src={photoPlaceholder}
+          alt=""
+          className="absolute inset-0 size-full object-cover opacity-20"
+        />
+      </div>
 
       <p className="font-roboto-condensed absolute top-[12.0625rem] left-[8.8125rem] w-[12.375rem] text-[0.5625rem] leading-[1.2] font-medium tracking-[0.0028rem] text-[#d6d6d6]">
         NTC ROUTINE REPUBLIC MEMBER PRACTICE LICENSE
