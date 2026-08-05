@@ -1,3 +1,4 @@
+import NtcCardFront from "./NtcCardFront";
 import type { NtcCard, NtcCardSide } from "@/types/myPage";
 
 interface CardDocumentProps {
@@ -16,11 +17,11 @@ export default function CardDocument({ card, side }: CardDocumentProps) {
         className="bg-lightyellow h-[6.5625rem] px-[1.75rem]"
         data-band="issued"
       />
-      <div className="h-[28.8125rem] px-[1.75rem]" data-band="body">
-        {/* Step 2~3에서 카드 프리뷰로 대체 */}
-        <p className="en-caption-2 text-gray4 pt-2">
-          {side} / {card.holderName}
-        </p>
+      <div className="relative h-[28.8125rem]" data-band="body">
+        {/* 카드는 문서 기준 (350, 207) — 본문 밴드가 y=174에서 시작하므로 상대 y=33 */}
+        <div className="absolute top-[2.0625rem] left-[21.875rem]">
+          {side === "front" && <NtcCardFront card={card} />}
+        </div>
       </div>
       <div
         className="h-[11.1875rem] bg-black px-[1.75rem]"
