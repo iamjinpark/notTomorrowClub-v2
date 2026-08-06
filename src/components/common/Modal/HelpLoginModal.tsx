@@ -6,13 +6,13 @@ interface HelpLoginModalProps {
 
 function HelpLoginModal({ onClose }: HelpLoginModalProps) {
   return (
-    <div className="relative w-202 h-135 bg-lightyellow pt-11.75 pb-15.25 px-30.25 flex flex-col items-center gap-13.5">
-      <button onClick={onClose} className="absolute top-5 right-5 ">
-        <img src={closeIcon} alt="Close Icon" className="w-8.75 h-8.75" />
+    <div className="bg-lightyellow relative flex h-135 w-202 flex-col items-center gap-13.5 px-30.25 pt-11.75 pb-15.25">
+      <button onClick={onClose} className="absolute top-5 right-5">
+        <img src={closeIcon} alt="Close Icon" className="h-8.75 w-8.75" />
       </button>
       <p className="en-title-lg">Help with Login</p>
 
-      <div className="w-full flex-1 pr-3.75 ko-caption-1">
+      <div className="ko-caption-1 w-full flex-1 pr-3.75">
         <ul className="">
           <li>
             <span>로그인 방법</span>

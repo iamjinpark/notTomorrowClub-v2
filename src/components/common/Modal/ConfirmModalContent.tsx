@@ -18,11 +18,11 @@ function ConfirmModalContent({
   cancelText = "Cancel",
 }: ConfirmModalContentProps) {
   return (
-    <div className="bg-white rounded-lg p-6 max-w-xs w-full mx-4 text-center space-y-6">
+    <div className="mx-4 w-full max-w-xs space-y-6 rounded-lg bg-white p-6 text-center">
       {/* 경고 아이콘 */}
-      <div className="mx-auto w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
         <svg
-          className="w-6 h-6 text-red-600"
+          className="h-6 w-6 text-red-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -38,7 +38,7 @@ function ConfirmModalContent({
 
       {/* 메시지 */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
+        <h3 className="mb-2 text-lg font-semibold text-gray-900">{title}</h3>
         <p className="text-sm text-gray-600">{message}</p>
       </div>
 

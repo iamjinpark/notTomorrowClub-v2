@@ -1,18 +1,40 @@
 import plusIcon from "@/assets/icon/plus.svg";
-import type { MyPageUser } from "@/types/myPage";
+import { findMood } from "@/constants/mood";
+import type { MoodId, MyPageUser } from "@/types/myPage";
 
 interface ProfileSummaryProps {
   user: MyPageUser;
+  moodId?: MoodId;
+  onPickMood?: () => void;
 }
 
-export default function ProfileSummary({ user }: ProfileSummaryProps) {
+export default function ProfileSummary({
+  user,
+  moodId,
+  onPickMood,
+}: ProfileSummaryProps) {
+  const mood = findMood(moodId);
+
   return (
     <div>
       <p className="ko-headline-sm text-gray3">User Name</p>
       <div className="mt-[0.875rem] flex items-start gap-[1.25rem]">
-        <div className="bg-gray6 flex size-16 shrink-0 items-center justify-center rounded-md">
-          <img src={plusIcon} alt="" className="size-6 opacity-50" />
-        </div>
+        <button
+          type="button"
+          onClick={onPickMood}
+          aria-label={
+            mood ? `오늘의 기분: ${mood.label}. 변경` : "오늘의 기분 선택"
+          }
+          className={`flex size-16 shrink-0 items-center justify-center ${
+            mood ? "" : "bg-gray6 rounded-md"
+          }`}
+        >
+          {mood ? (
+            <img src={mood.icon} alt="" className="size-full" />
+          ) : (
+            <img src={plusIcon} alt="" className="size-6 opacity-50" />
+          )}
+        </button>
         <div className="min-w-0 flex-1">
           <p className="en-title-lg border-gray4 truncate border-b pb-1 text-black">
             {user.name}

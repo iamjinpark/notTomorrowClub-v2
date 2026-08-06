@@ -227,9 +227,14 @@ export const MY_PAGE_RECENT: RecentMakeItPost = {
 };
 
 export const MY_PAGE_STATS: MyPageStat[] = [
-  { label: "Times Studied", value: 60, ratio: 0.54, color: "bg-yellow" },
-  { label: "Times Written", value: 24, ratio: 0.3, color: "bg-gray4" },
-  { label: "Days Attended", value: 182, ratio: 0.66, color: "bg-purple" },
+  { label: "Times Studied", value: 60, key: "timeStudied", color: "bg-yellow" },
+  { label: "Times Written", value: 24, key: "timesWritten", color: "bg-gray4" },
+  {
+    label: "Days Attended",
+    value: 182,
+    key: "daysAttended",
+    color: "bg-purple",
+  },
 ];
 
 export const MY_PAGE_CARD: NtcCard = {
