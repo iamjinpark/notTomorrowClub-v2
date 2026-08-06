@@ -15,8 +15,8 @@ export interface RecentMakeItPost {
 export interface MyPageStat {
   label: string;
   value: number;
-  // 막대 높이 비율(0~1). 시안 값이며 value에서 계산되지 않는다.
-  ratio: number;
+  // 막대 높이는 value를 이 항목의 기준 일수로 나눠 계산한다
+  key: keyof StudyDataStandard;
   color: string;
 }
 

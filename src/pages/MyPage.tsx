@@ -41,7 +41,11 @@ export default function MyPage() {
       />
       <section className="flex min-w-0 flex-1 flex-col">
         <RecentMakeIt post={recent} />
-        <StatsChart stats={stats} onOpenSettings={standardModal.open} />
+        <StatsChart
+          stats={stats}
+          standard={standard}
+          onOpenSettings={standardModal.open}
+        />
       </section>
 
       <Modal
