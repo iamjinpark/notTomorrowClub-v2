@@ -107,6 +107,11 @@ html {
   .card-scale {
     transform: none !important;
   }
+  /* 인라인 크기를 덮어야 하므로 !important */
+  .card-sizer {
+    width: auto !important;
+    height: auto !important;
+  }
 }
 
 /* 스크롤바 제거 */

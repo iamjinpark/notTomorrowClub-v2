@@ -33,8 +33,10 @@ export default function CardToolbar({
     { icon: arrowsOutIcon, label: "전체 화면으로 보기", onClick: onExpand },
   ];
 
+  // 시안은 데스크톱만 있다. 좁은 화면에서는 문서가 폭을 가득 채워 우상단 툴바가
+  // 문서를 가리므로 하단 중앙 가로 배치로 내린다.
   return (
-    <div className="absolute top-[0.6875rem] right-[0.5625rem] flex flex-col gap-[0.625rem] print:hidden">
+    <div className="fixed bottom-[1rem] left-1/2 z-10 flex -translate-x-1/2 gap-[0.625rem] rounded-full bg-black/40 px-[0.75rem] py-[0.5rem] lg:top-[0.6875rem] lg:right-[0.5625rem] lg:bottom-auto lg:left-auto lg:translate-x-0 lg:flex-col lg:rounded-none lg:bg-transparent lg:p-0 print:hidden">
       {items.map((item) => (
         <button
           key={item.label}

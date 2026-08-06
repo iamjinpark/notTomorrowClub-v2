@@ -37,6 +37,7 @@ export default function MyPageCard() {
     docSize.height && docSize.width && viewH && viewW
       ? Math.min(viewH / docSize.height, viewW / docSize.width)
       : 1;
+  const scale = fitScale * zoom;
 
   const changeZoom = (delta: number) =>
     setZoom((z) => Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, z + delta)));
@@ -86,13 +87,27 @@ export default function MyPageCard() {
   };
 
   return (
-    <div className="bg-gray1 card-viewport relative h-dvh overflow-hidden">
+    <div className="bg-gray1 card-viewport h-dvh overflow-auto">
+      {/* transform은 레이아웃 크기를 바꾸지 않는다. 확대했을 때 스크롤로 이동할 수 있도록
+          축소된 실제 크기를 가진 상자로 감싼다 */}
       <div
-        ref={docRef}
-        className="card-scale mx-auto w-fit origin-top"
-        style={{ transform: `scale(${fitScale * zoom})` }}
+        className="card-sizer mx-auto"
+        style={
+          docSize.width
+            ? {
+                width: docSize.width * scale,
+                height: docSize.height * scale,
+              }
+            : undefined
+        }
       >
-        <CardDocument card={card} side={side} onSideChange={setSide} />
+        <div
+          ref={docRef}
+          className="card-scale w-fit origin-top-left"
+          style={{ transform: `scale(${scale})` }}
+        >
+          <CardDocument card={card} side={side} onSideChange={setSide} />
+        </div>
       </div>
 
       <CardToolbar
@@ -108,7 +123,7 @@ export default function MyPageCard() {
       <p
         role="status"
         aria-live="polite"
-        className={`ko-caption-1 pointer-events-none fixed bottom-[1.5rem] left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-[1rem] py-[0.5rem] text-white transition-opacity print:hidden ${
+        className={`ko-caption-1 pointer-events-none fixed bottom-[4.5rem] left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-[1rem] py-[0.5rem] text-white transition-opacity lg:bottom-[1.5rem] print:hidden ${
           shareResult ? "opacity-100" : "opacity-0"
         }`}
       >
