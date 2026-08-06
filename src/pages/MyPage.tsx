@@ -6,7 +6,7 @@ import RecentMakeIt from "@/components/myPage/RecentMakeIt";
 import StatsChart from "@/components/myPage/StatsChart";
 import Modal from "@/components/common/Modal/Modal";
 import { useModal } from "@/hooks/useModal";
-import { MY_PAGE_RECENT, MY_PAGE_STATS, MY_PAGE_USER } from "@/api/dummyData";
+import { MY_PAGE_RECENTS, MY_PAGE_STATS, MY_PAGE_USER } from "@/api/dummyData";
 import type { MoodId, StudyDataStandard } from "@/types/myPage";
 
 // TODO: 서버 연동 후 실제 응답으로 교체
@@ -20,8 +20,10 @@ export default function MyPage() {
   const navigate = useNavigate();
 
   const user = MY_PAGE_USER;
-  const recent = MY_PAGE_RECENT;
   const stats = MY_PAGE_STATS;
+
+  const [recentIndex, setRecentIndex] = useState(0);
+  const recent = MY_PAGE_RECENTS[recentIndex];
 
   const exitModal = useModal();
   const standardModal = useModal();
@@ -40,7 +42,16 @@ export default function MyPage() {
         onExit={exitModal.open}
       />
       <section className="flex min-w-0 flex-1 flex-col">
-        <RecentMakeIt post={recent} />
+        {recent && (
+          <RecentMakeIt
+            post={recent}
+            // 이전 버튼이 없으므로 마지막에서 첫 글로 순환한다
+            onNext={() =>
+              setRecentIndex((i) => (i + 1) % MY_PAGE_RECENTS.length)
+            }
+            onOpenArchive={() => navigate("/mypage/sentences")}
+          />
+        )}
         <StatsChart
           stats={stats}
           standard={standard}
