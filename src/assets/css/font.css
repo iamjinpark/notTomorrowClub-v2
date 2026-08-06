@@ -170,6 +170,13 @@
   line-height: 1.375rem; /* 22px */
 }
 
+.ko-caption-2 {
+  font-family: var(--font-pretendard);
+  font-weight: 400;
+  font-size: 0.75rem; /* 12px */
+  line-height: 1;
+}
+
 /* detail - button */
 .ko-button-1 {
   font-family: var(--font-pretendard);
