@@ -8,7 +8,7 @@ interface ProfileSectionProps {
   moodId?: MoodId;
   onPickMood?: () => void;
   onEditName?: () => void;
-  onOpenBadge?: () => void;
+  onOpenAward?: () => void;
   onCheckCard?: () => void;
   onExit?: () => void;
 }
@@ -18,7 +18,7 @@ export default function ProfileSection({
   moodId,
   onPickMood,
   onEditName,
-  onOpenBadge,
+  onOpenAward,
   onCheckCard,
   onExit,
 }: ProfileSectionProps) {
@@ -27,7 +27,7 @@ export default function ProfileSection({
       <ProfileSummary user={user} moodId={moodId} onPickMood={onPickMood} />
       <ProfileActions
         onEditName={onEditName}
-        onOpenBadge={onOpenBadge}
+        onOpenAward={onOpenAward}
         onCheckCard={onCheckCard}
       />
       <NtcCard issuedYear={user.issuedYear} onExit={onExit} />

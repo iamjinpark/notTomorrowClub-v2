@@ -25,7 +25,9 @@ export default function ProfileSummary({
           aria-label={
             mood ? `오늘의 기분: ${mood.label}. 변경` : "오늘의 기분 선택"
           }
-          className="bg-gray6 flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-md"
+          className={`flex size-16 shrink-0 items-center justify-center ${
+            mood ? "" : "bg-gray6 rounded-md"
+          }`}
         >
           {mood ? (
             <img src={mood.icon} alt="" className="size-full" />

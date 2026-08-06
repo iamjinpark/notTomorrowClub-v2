@@ -2,13 +2,13 @@ import BorderBtn from "@/components/common/BorderBtn";
 
 interface ProfileActionsProps {
   onEditName?: () => void;
-  onOpenBadge?: () => void;
+  onOpenAward?: () => void;
   onCheckCard?: () => void;
 }
 
 export default function ProfileActions({
   onEditName,
-  onOpenBadge,
+  onOpenAward,
   onCheckCard,
 }: ProfileActionsProps) {
   return (
@@ -22,11 +22,11 @@ export default function ProfileActions({
           onClick={onEditName}
         />
         <BorderBtn
-          text="My Badge"
+          text="My Award"
           px="px-4"
           py="py-[0.625rem]"
           className="flex-1 whitespace-nowrap"
-          onClick={onOpenBadge}
+          onClick={onOpenAward}
         />
       </div>
       <BorderBtn
