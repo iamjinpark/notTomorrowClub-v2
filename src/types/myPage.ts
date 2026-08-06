@@ -19,3 +19,18 @@ export interface MyPageStat {
   ratio: number;
   color: string;
 }
+
+export type NtcCardSide = "front" | "back";
+
+export interface NtcCard {
+  holderName: string;
+  webUrl: string;
+  dailyLimit: string;
+  expire: string;
+  grade: string;
+  issuedAt: string;
+  signatureName: string;
+  // 뒷면 전용
+  cardNo: string;
+  serialNo: string;
+}

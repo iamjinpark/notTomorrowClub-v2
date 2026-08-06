@@ -1,6 +1,11 @@
 import type { CheerUpMessage, StepData } from "@/types";
 import type { MakeItPost } from "@/types/makeIt";
-import type { MyPageStat, MyPageUser, RecentMakeItPost } from "@/types/myPage";
+import type {
+  MyPageStat,
+  MyPageUser,
+  NtcCard,
+  RecentMakeItPost,
+} from "@/types/myPage";
 
 export const cheerUpMessages: CheerUpMessage[] = [
   {
@@ -226,3 +231,15 @@ export const MY_PAGE_STATS: MyPageStat[] = [
   { label: "Times Written", value: 24, ratio: 0.3, color: "bg-gray4" },
   { label: "Days Attended", value: 182, ratio: 0.66, color: "bg-purple" },
 ];
+
+export const MY_PAGE_CARD: NtcCard = {
+  holderName: "EZI PARK",
+  webUrl: "not-tomorrow-club.com",
+  dailyLimit: "5 Sentences",
+  expire: "WHEN YOU STOP TRYING",
+  grade: "NEW Evergreen",
+  issuedAt: "YYYY.MM.DD",
+  signatureName: "Park Ezi",
+  cardNo: "No. 00001",
+  serialNo: "0000052026",
+};
