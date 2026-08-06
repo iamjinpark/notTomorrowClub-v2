@@ -169,6 +169,12 @@ export const MAKE_IT_POSTS: MakeItPost[] = [
   },
 ];
 
+// ponytail: 내 문장 API가 없어 공용 목록의 작성자만 바꿔 재사용. API 연동 시 교체.
+export const MY_SENTENCE_POSTS: MakeItPost[] = MAKE_IT_POSTS.map((p) => ({
+  ...p,
+  author: "Ezi Park",
+}));
+
 export const STEP_DATA: StepData[] = [
   {
     ko: "저 공룡은 엄청나게 커!",
@@ -218,13 +224,29 @@ export const MY_PAGE_USER: MyPageUser = {
   issuedYear: "2026.03.28",
 };
 
-export const MY_PAGE_RECENT: RecentMakeItPost = {
-  date: "July.2",
-  title: "Have you ever been in love?",
-  body: "Have you ever been in love?\nI have never been in love before. I watched a youtube video. There were a white woman and a white man. They were doing everything to look like Jimin, to his skin.",
-  views: 999,
-  likes: 999,
-};
+export const MY_PAGE_RECENTS: RecentMakeItPost[] = [
+  {
+    date: "July.2",
+    title: "Have you ever been in love?",
+    body: "Have you ever been in love?\nI have never been in love before. I watched a youtube video. There were a white woman and a white man. They were doing everything to look like Jimin, to his skin.",
+    views: 999,
+    likes: 999,
+  },
+  {
+    date: "July.1",
+    title: "What did you do last weekend?",
+    body: "What did you do last weekend?\nI stayed home and read a book about language learning. It said that reading every day is the fastest way to grow your vocabulary, so I decided to try it for a month.",
+    views: 312,
+    likes: 87,
+  },
+  {
+    date: "June.30",
+    title: "Where would you like to travel?",
+    body: "Where would you like to travel?\nI want to visit a small town by the sea. I imagine walking along the shore in the morning and writing a few English sentences about everything I see there.",
+    views: 128,
+    likes: 45,
+  },
+];
 
 export const MY_PAGE_STATS: MyPageStat[] = [
   { label: "Times Studied", value: 60, key: "timeStudied", color: "bg-yellow" },

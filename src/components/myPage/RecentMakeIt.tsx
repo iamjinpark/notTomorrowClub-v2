@@ -5,12 +5,14 @@ import type { RecentMakeItPost } from "@/types/myPage";
 
 interface RecentMakeItProps {
   post: RecentMakeItPost;
-  onOpenDetail?: () => void;
+  onNext?: () => void;
+  onOpenArchive?: () => void;
 }
 
 export default function RecentMakeIt({
   post,
-  onOpenDetail,
+  onNext,
+  onOpenArchive,
 }: RecentMakeItProps) {
   return (
     <div className="border-b border-black py-[1.875rem] lg:py-5 lg:pl-4">
@@ -38,16 +40,21 @@ export default function RecentMakeIt({
             <p className="en-body-md line-clamp-5 break-words whitespace-pre-line text-black">
               {post.body}
             </p>
-            <span className="bg-gray6 ko-caption-1 text-gray3 mt-3 self-start rounded-full px-[0.875rem] py-1 lg:mt-auto">
+            <button
+              type="button"
+              onClick={onOpenArchive}
+              aria-label="내 문장 아카이브로 이동"
+              className="bg-gray6 ko-caption-1 text-gray3 hover:text-black mt-3 self-start rounded-full px-[0.875rem] py-1 transition-colors lg:mt-auto"
+            >
               +more
-            </span>
+            </button>
           </div>
         </div>
         <button
           type="button"
-          aria-label="최근 문장 상세보기"
+          aria-label="다음 문장 보기"
           className="shrink-0 self-center"
-          onClick={onOpenDetail}
+          onClick={onNext}
         >
           <img src={arrowRightIcon} alt="" className="size-9" />
         </button>

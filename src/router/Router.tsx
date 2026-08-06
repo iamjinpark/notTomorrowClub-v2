@@ -16,6 +16,7 @@ import Tracker from "@/pages/Tracker";
 import Notice from "@/pages/Notice";
 import MyPage from "@/pages/MyPage";
 import MyPageCard from "@/pages/MyPageCard";
+import MySentenceArchive from "@/pages/MySentenceArchive";
 import About from "@/pages/About";
 import NotFound from "@/pages/NotFound";
 
@@ -56,6 +57,7 @@ export const router = createBrowserRouter([
           { path: "tracker", element: <Tracker /> },
           { path: "notice", element: <Notice /> },
           { path: "mypage", element: <MyPage /> },
+          { path: "mypage/sentences", element: <MySentenceArchive /> },
         ],
       },
     ],
