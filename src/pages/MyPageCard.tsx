@@ -41,6 +41,33 @@ export default function MyPageCard() {
   const changeZoom = (delta: number) =>
     setZoom((z) => Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, z + delta)));
 
+  const [shareResult, setShareResult] = useState<"copied" | "failed" | null>(
+    null
+  );
+
+  // 클립보드는 보안 컨텍스트가 아니거나 권한이 없으면 실패한다.
+  // 잡지 않으면 버튼이 아무 반응 없이 죽은 것처럼 보인다.
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShareResult("copied");
+    } catch {
+      setShareResult("failed");
+    }
+  };
+
+  // 복사 안내는 잠깐만 띄운다
+  useEffect(() => {
+    if (!shareResult) return;
+    const timer = setTimeout(() => setShareResult(null), 2000);
+    return () => clearTimeout(timer);
+  }, [shareResult]);
+
+  const handleExpand = () => {
+    if (document.fullscreenElement) void document.exitFullscreen();
+    else void document.documentElement.requestFullscreen();
+  };
+
   // 화면의 문서는 transform으로 축소돼 있어 그대로 캡처하면 배율이 섞인다.
   // ReviewWordsForCapture와 같은 방식으로 화면 밖 원본 크기 노드를 캡처한다.
   const handleDownload = async () => {
@@ -71,9 +98,24 @@ export default function MyPageCard() {
       <CardToolbar
         onDownload={handleDownload}
         onPrint={() => window.print()}
+        onShare={handleShare}
         onZoomIn={() => changeZoom(ZOOM_STEP)}
         onZoomOut={() => changeZoom(-ZOOM_STEP)}
+        onExpand={handleExpand}
       />
+
+      {/* 시안에 없는 요소지만, 클립보드 복사는 결과가 보이지 않으면 버튼이 고장난 것처럼 보인다 */}
+      <p
+        role="status"
+        aria-live="polite"
+        className={`ko-caption-1 pointer-events-none fixed bottom-[1.5rem] left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-[1rem] py-[0.5rem] text-white transition-opacity print:hidden ${
+          shareResult ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        {shareResult === "copied" && "카드 주소를 복사했습니다"}
+        {shareResult === "failed" &&
+          "복사에 실패했습니다. 주소창을 복사해 주세요"}
+      </p>
 
       {/* 다운로드용 원본 크기 사본 (화면 밖) */}
       <div
