@@ -26,9 +26,9 @@ function LearningModal({ onClose }: LearningModalProps) {
   };
 
   return (
-    <div className="relative w-176.5 bg-lightyellow py-[3.438rem] flex flex-col items-center gap-[2.813rem]">
+    <div className="bg-lightyellow relative flex w-176.5 flex-col items-center gap-[2.813rem] py-[3.438rem]">
       <button onClick={onClose} className="absolute -top-10 right-0">
-        <img src={closeIcon} alt="Close Icon" className="w-8.75 h-8.75" />
+        <img src={closeIcon} alt="Close Icon" className="h-8.75 w-8.75" />
       </button>
       <p className="en-title-lg">Finished reading Today&apos;s sentences!</p>
       <div className="flex flex-col items-center gap-2.5">
@@ -36,21 +36,21 @@ function LearningModal({ onClose }: LearningModalProps) {
           text="Finished today's study"
           py="py-[0.813rem]"
           bg="bg-white"
-          className="w-63.5 font-roboto text-[1.25rem] leading-5 hover:text-black"
+          className="font-roboto w-63.5 text-[1.25rem] leading-5 hover:text-black"
           onClick={handleFinished}
         />
         <BorderBtn
           text="Go read again"
           py="py-[0.813rem]"
           bg="bg-white"
-          className="w-63.5 font-roboto text-[1.25rem] leading-5"
+          className="font-roboto w-63.5 text-[1.25rem] leading-5"
           onClick={handleReadAgain}
         />
         <BorderBtn
           text="Go make it page"
           py="py-[0.813rem]"
           bg="bg-black"
-          className="w-63.5 text-white border-black  font-roboto text-[1.25rem] leading-5"
+          className="font-roboto w-63.5 border-black text-[1.25rem] leading-5 text-white"
           onClick={handleGoToMakeIT}
         />
       </div>

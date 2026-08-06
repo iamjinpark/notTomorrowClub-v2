@@ -1,10 +1,12 @@
 import ProfileSummary from "./ProfileSummary";
 import ProfileActions from "./ProfileActions";
 import NtcCard from "./NtcCard";
-import type { MyPageUser } from "@/types/myPage";
+import type { MoodId, MyPageUser } from "@/types/myPage";
 
 interface ProfileSectionProps {
   user: MyPageUser;
+  moodId?: MoodId;
+  onPickMood?: () => void;
   onEditName?: () => void;
   onOpenBadge?: () => void;
   onCheckCard?: () => void;
@@ -13,6 +15,8 @@ interface ProfileSectionProps {
 
 export default function ProfileSection({
   user,
+  moodId,
+  onPickMood,
   onEditName,
   onOpenBadge,
   onCheckCard,
@@ -20,7 +24,7 @@ export default function ProfileSection({
 }: ProfileSectionProps) {
   return (
     <section className="flex w-full flex-col gap-[1.25rem] border-b border-black py-[1.875rem] lg:w-[35%] lg:min-w-[19rem] lg:shrink-0 lg:border-r lg:border-b-0 lg:py-5 lg:pr-4">
-      <ProfileSummary user={user} />
+      <ProfileSummary user={user} moodId={moodId} onPickMood={onPickMood} />
       <ProfileActions
         onEditName={onEditName}
         onOpenBadge={onOpenBadge}

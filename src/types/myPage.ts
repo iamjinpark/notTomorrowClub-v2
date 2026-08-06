@@ -20,6 +20,15 @@ export interface MyPageStat {
   color: string;
 }
 
+// 통계 그래프의 기준 일수. 시안 "Custom your study data standard" 모달에서 조정한다.
+export interface StudyDataStandard {
+  timeStudied: number;
+  timesWritten: number;
+  daysAttended: number;
+}
+
+export type MoodId = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+
 export type NtcCardSide = "front" | "back";
 
 export interface NtcCard {

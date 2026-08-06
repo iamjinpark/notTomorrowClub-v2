@@ -6,7 +6,11 @@ import ShareModalContent from "./ShareModalContent";
 import AlertModalContent from "./AlertModalContent";
 import PostDetailModalContent from "./PostDetailModalContent";
 import DateRangeCalendarContent from "./DateRangeCalendarContent";
+import NtcExitModalContent from "./NtcExitModalContent";
+import StudyStandardModalContent from "./StudyStandardModalContent";
+import MoodPickerModalContent from "./MoodPickerModalContent";
 import type { MakeItPost } from "@/types/makeIt";
+import type { MoodId, StudyDataStandard } from "@/types/myPage";
 
 import Confetti from "react-confetti";
 import { createPortal } from "react-dom";
@@ -49,6 +53,26 @@ type ModalProps =
       isOpen: boolean;
       onClose: () => void;
       onApply: (from: Date, to: Date) => void;
+    }
+  | {
+      type: "ntcExit";
+      isOpen: boolean;
+      onClose: () => void;
+      onConfirm?: () => void;
+    }
+  | {
+      type: "studyStandard";
+      isOpen: boolean;
+      onClose: () => void;
+      standard: StudyDataStandard;
+      onSave?: (standard: StudyDataStandard) => void;
+    }
+  | {
+      type: "moodPicker";
+      isOpen: boolean;
+      onClose: () => void;
+      moodId?: MoodId;
+      onSave?: (moodId: MoodId) => void;
     };
 
 function Modal(modalProps: ModalProps) {
@@ -110,9 +134,13 @@ function Modal(modalProps: ModalProps) {
       case "helpLogin":
         return <HelpLoginModal onClose={onClose} />;
       case "share":
-        return <ShareModalContent onClose={onClose} onSave={modalProps.onSave} />;
+        return (
+          <ShareModalContent onClose={onClose} onSave={modalProps.onSave} />
+        );
       case "alert":
-        return <AlertModalContent onClose={onClose} message={modalProps.message} />;
+        return (
+          <AlertModalContent onClose={onClose} message={modalProps.message} />
+        );
       case "postDetail":
         return (
           <PostDetailModalContent
@@ -131,6 +159,29 @@ function Modal(modalProps: ModalProps) {
             onApply={modalProps.onApply}
           />
         );
+      case "ntcExit":
+        return (
+          <NtcExitModalContent
+            onClose={onClose}
+            onConfirm={modalProps.onConfirm}
+          />
+        );
+      case "studyStandard":
+        return (
+          <StudyStandardModalContent
+            onClose={onClose}
+            standard={modalProps.standard}
+            onSave={modalProps.onSave}
+          />
+        );
+      case "moodPicker":
+        return (
+          <MoodPickerModalContent
+            onClose={onClose}
+            moodId={modalProps.moodId}
+            onSave={modalProps.onSave}
+          />
+        );
       default:
         return null;
     }
@@ -138,7 +189,7 @@ function Modal(modalProps: ModalProps) {
 
   const modalContent = (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
       onClick={handleBackdropClick}
     >
       {modalProps.type === "learning" && runConfetti && (

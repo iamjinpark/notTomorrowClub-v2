@@ -6,13 +6,13 @@ interface PolicyModalProps {
 
 function PolicyModal({ onClose }: PolicyModalProps) {
   return (
-    <div className="relative w-203 h-135 bg-lightyellow pt-11.75 pb-15.25 px-30.25 flex flex-col items-center gap-13.5">
-      <button onClick={onClose} className="absolute top-5 right-5 ">
-        <img src={closeIcon} alt="Close Icon" className="w-8.75 h-8.75" />
+    <div className="bg-lightyellow relative flex h-135 w-203 flex-col items-center gap-13.5 px-30.25 pt-11.75 pb-15.25">
+      <button onClick={onClose} className="absolute top-5 right-5">
+        <img src={closeIcon} alt="Close Icon" className="h-8.75 w-8.75" />
       </button>
       <p className="en-title-lg">Privacy Policy</p>
 
-      <div className="overflow-y-scroll show-scrollbar w-full flex-1 pr-3.75 ko-caption-1">
+      <div className="show-scrollbar ko-caption-1 w-full flex-1 overflow-y-scroll pr-3.75">
         <span className="">개인정보 처리방침</span>
         <ul className="">
           <li>

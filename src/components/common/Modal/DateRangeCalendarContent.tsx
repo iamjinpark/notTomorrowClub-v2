@@ -88,7 +88,7 @@ function DateRangeCalendarContent({
       : `${fmt(start)} ~`;
 
   return (
-    <div className="bg-lightyellow flex h-[538px] w-[675px] flex-col px-10 pb-8 pt-6">
+    <div className="bg-lightyellow flex h-[538px] w-[675px] flex-col px-10 pt-6 pb-8">
       <button onClick={onClose} aria-label="닫기" className="self-end">
         <img src={closeIcon} alt="" className="size-7" />
       </button>
@@ -111,7 +111,7 @@ function DateRangeCalendarContent({
         </button>
       </div>
 
-      <div className="en-title-sm text-black mx-auto mt-6 grid w-[445px] grid-cols-7 text-center">
+      <div className="en-title-sm mx-auto mt-6 grid w-[445px] grid-cols-7 text-center text-black">
         {WEEKDAYS.map((w, i) => (
           <span key={i} className="py-2">
             {w}
@@ -147,7 +147,7 @@ function DateRangeCalendarContent({
             >
               {/* 범위 green 바 (셀 사이 연결) */}
               {isBetween(day) && (
-                <span className="bg-green absolute inset-y-0 left-0 right-0 my-auto h-[30px]" />
+                <span className="bg-green absolute inset-y-0 right-0 left-0 my-auto h-[30px]" />
               )}
               {startConnects && (
                 <span className="bg-green absolute inset-y-0 right-0 my-auto h-[30px] w-1/2" />
@@ -176,10 +176,8 @@ function DateRangeCalendarContent({
         type="button"
         disabled={!start}
         onClick={() => start && onApply(start, end ?? start)}
-        className={`mx-auto mt-8 rounded-full px-12 py-3 en-button-1 ${
-          start
-            ? "bg-charcoal text-white"
-            : "border border-gray3 text-gray3"
+        className={`en-button-1 mx-auto mt-8 rounded-full px-12 py-3 ${
+          start ? "bg-charcoal text-white" : "border-gray3 text-gray3 border"
         }`}
       >
         {label}
