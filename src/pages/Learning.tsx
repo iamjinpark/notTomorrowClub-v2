@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import LearningFunnelContainer from "@/components/learning/LearningFunnelContainer";
-import LoginRequiredOverlay from "@/components/learning/LoginRequiredOverlay";
+import LoginRequiredOverlay from "@/components/common/LoginRequiredOverlay";
 import StepIndicator from "@/components/learning/StepIndicator";
 import PageHeader from "@/layouts/PageHeader";
 import { useLearningData } from "@/context/LearningDataContext";
+import { useAuth } from "@/hooks/useAuth";
 import { SCROLL_REVEAL_THRESHOLD, MAX_STEP } from "@/constants";
 
 type LearningPhase = "intro" | "reveal";
@@ -14,7 +15,7 @@ function Learning() {
   const learningData = useLearningData();
   const [searchParams, setSearchParams] = useSearchParams();
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isLoggedIn] = useState(true); // TODO : 로그인 로직 구현 후 false로 변경
+  const { isLoggedIn } = useAuth();
   const [stepPhase, setStepPhase] = useState<LearningPhase>("intro");
 
   const stepFromUrl = Number(searchParams.get("step")) || 1;
