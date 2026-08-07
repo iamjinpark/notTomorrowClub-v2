@@ -1,10 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-export function RouterGuard() {
-  // TODO: 실제 로그인 체크 로직으로 변경 필요
-  const isLogin = true;
+import { useAuth } from "@/hooks/useAuth";
 
-  if (!isLogin) {
+export function RouterGuard() {
+  const { isLoggedIn, isLoading } = useAuth();
+
+  // 세션 복구 전에는 판단을 보류한다 (새로고침 시 로그인 화면이 잠깐 보이는 것 방지)
+  if (isLoading) return null;
+
+  if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
   }
   return <Outlet />;

@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import logoImage from "@/assets/img/logo.svg";
 import CLOSE_ICON_WHITE from "@/assets/img/closeIconWhite.svg";
+import { useAuth } from "@/hooks/useAuth";
 
 function Header() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  // TODO: 실제 로그인 체크 로직으로 변경 필요
-  const isLogin = false;
+  const { isLoggedIn: isLogin, logout } = useAuth();
   const isHome = pathname === "/";
 
   const [showBubble, setShowBubble] = useState(false);
@@ -77,9 +77,15 @@ function Header() {
         <button
           type="button"
           className="rounded-sm bg-[#D9D9D9] px-2 py-1 text-sm font-medium"
-          onClick={() => navigate("/login")}
+          onClick={() => {
+            if (isLogin) {
+              void logout().then(() => navigate("/"));
+              return;
+            }
+            navigate("/login");
+          }}
         >
-          Login
+          {isLogin ? "Logout" : "Login"}
         </button>
       </div>
     </header>
