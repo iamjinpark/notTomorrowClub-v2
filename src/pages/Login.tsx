@@ -1,20 +1,18 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 import { useModal } from "@/hooks/useModal";
 import Modal from "@/components/common/Modal/Modal";
 import { useAuth } from "@/hooks/useAuth";
 
 function Login() {
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, isLoggedIn } = useAuth();
+  const { state } = useLocation();
   const [error, setError] = useState<string>();
 
   const handleLogin = () => {
     setError(undefined);
-    login()
-      .then(() => navigate("/", { replace: true }))
-      .catch(() => setError("로그인에 실패했어요. 다시 시도해 주세요."));
+    login().catch(() => setError("로그인에 실패했어요. 다시 시도해 주세요."));
   };
 
   const {
@@ -27,6 +25,12 @@ function Login() {
     open: openHelpLogin,
     close: closeHelpLogin,
   } = useModal();
+
+  // 로그인 성공 시에도 이 분기로 빠져나간다 (가드가 넘긴 경로 우선)
+  if (isLoggedIn) {
+    const from = (state as { from?: string } | null)?.from ?? "/";
+    return <Navigate to={from} replace />;
+  }
 
   return (
     <>
