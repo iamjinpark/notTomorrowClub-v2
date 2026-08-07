@@ -9,7 +9,9 @@ import DateRangeCalendarContent from "./DateRangeCalendarContent";
 import NtcExitModalContent from "./NtcExitModalContent";
 import StudyStandardModalContent from "./StudyStandardModalContent";
 import MoodPickerModalContent from "./MoodPickerModalContent";
+import NoticeDetailModalContent from "./NoticeDetailModalContent";
 import type { MakeItPost } from "@/types/makeIt";
+import type { Notice } from "@/types/notice";
 import type { MoodId, StudyDataStandard } from "@/types/myPage";
 
 import Confetti from "react-confetti";
@@ -73,6 +75,14 @@ type ModalProps =
       onClose: () => void;
       moodId?: MoodId;
       onSave?: (moodId: MoodId) => void;
+    }
+  | {
+      type: "notice";
+      isOpen: boolean;
+      onClose: () => void;
+      notice: Notice;
+      // 운영자 시안(94:2320)에서만 Save 버튼이 노출된다
+      onSave?: () => void;
     };
 
 function Modal(modalProps: ModalProps) {
@@ -179,6 +189,14 @@ function Modal(modalProps: ModalProps) {
           <MoodPickerModalContent
             onClose={onClose}
             moodId={modalProps.moodId}
+            onSave={modalProps.onSave}
+          />
+        );
+      case "notice":
+        return (
+          <NoticeDetailModalContent
+            onClose={onClose}
+            notice={modalProps.notice}
             onSave={modalProps.onSave}
           />
         );

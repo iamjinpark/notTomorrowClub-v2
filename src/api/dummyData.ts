@@ -1,5 +1,6 @@
 import type { CheerUpMessage, StepData } from "@/types";
 import type { MakeItPost } from "@/types/makeIt";
+import type { Notice } from "@/types/notice";
 import type {
   MyPageStat,
   MyPageUser,
@@ -173,6 +174,22 @@ export const MAKE_IT_POSTS: MakeItPost[] = [
 export const MY_SENTENCE_POSTS: MakeItPost[] = MAKE_IT_POSTS.map((p) => ({
   ...p,
   author: "Ezi Park",
+}));
+
+// ponytail: 공지 API가 없어 제목·본문을 반복 생성. API 연동 시 교체.
+const NOTICE_BODY = Array.from({ length: 12 }, () =>
+  [
+    "3월 한달간 15일 연속 공부 달성시 받을 수 있는 배지를 획득해 보세요.",
+    "자세한 뱃지 라인 업을 보고싶으면 상단 배너의 이번주 히든 뱃지 구경하기 탭을 눌러보세요.",
+  ].join("\n"),
+).join("\n");
+
+export const NOTICES: Notice[] = Array.from({ length: 15 }, (_, i) => ({
+  id: String(i + 1),
+  title: "[진행중] 봄 챌린지",
+  body: NOTICE_BODY,
+  author: "NTC Team",
+  date: "2026. 04. 01",
 }));
 
 export const STEP_DATA: StepData[] = [

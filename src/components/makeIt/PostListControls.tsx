@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
 import arrowsOutIcon from "@/assets/icon/arrows-out.svg";
-import directionLeftIcon from "@/assets/icon/direction-left.svg";
-import directionRightIcon from "@/assets/icon/direction-right.svg";
 import layout11Icon from "@/assets/icon/layout-1-1.svg";
 import layout22Icon from "@/assets/icon/layout-2-2.svg";
 import layout33Icon from "@/assets/icon/layout-3-3.svg";
+import Pagination from "@/components/common/Pagination";
 
 type Cols = 1 | 2 | 3;
 
@@ -25,7 +24,6 @@ export default function PostListControls({
   onPageChange,
 }: PostListControlsProps) {
   const navigate = useNavigate();
-  const pageNumbers = getPageNumbers(currentPage, totalPages);
 
   return (
     <div className="flex items-center justify-between py-1">
@@ -35,44 +33,11 @@ export default function PostListControls({
         <LayoutToggleBtn icon={layout33Icon} label="3열 보기" active={cols === 3} onClick={() => onColsChange(3)} />
       </div>
 
-      <div className="flex items-center gap-6">
-        <button
-          type="button"
-          onClick={() => onPageChange(Math.max(1, currentPage - 1))}
-          disabled={currentPage === 1}
-          className="size-[22px] flex items-center justify-center disabled:opacity-30"
-          aria-label="이전 페이지"
-        >
-          <img src={directionLeftIcon} alt="" className="size-[22px]" />
-        </button>
-        <div className="flex items-center gap-6 en-title-sm not-italic capitalize">
-          {pageNumbers.map((p, i) =>
-            p === "..." ? (
-              <span key={`ellipsis-${i}`} className="text-gray4">
-                ...
-              </span>
-            ) : (
-              <button
-                key={p}
-                type="button"
-                onClick={() => onPageChange(p as number)}
-                className={p === currentPage ? "text-black" : "text-gray4"}
-              >
-                {p}
-              </button>
-            ),
-          )}
-        </div>
-        <button
-          type="button"
-          onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
-          disabled={currentPage === totalPages}
-          className="size-[22px] flex items-center justify-center disabled:opacity-30"
-          aria-label="다음 페이지"
-        >
-          <img src={directionRightIcon} alt="" className="size-[22px]" />
-        </button>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={onPageChange}
+      />
 
       <div className="flex items-center gap-1 justify-end w-[9.375rem]">
         <button
@@ -111,11 +76,4 @@ function LayoutToggleBtn({
       <img src={icon} alt="" className="size-full" />
     </button>
   );
-}
-
-function getPageNumbers(current: number, total: number): (number | "...")[] {
-  if (total <= 5) return Array.from({ length: total }, (_, i) => i + 1);
-  if (current <= 3) return [1, 2, 3, "...", total];
-  if (current >= total - 2) return [1, "...", total - 2, total - 1, total];
-  return [1, "...", current - 1, current, current + 1, "...", total];
 }
