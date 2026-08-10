@@ -5,6 +5,11 @@ import { findMood } from "@/constants/mood";
 import { useAuth } from "@/hooks/useAuth";
 import { useMood } from "@/hooks/useMood";
 
+// 무드 아이콘과 같은 모서리 잘린 사각 타일.
+// 컷 비율은 무드 SVG에서 그대로 가져왔다 (3.28478 / 31.6522 = 10.378%)
+const MOOD_TILE_CLIP =
+  "[clip-path:polygon(10.378%_0,_89.622%_0,_100%_10.378%,_100%_89.622%,_89.622%_100%,_10.378%_100%,_0_89.622%,_0_10.378%)]";
+
 export default function ProfileMenu() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -59,12 +64,16 @@ export default function ProfileMenu() {
         aria-expanded={isOpen}
         aria-label={`${user?.name ?? "회원"} 메뉴`}
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`en-caption-1 text-black flex size-[26px] items-center justify-center leading-4 ${
-          // 무드 아이콘은 모서리 잘린 사각 타일이라 원형 배경을 두지 않는다
-          mood ? "" : "bg-red rounded-full"
-        }`}
+        className="flex size-[26px] items-center justify-center"
       >
-        {mood ? <img src={mood.icon} alt="" className="size-full" /> : initial}
+        {/* clip-path를 버튼에 걸면 포커스 링까지 잘려서 안쪽 span에 건다 */}
+        <span
+          className={`en-caption-1 text-black flex size-full items-center justify-center leading-4 ${MOOD_TILE_CLIP} ${
+            mood ? "" : "bg-red"
+          }`}
+        >
+          {mood ? <img src={mood.icon} alt="" className="size-full" /> : initial}
+        </span>
       </button>
 
       {isOpen && (
