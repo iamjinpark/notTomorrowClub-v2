@@ -6,8 +6,9 @@ import RecentMakeIt from "@/components/myPage/RecentMakeIt";
 import StatsChart from "@/components/myPage/StatsChart";
 import Modal from "@/components/common/Modal/Modal";
 import { useModal } from "@/hooks/useModal";
+import { useMood } from "@/hooks/useMood";
 import { MY_PAGE_RECENTS, MY_PAGE_STATS, MY_PAGE_USER } from "@/api/dummyData";
-import type { MoodId, StudyDataStandard } from "@/types/myPage";
+import type { StudyDataStandard } from "@/types/myPage";
 
 // TODO: 서버 연동 후 실제 응답으로 교체
 const DEFAULT_STANDARD: StudyDataStandard = {
@@ -30,7 +31,8 @@ export default function MyPage() {
   const moodModal = useModal();
 
   const [standard, setStandard] = useState(DEFAULT_STANDARD);
-  const [moodId, setMoodId] = useState<MoodId>();
+  // 헤더 아바타도 같은 값을 쓰므로 전역 상태에 둔다
+  const { moodId, setMoodId } = useMood();
 
   return (
     <div className="flex flex-col border-y border-black lg:min-h-[530px] lg:flex-row">

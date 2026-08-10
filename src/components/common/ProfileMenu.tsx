@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { findMood } from "@/constants/mood";
 import { useAuth } from "@/hooks/useAuth";
+import { useMood } from "@/hooks/useMood";
 
 export default function ProfileMenu() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { moodId } = useMood();
   const [isOpen, setIsOpen] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -45,6 +48,7 @@ export default function ProfileMenu() {
   };
 
   const initial = user?.name.trim().charAt(0).toUpperCase() ?? "";
+  const mood = findMood(moodId);
 
   return (
     <div ref={containerRef} className="relative">
@@ -55,9 +59,12 @@ export default function ProfileMenu() {
         aria-expanded={isOpen}
         aria-label={`${user?.name ?? "회원"} 메뉴`}
         onClick={() => setIsOpen((prev) => !prev)}
-        className="en-caption-1 bg-red text-black flex size-[26px] items-center justify-center rounded-full leading-4"
+        className={`en-caption-1 text-black flex size-[26px] items-center justify-center leading-4 ${
+          // 무드 아이콘은 모서리 잘린 사각 타일이라 원형 배경을 두지 않는다
+          mood ? "" : "bg-red rounded-full"
+        }`}
       >
-        {initial}
+        {mood ? <img src={mood.icon} alt="" className="size-full" /> : initial}
       </button>
 
       {isOpen && (
