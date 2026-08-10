@@ -3,11 +3,13 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import logoImage from "@/assets/img/logo.svg";
 import CLOSE_ICON_WHITE from "@/assets/img/closeIconWhite.svg";
 import { useAuth } from "@/hooks/useAuth";
+import { useGoLogin } from "@/hooks/useGoLogin";
 
 function Header() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { isLoggedIn: isLogin, logout } = useAuth();
+  const goLogin = useGoLogin();
   const isHome = pathname === "/";
 
   const [showBubble, setShowBubble] = useState(false);
@@ -82,7 +84,7 @@ function Header() {
               void logout().then(() => navigate("/"));
               return;
             }
-            navigate("/login");
+            goLogin();
           }}
         >
           {isLogin ? "Logout" : "Login"}

@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import LearningFunnelContainer from "@/components/learning/LearningFunnelContainer";
 import LoginRequiredOverlay from "@/components/common/LoginRequiredOverlay";
 import StepIndicator from "@/components/learning/StepIndicator";
 import PageHeader from "@/layouts/PageHeader";
 import { useLearningData } from "@/context/LearningDataContext";
 import { useAuth } from "@/hooks/useAuth";
+import { useGoLogin } from "@/hooks/useGoLogin";
 import { SCROLL_REVEAL_THRESHOLD, MAX_STEP } from "@/constants";
 
 type LearningPhase = "intro" | "reveal";
 
 function Learning() {
-  const navigate = useNavigate();
+  const goLogin = useGoLogin();
   const learningData = useLearningData();
   const [searchParams, setSearchParams] = useSearchParams();
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -52,7 +53,7 @@ function Learning() {
         learningData={learningData}
         goNext={goNext}
       />
-      {showOverlay && <LoginRequiredOverlay goLogin={() => navigate("/login")} />}
+      {showOverlay && <LoginRequiredOverlay goLogin={goLogin} />}
     </div>
   );
 }
