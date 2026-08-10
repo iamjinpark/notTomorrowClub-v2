@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useAtomValue } from "jotai";
 import { useNavigate } from "react-router-dom";
 
 import { findMood } from "@/constants/mood";
 import { useAuth } from "@/hooks/useAuth";
-import { useMood } from "@/hooks/useMood";
+import { useDropdown } from "@/hooks/useDropdown";
+import { moodAtom } from "@/store/mood";
 
 // 무드 아이콘과 같은 모서리 잘린 사각 타일.
 // 컷 비율은 무드 SVG에서 그대로 가져왔다 (3.28478 / 31.6522 = 10.378%)
@@ -13,39 +14,12 @@ const MOOD_TILE_CLIP =
 export default function ProfileMenu() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const { moodId } = useMood();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const containerRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
-  const firstItemRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handlePointerDown = (event: MouseEvent) => {
-      if (!containerRef.current?.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") return;
-      setIsOpen(false);
-      triggerRef.current?.focus();
-    };
-
-    document.addEventListener("mousedown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
-    firstItemRef.current?.focus();
-
-    return () => {
-      document.removeEventListener("mousedown", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen]);
+  const moodId = useAtomValue(moodAtom);
+  const { isOpen, toggle, close, containerRef, triggerRef, firstItemRef } =
+    useDropdown();
 
   const handleLogout = () => {
-    setIsOpen(false);
+    close();
     // signOut은 사실상 실패하지 않지만, reject를 방치하면 unhandled rejection이 된다
     logout()
       .then(() => navigate("/"))
@@ -63,7 +37,7 @@ export default function ProfileMenu() {
         aria-haspopup="menu"
         aria-expanded={isOpen}
         aria-label={`${user?.name ?? "회원"} 메뉴`}
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={toggle}
         className="flex size-[26px] items-center justify-center"
       >
         {/* clip-path를 버튼에 걸면 포커스 링까지 잘려서 안쪽 span에 건다 */}

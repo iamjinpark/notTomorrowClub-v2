@@ -1,3 +1,4 @@
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,7 +7,7 @@ import RecentMakeIt from "@/components/myPage/RecentMakeIt";
 import StatsChart from "@/components/myPage/StatsChart";
 import Modal from "@/components/common/Modal/Modal";
 import { useModal } from "@/hooks/useModal";
-import { useMood } from "@/hooks/useMood";
+import { moodAtom } from "@/store/mood";
 import { MY_PAGE_RECENTS, MY_PAGE_STATS, MY_PAGE_USER } from "@/api/dummyData";
 import type { StudyDataStandard } from "@/types/myPage";
 
@@ -32,7 +33,7 @@ export default function MyPage() {
 
   const [standard, setStandard] = useState(DEFAULT_STANDARD);
   // 헤더 아바타도 같은 값을 쓰므로 전역 상태에 둔다
-  const { moodId, setMoodId } = useMood();
+  const [moodId, setMoodId] = useAtom(moodAtom);
 
   return (
     <div className="flex flex-col border-y border-black lg:min-h-[530px] lg:flex-row">
