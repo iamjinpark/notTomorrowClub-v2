@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logoImage from "@/assets/img/logo.svg";
 import CLOSE_ICON_WHITE from "@/assets/img/closeIconWhite.svg";
+import ProfileMenu from "@/components/common/ProfileMenu";
+import { ATTENDANCE_DAYS } from "@/api/dummyData";
 import { useAuth } from "@/hooks/useAuth";
 import { useGoLogin } from "@/hooks/useGoLogin";
 
 function Header() {
-  const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { isLoggedIn: isLogin, logout } = useAuth();
+  const { isLoggedIn: isLogin } = useAuth();
   const goLogin = useGoLogin();
   const isHome = pathname === "/";
 
@@ -24,7 +25,7 @@ function Header() {
   }, [isLogin, isHome]);
 
   return (
-    <header className="font-roboto border-charcoal fixed top-0 left-0 z-50 flex w-full items-center justify-between overflow-visible border-b border-b-[0.6px] bg-white px-4 py-4">
+    <header className="font-roboto border-gray1 fixed top-0 left-0 z-50 flex w-full items-center justify-between overflow-visible border-b border-b-[0.6px] bg-white px-4 py-4">
       <div>
         <Link to="/">
           <img src={logoImage} alt="NTC 로고" className="h-[1.5rem] w-auto" />
@@ -33,22 +34,22 @@ function Header() {
 
       <div>
         <nav>
-          <ul className="flex flex-row gap-7 font-medium">
+          <ul className="text-black flex flex-row gap-[26px] text-base font-semibold">
             <li>
-              <Link to="/make-it">make it</Link>
+              <Link to="/make-it">Make it</Link>
             </li>
             <li>
-              <Link to="/tracker">tracker</Link>
+              <Link to="/tracker">Tracker</Link>
             </li>
             <li>
-              <Link to="/notice">notice</Link>
+              <Link to="/notice">Notice</Link>
             </li>
             <li>
               {isLogin ? (
-                <Link to="/mypage">my page</Link>
+                <Link to="/mypage">My Page</Link>
               ) : (
                 <span className="relative">
-                  <Link to="/about">about</Link>
+                  <Link to="/about">About</Link>
                   {isHome && showBubble && (
                     <div className="absolute top-full left-1/2 z-[200] mt-[8px] flex -translate-x-1/2 flex-col items-center">
                       <div className="h-[8px] w-[11px] bg-black [clip-path:polygon(50%_0%,_0%_100%,_100%_100%)]" />
@@ -75,21 +76,24 @@ function Header() {
         </nav>
       </div>
 
-      <div>
-        <button
-          type="button"
-          className="rounded-sm bg-[#D9D9D9] px-2 py-1 text-sm font-medium"
-          onClick={() => {
-            if (isLogin) {
-              void logout().then(() => navigate("/"));
-              return;
-            }
-            goLogin();
-          }}
-        >
-          {isLogin ? "Logout" : "Login"}
-        </button>
-      </div>
+      {isLogin ? (
+        <div className="flex items-center gap-[10px]">
+          <div className="bg-gray5 en-caption-1 text-black flex h-[24px] w-[82px] items-center justify-center rounded-[3px] leading-4">
+            + {ATTENDANCE_DAYS} days
+          </div>
+          <ProfileMenu />
+        </div>
+      ) : (
+        <div>
+          <button
+            type="button"
+            className="bg-gray5 en-caption-1 text-black rounded-sm px-2 py-1 leading-4"
+            onClick={goLogin}
+          >
+            Login
+          </button>
+        </div>
+      )}
     </header>
   );
 }

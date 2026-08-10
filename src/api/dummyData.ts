@@ -287,3 +287,6 @@ export const MY_PAGE_CARD: NtcCard = {
   cardNo: "No. 00001",
   serialNo: "0000052026",
 };
+
+// TODO: 서버 연동 후 실제 출석일수로 교체
+export const ATTENDANCE_DAYS = 340;
