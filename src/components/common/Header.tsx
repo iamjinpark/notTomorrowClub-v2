@@ -9,7 +9,7 @@ import { useGoLogin } from "@/hooks/useGoLogin";
 
 function Header() {
   const { pathname } = useLocation();
-  const { isLoggedIn: isLogin } = useAuth();
+  const { isLoggedIn: isLogin, isLoading } = useAuth();
   const goLogin = useGoLogin();
   const isHome = pathname === "/";
 
@@ -44,39 +44,45 @@ function Header() {
             <li>
               <Link to="/notice">Notice</Link>
             </li>
-            <li>
-              {isLogin ? (
-                <Link to="/mypage">My Page</Link>
-              ) : (
-                <span className="relative">
-                  <Link to="/about">About</Link>
-                  {isHome && showBubble && (
-                    <div className="absolute top-full left-1/2 z-[200] mt-[8px] flex -translate-x-1/2 flex-col items-center">
-                      <div className="h-[8px] w-[11px] bg-black [clip-path:polygon(50%_0%,_0%_100%,_100%_100%)]" />
-                      <div className="en-caption-2 flex items-center justify-between gap-[5px] rounded-none bg-black p-[6px] text-sm whitespace-nowrap text-white">
-                        <span>Look at This Bro</span>
-                        <button
-                          type="button"
-                          className="flex h-[14px] w-[14px] items-center"
-                          onClick={() => setShowBubble(false)}
-                        >
-                          <img
-                            src={CLOSE_ICON_WHITE}
-                            alt=""
-                            className="w-full"
-                          />
-                        </button>
+            {/* 세션 복구 전에 그리면 로그인 사용자에게도 About이 잠깐 보인다 */}
+            {!isLoading && (
+              <li>
+                {isLogin ? (
+                  <Link to="/mypage">My Page</Link>
+                ) : (
+                  <span className="relative">
+                    <Link to="/about">About</Link>
+                    {isHome && showBubble && (
+                      <div className="absolute top-full left-1/2 z-[200] mt-[8px] flex -translate-x-1/2 flex-col items-center">
+                        <div className="h-[8px] w-[11px] bg-black [clip-path:polygon(50%_0%,_0%_100%,_100%_100%)]" />
+                        <div className="en-caption-2 flex items-center justify-between gap-[5px] rounded-none bg-black p-[6px] text-sm whitespace-nowrap text-white">
+                          <span>Look at This Bro</span>
+                          <button
+                            type="button"
+                            className="flex h-[14px] w-[14px] items-center"
+                            onClick={() => setShowBubble(false)}
+                          >
+                            <img
+                              src={CLOSE_ICON_WHITE}
+                              alt=""
+                              className="w-full"
+                            />
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </span>
-              )}
-            </li>
+                    )}
+                  </span>
+                )}
+              </li>
+            )}
           </ul>
         </nav>
       </div>
 
-      {isLogin ? (
+      {/* 세션 복구 중에는 비워둔다. 로그인 사용자에게 Login 버튼이 깜빡이는 것보다 낫다 */}
+      {isLoading ? (
+        <div className="h-[26px]" />
+      ) : isLogin ? (
         <div className="flex items-center gap-[10px]">
           <div className="bg-gray5 en-caption-1 text-black flex h-[24px] w-[82px] items-center justify-center rounded-[3px] leading-4">
             + {ATTENDANCE_DAYS} days
