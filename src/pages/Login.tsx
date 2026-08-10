@@ -4,6 +4,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useModal } from "@/hooks/useModal";
 import Modal from "@/components/common/Modal/Modal";
 import { useAuth } from "@/hooks/useAuth";
+import { toLoginErrorMessage } from "@/utils/authError";
 
 function Login() {
   const { login, isLoggedIn } = useAuth();
@@ -12,7 +13,11 @@ function Login() {
 
   const handleLogin = () => {
     setError(undefined);
-    login().catch(() => setError("로그인에 실패했어요. 다시 시도해 주세요."));
+    login().catch((e: unknown) => {
+      // 사용자가 팝업을 닫은 경우 null이 온다. 취소를 실패로 알리지 않는다
+      const message = toLoginErrorMessage(e);
+      if (message) setError(message);
+    });
   };
 
   const {

@@ -12,6 +12,10 @@ import { AuthContext } from "@/context/authContext";
 import { auth } from "@/lib/firebase";
 import type { AuthUser } from "@/types/auth";
 
+// prompt를 지정하지 않으면 구글이 직전 계정으로 바로 로그인해서 계정 전환이 불가능하다
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
+
 function toAuthUser(user: User): AuthUser {
   return {
     uid: user.uid,
@@ -36,7 +40,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   const login = useCallback(async () => {
-    await signInWithPopup(auth, new GoogleAuthProvider());
+    await signInWithPopup(auth, googleProvider);
   }, []);
 
   const logout = useCallback(async () => {
