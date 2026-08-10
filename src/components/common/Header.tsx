@@ -9,7 +9,7 @@ import { useGoLogin } from "@/hooks/useGoLogin";
 
 function Header() {
   const { pathname } = useLocation();
-  const { isLoggedIn: isLogin, isLoading } = useAuth();
+  const { isLoggedIn: isLogin } = useAuth();
   const goLogin = useGoLogin();
   const isHome = pathname === "/";
 
@@ -47,14 +47,13 @@ function Header() {
             {/*
               로그인 여부로 라벨이 바뀌어(About / My Page) nav 폭이 흔들린다.
               가장 넓은 라벨을 숨긴 채 깔아 자리를 고정한다 (px 하드코딩 회피).
-              복구 전에 그리면 로그인 사용자에게 About이 잠깐 보이므로 비워둔다.
             */}
             <li className="grid">
               <span aria-hidden className="invisible col-start-1 row-start-1">
                 My Page
               </span>
               <span className="col-start-1 row-start-1">
-                {isLoading ? null : isLogin ? (
+                {isLogin ? (
                   <Link to="/mypage">My Page</Link>
                 ) : (
                   <span className="relative">
@@ -86,12 +85,9 @@ function Header() {
         </nav>
       </div>
 
-      {/*
-        폭을 로그인 여부와 무관하게 고정한다 (시안: 칩 82 + gap 10 + 아바타 26).
-        세션 복구 중에는 비워두되 자리는 잡아둬야 헤더가 리플로우되지 않는다.
-      */}
+      {/* 폭을 로그인 여부와 무관하게 고정한다 (시안: 칩 82 + gap 10 + 아바타 26) */}
       <div className="flex h-[26px] w-[118px] items-center justify-end gap-[10px]">
-        {isLoading ? null : isLogin ? (
+        {isLogin ? (
           <>
             <div className="bg-gray5 en-caption-1 text-black flex h-[24px] w-[82px] items-center justify-center rounded-[3px] leading-4">
               + {ATTENDANCE_DAYS} days
