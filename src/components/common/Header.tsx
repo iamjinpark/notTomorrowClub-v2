@@ -44,10 +44,17 @@ function Header() {
             <li>
               <Link to="/notice">Notice</Link>
             </li>
-            {/* 세션 복구 전에 그리면 로그인 사용자에게도 About이 잠깐 보인다 */}
-            {!isLoading && (
-              <li>
-                {isLogin ? (
+            {/*
+              로그인 여부로 라벨이 바뀌어(About / My Page) nav 폭이 흔들린다.
+              가장 넓은 라벨을 숨긴 채 깔아 자리를 고정한다 (px 하드코딩 회피).
+              복구 전에 그리면 로그인 사용자에게 About이 잠깐 보이므로 비워둔다.
+            */}
+            <li className="grid">
+              <span aria-hidden className="invisible col-start-1 row-start-1">
+                My Page
+              </span>
+              <span className="col-start-1 row-start-1">
+                {isLoading ? null : isLogin ? (
                   <Link to="/mypage">My Page</Link>
                 ) : (
                   <span className="relative">
@@ -73,24 +80,25 @@ function Header() {
                     )}
                   </span>
                 )}
-              </li>
-            )}
+              </span>
+            </li>
           </ul>
         </nav>
       </div>
 
-      {/* 세션 복구 중에는 비워둔다. 로그인 사용자에게 Login 버튼이 깜빡이는 것보다 낫다 */}
-      {isLoading ? (
-        <div className="h-[26px]" />
-      ) : isLogin ? (
-        <div className="flex items-center gap-[10px]">
-          <div className="bg-gray5 en-caption-1 text-black flex h-[24px] w-[82px] items-center justify-center rounded-[3px] leading-4">
-            + {ATTENDANCE_DAYS} days
-          </div>
-          <ProfileMenu />
-        </div>
-      ) : (
-        <div>
+      {/*
+        폭을 로그인 여부와 무관하게 고정한다 (시안: 칩 82 + gap 10 + 아바타 26).
+        세션 복구 중에는 비워두되 자리는 잡아둬야 헤더가 리플로우되지 않는다.
+      */}
+      <div className="flex h-[26px] w-[118px] items-center justify-end gap-[10px]">
+        {isLoading ? null : isLogin ? (
+          <>
+            <div className="bg-gray5 en-caption-1 text-black flex h-[24px] w-[82px] items-center justify-center rounded-[3px] leading-4">
+              + {ATTENDANCE_DAYS} days
+            </div>
+            <ProfileMenu />
+          </>
+        ) : (
           <button
             type="button"
             className="bg-gray5 en-caption-1 text-black rounded-sm px-2 py-1 leading-4"
@@ -98,8 +106,8 @@ function Header() {
           >
             Login
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </header>
   );
 }
