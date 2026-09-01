@@ -1,28 +1,31 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logoImage from "@/assets/img/logo.svg";
 import CLOSE_ICON_WHITE from "@/assets/img/closeIconWhite.svg";
+import ProfileMenu from "@/components/common/ProfileMenu";
+import { ATTENDANCE_DAYS } from "@/api/dummyData";
 import { useAuth } from "@/hooks/useAuth";
+import { useGoLogin } from "@/hooks/useGoLogin";
 
 function Header() {
-  const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { isLoggedIn: isLogin, logout } = useAuth();
+  const { isLoggedIn: isLogin, isLoading } = useAuth();
+  const goLogin = useGoLogin();
   const isHome = pathname === "/";
 
   const [showBubble, setShowBubble] = useState(false);
 
   useEffect(() => {
-    if (isLogin || !isHome) return;
+    if (isLoading || isLogin || !isHome) return;
     const timer = setTimeout(() => setShowBubble(true), 3000);
     return () => {
       clearTimeout(timer);
       setShowBubble(false);
     };
-  }, [isLogin, isHome]);
+  }, [isLoading, isLogin, isHome]);
 
   return (
-    <header className="font-roboto border-charcoal fixed top-0 left-0 z-50 flex w-full items-center justify-between overflow-visible border-b border-b-[0.6px] bg-white px-4 py-4">
+    <header className="font-roboto border-gray1 fixed top-0 left-0 z-50 flex w-full items-center justify-between overflow-visible border-b border-b-[0.6px] bg-white px-4 py-4">
       <div>
         <Link to="/">
           <img src={logoImage} alt="NTC 로고" className="h-[1.5rem] w-auto" />
@@ -31,62 +34,75 @@ function Header() {
 
       <div>
         <nav>
-          <ul className="flex flex-row gap-7 font-medium">
+          <ul className="text-black flex flex-row gap-[26px] text-base font-semibold">
             <li>
-              <Link to="/make-it">make it</Link>
+              <Link to="/make-it">Make it</Link>
             </li>
             <li>
-              <Link to="/tracker">tracker</Link>
+              <Link to="/tracker">Tracker</Link>
             </li>
             <li>
-              <Link to="/notice">notice</Link>
+              <Link to="/notice">Notice</Link>
             </li>
-            <li>
-              {isLogin ? (
-                <Link to="/mypage">my page</Link>
-              ) : (
-                <span className="relative">
-                  <Link to="/about">about</Link>
-                  {isHome && showBubble && (
-                    <div className="absolute top-full left-1/2 z-[200] mt-[8px] flex -translate-x-1/2 flex-col items-center">
-                      <div className="h-[8px] w-[11px] bg-black [clip-path:polygon(50%_0%,_0%_100%,_100%_100%)]" />
-                      <div className="en-caption-2 flex items-center justify-between gap-[5px] rounded-none bg-black p-[6px] text-sm whitespace-nowrap text-white">
-                        <span>Look at This Bro</span>
-                        <button
-                          type="button"
-                          className="flex h-[14px] w-[14px] items-center"
-                          onClick={() => setShowBubble(false)}
-                        >
-                          <img
-                            src={CLOSE_ICON_WHITE}
-                            alt=""
-                            className="w-full"
-                          />
-                        </button>
+            {/*
+              로그인 여부로 라벨이 바뀌어(About / My Page) nav 폭이 흔들린다.
+              가장 넓은 라벨을 숨긴 채 깔아 자리를 고정한다 (px 하드코딩 회피).
+            */}
+            <li className="grid">
+              <span aria-hidden className="invisible col-start-1 row-start-1">
+                My Page
+              </span>
+              <span className="col-start-1 row-start-1">
+                {isLogin ? (
+                  <Link to="/mypage">My Page</Link>
+                ) : (
+                  <span className="relative">
+                    <Link to="/about">About</Link>
+                    {isHome && showBubble && (
+                      <div className="absolute top-full left-1/2 z-[200] mt-[8px] flex -translate-x-1/2 flex-col items-center">
+                        <div className="h-[8px] w-[11px] bg-black [clip-path:polygon(50%_0%,_0%_100%,_100%_100%)]" />
+                        <div className="en-caption-2 flex items-center justify-between gap-[5px] rounded-none bg-black p-[6px] text-sm whitespace-nowrap text-white">
+                          <span>Look at This Bro</span>
+                          <button
+                            type="button"
+                            className="flex h-[14px] w-[14px] items-center"
+                            onClick={() => setShowBubble(false)}
+                          >
+                            <img
+                              src={CLOSE_ICON_WHITE}
+                              alt=""
+                              className="w-full"
+                            />
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </span>
-              )}
+                    )}
+                  </span>
+                )}
+              </span>
             </li>
           </ul>
         </nav>
       </div>
 
-      <div>
-        <button
-          type="button"
-          className="rounded-sm bg-[#D9D9D9] px-2 py-1 text-sm font-medium"
-          onClick={() => {
-            if (isLogin) {
-              void logout().then(() => navigate("/"));
-              return;
-            }
-            navigate("/login");
-          }}
-        >
-          {isLogin ? "Logout" : "Login"}
-        </button>
+      {/* 폭을 로그인 여부와 무관하게 고정한다 (시안: 칩 82 + gap 10 + 아바타 26) */}
+      <div className="flex h-[26px] w-[118px] items-center justify-end gap-[10px]">
+        {isLogin ? (
+          <>
+            <div className="bg-gray5 en-caption-1 text-black flex h-[24px] w-[82px] items-center justify-center rounded-[3px] leading-4">
+              + {ATTENDANCE_DAYS} days
+            </div>
+            <ProfileMenu />
+          </>
+        ) : (
+          <button
+            type="button"
+            className="bg-gray5 en-caption-1 text-black rounded-sm px-2 py-1 leading-4"
+            onClick={goLogin}
+          >
+            Login
+          </button>
+        )}
       </div>
     </header>
   );

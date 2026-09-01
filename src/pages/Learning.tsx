@@ -1,21 +1,22 @@
 import { useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import LearningFunnelContainer from "@/components/learning/LearningFunnelContainer";
 import LoginRequiredOverlay from "@/components/common/LoginRequiredOverlay";
 import StepIndicator from "@/components/learning/StepIndicator";
 import PageHeader from "@/layouts/PageHeader";
 import { useLearningData } from "@/context/LearningDataContext";
 import { useAuth } from "@/hooks/useAuth";
+import { useGoLogin } from "@/hooks/useGoLogin";
 import { SCROLL_REVEAL_THRESHOLD, MAX_STEP } from "@/constants";
 
 type LearningPhase = "intro" | "reveal";
 
 function Learning() {
-  const navigate = useNavigate();
+  const goLogin = useGoLogin();
   const learningData = useLearningData();
   const [searchParams, setSearchParams] = useSearchParams();
   const [scrollProgress, setScrollProgress] = useState(0);
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isLoading } = useAuth();
   const [stepPhase, setStepPhase] = useState<LearningPhase>("intro");
 
   const stepFromUrl = Number(searchParams.get("step")) || 1;
@@ -36,7 +37,8 @@ function Learning() {
       ? "한국어 문장을 보면서 영어 문장을 생각해보세요."
       : "두 문장을 함께 보면서 스스로 맞는지 확인해보세요.";
 
-  const showOverlay = !isLoggedIn && scrollProgress > SCROLL_REVEAL_THRESHOLD;
+  const showOverlay =
+    !isLoading && !isLoggedIn && scrollProgress > SCROLL_REVEAL_THRESHOLD;
 
   return (
     <div className="relative flex flex-col gap-[23px]">
@@ -48,11 +50,11 @@ function Learning() {
         stepPhase={stepPhase}
         onStepPhaseChange={setStepPhase}
         onScrollProgress={setScrollProgress}
-        isLoggedIn={isLoggedIn}
+        isLoggedIn={isLoggedIn && !isLoading}
         learningData={learningData}
         goNext={goNext}
       />
-      {showOverlay && <LoginRequiredOverlay goLogin={() => navigate("/login")} />}
+      {showOverlay && <LoginRequiredOverlay goLogin={goLogin} />}
     </div>
   );
 }

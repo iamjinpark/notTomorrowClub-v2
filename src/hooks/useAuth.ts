@@ -1,11 +1,9 @@
-import { useContext } from "react";
+import { useAtomValue } from "jotai";
 
-import { AuthContext, type AuthContextValue } from "@/context/authContext";
+import { authAtom, login, logout } from "@/store/auth";
 
-export function useAuth(): AuthContextValue {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth는 AuthProvider 안에서만 쓸 수 있습니다");
-  }
-  return context;
+export function useAuth() {
+  const { user, isLoading } = useAtomValue(authAtom);
+
+  return { user, isLoading, isLoggedIn: user !== null, login, logout };
 }
