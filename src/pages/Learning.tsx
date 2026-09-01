@@ -50,7 +50,7 @@ function Learning() {
         stepPhase={stepPhase}
         onStepPhaseChange={setStepPhase}
         onScrollProgress={setScrollProgress}
-        isLoggedIn={isLoggedIn}
+        isLoggedIn={isLoggedIn && !isLoading}
         learningData={learningData}
         goNext={goNext}
       />

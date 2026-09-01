@@ -7,7 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { toLoginErrorMessage } from "@/utils/authError";
 
 function Login() {
-  const { login, isLoggedIn } = useAuth();
+  const { login, isLoggedIn, isLoading } = useAuth();
   const { state } = useLocation();
   const [error, setError] = useState<string>();
 
@@ -32,7 +32,7 @@ function Login() {
   } = useModal();
 
   // 로그인 성공 시에도 이 분기로 빠져나간다 (가드가 넘긴 경로 우선)
-  if (isLoggedIn) {
+  if (!isLoading && isLoggedIn) {
     const from = (state as { from?: string } | null)?.from ?? "/";
     return <Navigate to={from} replace />;
   }

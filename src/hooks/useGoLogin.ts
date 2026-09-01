@@ -10,8 +10,8 @@ export function useGoLogin() {
   const { pathname, search } = useLocation();
 
   // search까지 넘겨야 /learning?step=3 처럼 진행 상태가 있는 화면으로 정확히 돌아온다
-  return useCallback(
-    () => navigate("/login", { state: { from: `${pathname}${search}` } }),
-    [navigate, pathname, search]
-  );
+  return useCallback(() => {
+    if (pathname === "/login") return;
+    navigate("/login", { state: { from: `${pathname}${search}` } });
+  }, [navigate, pathname, search]);
 }
