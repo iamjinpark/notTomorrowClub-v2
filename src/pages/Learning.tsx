@@ -16,7 +16,7 @@ function Learning() {
   const learningData = useLearningData();
   const [searchParams, setSearchParams] = useSearchParams();
   const [scrollProgress, setScrollProgress] = useState(0);
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isLoading } = useAuth();
   const [stepPhase, setStepPhase] = useState<LearningPhase>("intro");
 
   const stepFromUrl = Number(searchParams.get("step")) || 1;
@@ -37,7 +37,8 @@ function Learning() {
       ? "한국어 문장을 보면서 영어 문장을 생각해보세요."
       : "두 문장을 함께 보면서 스스로 맞는지 확인해보세요.";
 
-  const showOverlay = !isLoggedIn && scrollProgress > SCROLL_REVEAL_THRESHOLD;
+  const showOverlay =
+    !isLoading && !isLoggedIn && scrollProgress > SCROLL_REVEAL_THRESHOLD;
 
   return (
     <div className="relative flex flex-col gap-[23px]">

@@ -23,22 +23,55 @@ function toAuthUser(user: User): AuthUser {
   };
 }
 
+const LAST_USER_KEY = "ntc.lastUser";
+
+function readLastUser(): AuthUser | null {
+  try {
+    const raw = localStorage.getItem(LAST_USER_KEY);
+    if (!raw) return null;
+
+    const parsed: unknown = JSON.parse(raw);
+    if (
+      typeof parsed !== "object" ||
+      parsed === null ||
+      typeof (parsed as AuthUser).uid !== "string" ||
+      typeof (parsed as AuthUser).name !== "string"
+    ) {
+      return null;
+    }
+    return parsed as AuthUser;
+  } catch {
+    return null;
+  }
+}
+
+function saveLastUser(user: AuthUser | null): void {
+  try {
+    if (user) localStorage.setItem(LAST_USER_KEY, JSON.stringify(user));
+    else localStorage.removeItem(LAST_USER_KEY);
+  } catch {
+    return;
+  }
+}
+
 interface AuthState {
   user: AuthUser | null;
   /** Firebase가 저장된 세션을 복구하는 동안 true */
   isLoading: boolean;
 }
 
-export const authAtom = atom<AuthState>({ user: null, isLoading: true });
+export const authAtom = atom<AuthState>({
+  user: readLastUser(),
+  isLoading: true,
+});
 
 // 구독 하나가 로그인/로그아웃과 새로고침 후 세션 복구를 모두 처리한다.
 // onMount가 반환한 해제 함수는 Jotai가 언마운트 시 호출한다.
 authAtom.onMount = (set) =>
   onAuthStateChanged(auth, (firebaseUser) => {
-    set({
-      user: firebaseUser ? toAuthUser(firebaseUser) : null,
-      isLoading: false,
-    });
+    const user = firebaseUser ? toAuthUser(firebaseUser) : null;
+    saveLastUser(user);
+    set({ user, isLoading: false });
   });
 
 export function login(): Promise<unknown> {

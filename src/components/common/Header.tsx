@@ -9,20 +9,20 @@ import { useGoLogin } from "@/hooks/useGoLogin";
 
 function Header() {
   const { pathname } = useLocation();
-  const { isLoggedIn: isLogin } = useAuth();
+  const { isLoggedIn: isLogin, isLoading } = useAuth();
   const goLogin = useGoLogin();
   const isHome = pathname === "/";
 
   const [showBubble, setShowBubble] = useState(false);
 
   useEffect(() => {
-    if (isLogin || !isHome) return;
+    if (isLoading || isLogin || !isHome) return;
     const timer = setTimeout(() => setShowBubble(true), 3000);
     return () => {
       clearTimeout(timer);
       setShowBubble(false);
     };
-  }, [isLogin, isHome]);
+  }, [isLoading, isLogin, isHome]);
 
   return (
     <header className="font-roboto border-gray1 fixed top-0 left-0 z-50 flex w-full items-center justify-between overflow-visible border-b border-b-[0.6px] bg-white px-4 py-4">
